@@ -24,6 +24,7 @@ namespace UI.Desktop {
 		}
 		public UsuarioDesktop(ModoForm modo) : this() {
 			MF = modo;
+			UsuarioActual = new Usuario();
 		}
 		public UsuarioDesktop(int ID, ModoForm modo) : this() {
 			MF = modo;
@@ -32,11 +33,11 @@ namespace UI.Desktop {
 			MapearDeDatos();
 		}
 		public virtual void MapearDeDatos() {
-			if ((MF == ApplicationForm.ModoForm.Alta) || (MF == ApplicationForm.ModoForm.Alta)) {
+			if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta)) {
 				this.btnAceptar.Text = "Guardar";
-			} else if (MF == ApplicationForm.ModoForm.Baja) {
+			} else if (MF == ModoForm.Baja) {
 				this.btnAceptar.Text = "Eliminar";
-			} else if (MF == ApplicationForm.ModoForm.Consulta) {
+			} else if (MF == ModoForm.Consulta) {
 				this.btnAceptar.Text = "Aceptar";
 			}
 			this.txtID.Text = this.UsuarioActual.ID.ToString();
@@ -49,15 +50,24 @@ namespace UI.Desktop {
 			this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
 		}
 		public virtual void MapearADatos() {
-			if (MF == ApplicationForm.ModoForm.Alta) {
-				UsuarioActual = new Usuario();
+			if (MF == ModoForm.Alta || MF == ModoForm.Modificacion) {
 				UsuarioActual.Nombre = this.txtNombre.Text;
 				UsuarioActual.Apellido = this.txtApellido.Text;
-				UsuarioActual.Email = this.txtNombre.Text;
-				UsuarioActual.NombreUsuario = this.txtNombre.Text;
+				UsuarioActual.Email = this.txtEmail.Text;
+				UsuarioActual.NombreUsuario = this.txtUsuario.Text;
 				UsuarioActual.Clave = this.txtClave.Text;
 				UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-				UsuarioActual.State = BusinessEntity.States.New;
+			}
+			switch (MF) {
+				case ModoForm.Alta:
+					UsuarioActual.State = BusinessEntity.States.New;
+					break;
+				case ModoForm.Modificacion:
+					UsuarioActual.State = BusinessEntity.States.Modified;
+					break;
+				case ModoForm.Baja:
+					UsuarioActual.State = BusinessEntity.States.Deleted;
+					break;
 			}
 		}
 		public virtual void GuardarCambios() {
@@ -119,8 +129,16 @@ namespace UI.Desktop {
 		private void btnAceptar_Click(object sender, EventArgs e) {
 			bool v = Validar();
 			if (v) {
-				GuardarCambios();
-				this.Close();
+				switch (MF) {
+					case ModoForm.Alta:
+						GuardarCambios();
+						this.Close();
+						break;
+					case ModoForm.Modificacion:
+						GuardarCambios();
+						this.Close();
+						break;
+				}
 			}
 		}
 		private void btnCancelar_Click(object sender, EventArgs e) {
