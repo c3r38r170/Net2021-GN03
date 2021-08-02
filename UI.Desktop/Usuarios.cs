@@ -56,9 +56,18 @@ namespace UI.Desktop
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-            UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
-            ud.ShowDialog();
+            Usuario u = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
+            int ID = u.ID;
+            string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
+            string title = "Eliminar usuario";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                UsuarioLogic ul = new UsuarioLogic();
+                ul.Delete(ID);
+                // u.State = BusinessEntity.States.Deleted;
+            }
             this.Listar();
         }
     }
