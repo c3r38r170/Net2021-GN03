@@ -25,20 +25,18 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
-        public UsuarioDesktop(ModoForm modo):this()
+        public UsuarioDesktop(ModoForm modo) : this()
         {
             MF = modo;
-            InitializeComponent();
         }
-        public UsuarioDesktop(int ID, ModoForm modo):this()
+        public UsuarioDesktop(int ID, ModoForm modo) : this()
         {
             MF = modo;
             UsuarioLogic ul = new UsuarioLogic();
             UsuarioActual = ul.GetOne(ID);
             MapearDeDatos();
-            InitializeComponent();
         }
-        public virtual void MapearDeDatos() 
+        public virtual void MapearDeDatos()
         {
             if ((MF == ApplicationForm.ModoForm.Alta) || (MF == ApplicationForm.ModoForm.Alta))
             {
@@ -115,7 +113,7 @@ namespace UI.Desktop
             }
             else if ((this.txtClave.Text).Length < 8)
             {
-                Notificar("Error","La contraseña debe tener más de 8 caracteres",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                Notificar("Error", "La contraseña debe tener más de 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else if ((this.txtConfirmarClave.Text).Length < 8)
