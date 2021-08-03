@@ -11,13 +11,14 @@ namespace UI.Desktop
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        public static Menu menu;
         [STAThread]
         static void Main()
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Usuarios());
+            Application.Run(menu = new Menu());
         }
     }
 }

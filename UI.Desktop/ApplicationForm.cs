@@ -40,5 +40,11 @@ namespace UI.Desktop
         {
             this.Notificar(this.Text, mensaje, botones, icono);
         }
+
+
+        private void ApplicationForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
