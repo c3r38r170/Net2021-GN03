@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Entities {
-	public class Personas :BusinessEntity{
+	public class Persona :BusinessEntity{
 		private string _Apellido;
 		private string _Direccion;
 		private string _Email;
