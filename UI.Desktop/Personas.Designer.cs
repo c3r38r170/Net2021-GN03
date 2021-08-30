@@ -1,7 +1,7 @@
 ﻿
 namespace UI.Desktop
 {
-    partial class Usuarios
+    partial class Personas
     {
         /// <summary>
         ///  Required designer variable.
@@ -33,12 +33,15 @@ namespace UI.Desktop
             this.tscUsuarios = new System.Windows.Forms.ToolStripContainer();
             this.tlUsuarios = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.tsUsuarios = new System.Windows.Forms.ToolStrip();
@@ -117,12 +120,15 @@ namespace UI.Desktop
             // 
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
             this.nombre,
             this.apellido,
-            this.usuario,
+            this.direccion,
             this.email,
-            this.habilitado});
+            this.telefono,
+            this.legajo,
+            this.idplan,
+            this.fechaNacimiento,
+            this.tipo});
             this.tlUsuarios.SetColumnSpan(this.dgvUsuarios, 2);
             this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsuarios.Location = new System.Drawing.Point(3, 3);
@@ -132,13 +138,6 @@ namespace UI.Desktop
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsuarios.Size = new System.Drawing.Size(794, 415);
             this.dgvUsuarios.TabIndex = 0;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
             // 
             // nombre
             // 
@@ -154,26 +153,54 @@ namespace UI.Desktop
             this.apellido.Name = "apellido";
             this.apellido.ReadOnly = true;
             // 
-            // usuario
+            // direccion
             // 
-            this.usuario.DataPropertyName = "NombreUsuario";
-            this.usuario.HeaderText = "Usuario";
-            this.usuario.Name = "usuario";
-            this.usuario.ReadOnly = true;
+            this.direccion.DataPropertyName = "Direccion";
+            this.direccion.HeaderText = "Direccion";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
             // 
             // email
             // 
             this.email.DataPropertyName = "Email";
-            this.email.HeaderText = "EMail";
+            this.email.HeaderText = "Email";
             this.email.Name = "email";
             this.email.ReadOnly = true;
             // 
-            // habilitado
+            // telefono
             // 
-            this.habilitado.DataPropertyName = "Habilitado";
-            this.habilitado.HeaderText = "Habilitado";
-            this.habilitado.Name = "habilitado";
-            this.habilitado.ReadOnly = true;
+            this.telefono.DataPropertyName = "Telefono";
+            this.telefono.HeaderText = "Telefono";
+            this.telefono.Name = "telefono";
+            this.telefono.ReadOnly = true;
+            // 
+            // legajo
+            // 
+            this.legajo.DataPropertyName = "Legajo";
+            this.legajo.HeaderText = "Legajo";
+            this.legajo.Name = "legajo";
+            this.legajo.ReadOnly = true;
+            // 
+            // idplan
+            // 
+            this.idplan.DataPropertyName = "IDPlan";
+            this.idplan.HeaderText = "ID Plan";
+            this.idplan.Name = "idplan";
+            this.idplan.ReadOnly = true;
+            // 
+            // fechaNacimiento
+            // 
+            this.fechaNacimiento.DataPropertyName = "FechaNacimiento";
+            this.fechaNacimiento.HeaderText = "Fecha Nacimiento";
+            this.fechaNacimiento.Name = "fechaNacimiento";
+            this.fechaNacimiento.ReadOnly = true;
+            // 
+            // tipo
+            // 
+            this.tipo.DataPropertyName = "TipoPersona";
+            this.tipo.HeaderText = "Tipo";
+            this.tipo.Name = "tipo";
+            this.tipo.ReadOnly = true;
             // 
             // btnActualizar
             // 
@@ -249,7 +276,7 @@ namespace UI.Desktop
             this.Controls.Add(this.tscUsuarios);
             this.Name = "Usuarios";
             this.Text = "Usuarios";
-            this.Load += new System.EventHandler(this.Usuarios_Load);
+            this.Load += new System.EventHandler(this.Alumnos_Load);
             this.tscUsuarios.ContentPanel.ResumeLayout(false);
             this.tscUsuarios.TopToolStripPanel.ResumeLayout(false);
             this.tscUsuarios.TopToolStripPanel.PerformLayout();
@@ -268,16 +295,19 @@ namespace UI.Desktop
         private System.Windows.Forms.DataGridView dgvUsuarios;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.ToolStrip tsUsuarios;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn usuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn habilitado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn legajo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idplan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaNacimiento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipo;
         private System.Windows.Forms.ToolStripButton tsbNuevo;
         private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
+        private System.Windows.Forms.ToolStrip tsUsuarios;
     }
 }
 

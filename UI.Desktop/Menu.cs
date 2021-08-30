@@ -21,9 +21,14 @@ namespace UI.Desktop
         {
             Program.menu.Hide();
             Usuarios uForm = new Usuarios();
-            uForm.ShowDialog();
-            
-            
+            uForm.ShowDialog();    
+        }
+
+        private void btnAlumnos_Click(object sender, EventArgs e)
+        {
+            Program.menu.Hide();
+            Personas a = new Personas();
+            a.ShowDialog();
         }
     }
 }

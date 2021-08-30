@@ -51,12 +51,13 @@ namespace UI.Desktop
             this.btnAlumnos.TabIndex = 1;
             this.btnAlumnos.Text = "Alumnos";
             this.btnAlumnos.UseVisualStyleBackColor = true;
+            this.btnAlumnos.Click += new System.EventHandler(this.btnAlumnos_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 501);
+            this.ClientSize = new System.Drawing.Size(242, 158);
             this.Controls.Add(this.btnAlumnos);
             this.Controls.Add(this.btnUsuarios);
             this.Name = "Menu";

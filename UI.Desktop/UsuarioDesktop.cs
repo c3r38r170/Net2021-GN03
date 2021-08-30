@@ -32,7 +32,7 @@ namespace UI.Desktop {
 			UsuarioActual = ul.GetOne(ID);
 			MapearDeDatos();
 		}
-		public virtual void MapearDeDatos() {
+		public override void MapearDeDatos() {
 			if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta)) {
 				this.btnAceptar.Text = "Guardar";
 			} else if (MF == ModoForm.Consulta) {
@@ -47,7 +47,7 @@ namespace UI.Desktop {
 			this.txtClave.Text = this.UsuarioActual.Clave;
 			this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
 		}
-		public virtual void MapearADatos() {
+		public override void MapearADatos() {
 			if (MF == ModoForm.Alta || MF == ModoForm.Modificacion) {
 				UsuarioActual.Nombre = this.txtNombre.Text;
 				UsuarioActual.Apellido = this.txtApellido.Text;
@@ -68,12 +68,12 @@ namespace UI.Desktop {
 					break;*/
 			}
 		}
-		public virtual void GuardarCambios() {
+		public override void GuardarCambios() {
 			MapearADatos();
 			UsuarioLogic ul = new UsuarioLogic();
 			ul.Save(UsuarioActual);
 		}
-		public virtual bool Validar() {
+		public override bool Validar() {
 			if (string.IsNullOrWhiteSpace(this.txtNombre.Text)) {
 				NotificarError("El campo 'Nombre' está vacío");
 				return false;
