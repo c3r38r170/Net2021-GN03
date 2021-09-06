@@ -61,7 +61,6 @@ namespace Data.Database {
 			this.OpenConnection();
 			SqlCommand cmdUsuarios = new SqlCommand("SELECT * FROM usuarios",sqlConn);
 			try {
-
 				SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
 				while (drUsuarios.Read()) {
 					Usuario a = new Usuario();
@@ -85,7 +84,7 @@ namespace Data.Database {
 			return usuarios;
 		}
 
-		public Business.Entities.Usuario GetOne(int ID) {
+		public Usuario GetOne(int ID) {
 			//return Usuarios.Find(delegate (Usuario u) { return u.ID == ID; });
 
 			Usuario usuario = new Usuario();
@@ -123,22 +122,39 @@ namespace Data.Database {
 			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			cmdUsuario.ExecuteNonQuery();
+			this.CloseConnection();
 		}
 
 		public void Save(Usuario usuario) {
 			if (usuario.State == BusinessEntity.States.New) {
-				/*int NextID = 0;
-				foreach (Usuario usr in Usuarios) {
-					if (usr.ID > NextID) {
-						NextID = usr.ID;
-					}
-				}
-				usuario.ID = NextID + 1;*/
-				Usuarios.Add(usuario);
+				this.OpenConnection();
+				SqlCommand cmdUsuario = new SqlCommand("INSERT INTO usuarios (nombre_usuario,clave,habilitado,nombre,apellido,email) VALUES (@usuario,@clave,@habilitado,@nombre,@apellido,@email); SET @ID = SCOPE_IDENTITY();", sqlConn);
+				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
+				cmdUsuario.Parameters.Add("@usuario", System.Data.SqlDbType.VarChar).Value = usuario.NombreUsuario;
+				cmdUsuario.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = usuario.Clave;
+				cmdUsuario.Parameters.Add("@habilitado", System.Data.SqlDbType.Bit).Value = usuario.Habilitado;
+				cmdUsuario.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = usuario.Nombre;
+				cmdUsuario.Parameters.Add("@apellido", System.Data.SqlDbType.VarChar).Value = usuario.Apellido;
+				cmdUsuario.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = usuario.Email;
+				cmdUsuario.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+				cmdUsuario.ExecuteNonQuery();
+				usuario.ID = (int)cmdUsuario.Parameters["@ID"].Value;
+				this.CloseConnection();
 			} else if (usuario.State == BusinessEntity.States.Deleted) {
 				this.Delete(usuario.ID);
 			} else if (usuario.State == BusinessEntity.States.Modified) {
-				Usuarios[Usuarios.FindIndex(delegate (Usuario u) { return u.ID == usuario.ID; })] = usuario;
+				this.OpenConnection();
+				SqlCommand cmdUsuario = new SqlCommand("UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email) WHERE id_usuario=@id", sqlConn);
+				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
+				cmdUsuario.Parameters.Add("@usuario", System.Data.SqlDbType.VarChar).Value = usuario.NombreUsuario;
+				cmdUsuario.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = usuario.Clave;
+				cmdUsuario.Parameters.Add("@habilitado", System.Data.SqlDbType.Bit).Value = usuario.Habilitado;
+				cmdUsuario.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = usuario.Nombre;
+				cmdUsuario.Parameters.Add("@apellido", System.Data.SqlDbType.VarChar).Value = usuario.Apellido;
+				cmdUsuario.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = usuario.Email;
+				cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = usuario.ID;
+				cmdUsuario.ExecuteNonQuery();
+				this.CloseConnection();
 			}
 			usuario.State = BusinessEntity.States.Unmodified;
 		}
