@@ -7,7 +7,7 @@ using Business.Entities;
 using System.Data.SqlClient;
 
 namespace Data.Database {
-	class EspecialidadAdapter : Adapter {
+	public class EspecialidadAdapter : Adapter {
 
 		public List<Especialidad> GetAll() {
 			List<Especialidad> especialidades = new List<Especialidad>();
