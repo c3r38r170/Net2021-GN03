@@ -142,7 +142,7 @@ namespace Data.Database {
 				this.Delete(usuario.ID);
 			} else if (usuario.State == BusinessEntity.States.Modified) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email) WHERE id_usuario=@id", sqlConn);
+				SqlCommand cmdUsuario = new SqlCommand("UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email WHERE id_usuario=@id", sqlConn);
 				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
 				cmdUsuario.Parameters.Add("@usuario", System.Data.SqlDbType.VarChar).Value = usuario.NombreUsuario;
 				cmdUsuario.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = usuario.Clave;
