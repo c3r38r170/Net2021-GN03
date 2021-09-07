@@ -92,18 +92,16 @@ namespace Data.Database {
 			SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM usuarios WHERE id_usuario=@id", sqlConn);
 			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
-			Usuario a = null;
 			try { 
 				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
 				if (drUsuario.Read()) {
-					a = new Usuario();
-					a.ID = (int)drUsuario["id_usuarios"];
-					a.NombreUsuario = (string)drUsuario["nombre_usuario"];
-					a.Clave = (string)drUsuario["clave"];
-					a.Habilitado = (bool)drUsuario["habilitado"];
-					a.Nombre = (string)drUsuario["nombre"];
-					a.Apellido = (string)drUsuario["apellido"];
-					a.Email = (string)drUsuario["email"];
+					usuario.ID = (int)drUsuario["id_usuarios"];
+					usuario.NombreUsuario = (string)drUsuario["nombre_usuario"];
+					usuario.Clave = (string)drUsuario["clave"];
+					usuario.Habilitado = (bool)drUsuario["habilitado"];
+					usuario.Nombre = (string)drUsuario["nombre"];
+					usuario.Apellido = (string)drUsuario["apellido"];
+					usuario.Email = (string)drUsuario["email"];
 				}
 				drUsuario.Close();
 			} catch (Exception Ex) {
