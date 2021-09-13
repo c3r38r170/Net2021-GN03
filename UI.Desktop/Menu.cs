@@ -30,5 +30,17 @@ namespace UI.Desktop
             Personas a = new Personas();
             a.ShowDialog();
         }
+
+        private void btnEspecialidad_Click(object sender, EventArgs e)
+        {
+            Especialidades espe = new Especialidades();
+            espe.Show();
+        }
+
+        private void btnPlanesMaterias_Click(object sender, EventArgs e)//ESTE ES EL EVENTO DEL BOTON PLANES!!
+        {
+            Planes p = new Planes();
+            p.Show();
+        }
     }
 }
