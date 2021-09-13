@@ -30,5 +30,12 @@ namespace UI.Desktop
             Personas a = new Personas();
             a.ShowDialog();
         }
+
+        private void btnEspecialidades_Click(object sender, EventArgs e)
+        {
+            Program.menu.Hide();
+            Especialidades esp = new Especialidades();
+            esp.ShowDialog();
+        }
     }
 }

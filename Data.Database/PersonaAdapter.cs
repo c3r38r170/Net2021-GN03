@@ -7,33 +7,32 @@ using Business.Entities;
 using System.Data.SqlClient;
 
 namespace Data.Database {
-	public class EspecialidadAdapter : Adapter {
-
-		public List<Especialidad> GetAll() {
-			List<Especialidad> especialidades = new List<Especialidad>();
+	class PersonaAdapter : Adapter {
+		public List<Persona> GetAll() {
+			List<Persona> personas = new List<Persona>();
 			this.OpenConnection();
-			SqlCommand cmdEspecialidad = new SqlCommand("SELECT * FROM especialidades", sqlConn);
+			SqlCommand cmdPersona = new SqlCommand("SELECT * FROM personas", sqlConn);
 			try {
 
-				SqlDataReader drEspecialidades = cmdEspecialidad.ExecuteReader();
-				while (drEspecialidades.Read()) {
-					Especialidad e = new Especialidad();
-					e.Descripcion = (string)drEspecialidades["desc_especialidad"];
-					especialidades.Add(e);
+				SqlDataReader drPersonas = cmdPersona.ExecuteReader();
+				while (drPersonas.Read()) {
+					Persona e = new Persona();
+					e.Descripcion = (string)drPersona["desc_especialidad"];
+					personas.Add(e);
 				}
-				drEspecialidades.Close();
+				drPersonas.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
-				Exception ExcepcionManejada = new Exception("Error al recuperar lista de especialidades.", Ex);
+				Exception ExcepcionManejada = new Exception("Error al recuperar lista de personas.", Ex);
 				throw ExcepcionManejada;
 			} finally {
 				this.CloseConnection();
 			}
-			return especialidades;
+			return personas;
 		}
 
-		public Especialidad GetOne(int ID) {
-			Especialidad especialidad = new Especialidad();
+		public Persona GetOne(int ID) {
+			Persona persona = new Persona();
 			this.OpenConnection();
 			SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM especialidades WHERE id_especialidad=@id", sqlConn);
 			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
