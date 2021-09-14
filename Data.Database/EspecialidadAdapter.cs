@@ -35,16 +35,16 @@ namespace Data.Database {
 		public Especialidad GetOne(int ID) {
 			Especialidad especialidad = new Especialidad();
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM especialidades WHERE id_especialidad=@id", sqlConn);
-			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdEspecialidad = new SqlCommand("SELECT * FROM especialidades WHERE id_especialidad=@id", sqlConn);
+			cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
+			cmdEspecialidad.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			try {
-				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
-				if (drUsuario.Read()) {
-					especialidad.ID = (int)drUsuario["id_especialidad"];
-					especialidad.Descripcion = (string)drUsuario["desc_especialidad"];
+				SqlDataReader drEspecialidad = cmdEspecialidad.ExecuteReader();
+				if (drEspecialidad.Read()) {
+					especialidad.ID = (int)drEspecialidad["id_especialidad"];
+					especialidad.Descripcion = (string)drEspecialidad["desc_especialidad"];
 				}
-				drUsuario.Close();
+				drEspecialidad.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
 				Exception ExcepcionManejada = new Exception("Error al recuperar la especialidad.", Ex);
@@ -57,31 +57,31 @@ namespace Data.Database {
 
 		public void Delete(int ID) {
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("DELETE FROM especialidades WHERE id_especialidad=@id", sqlConn);
-			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
-			cmdUsuario.ExecuteNonQuery();
+			SqlCommand cmdEspecialidad = new SqlCommand("DELETE FROM especialidades WHERE id_especialidad=@id", sqlConn);
+			cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
+			cmdEspecialidad.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			cmdEspecialidad.ExecuteNonQuery();
 		}
 
 		public void Save(Especialidad especialidad) {
 			if (especialidad.State == BusinessEntity.States.New) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("INSERT INTO especialidades (desc_especialidad) VALUES (@desc); SET @ID = SCOPE_IDENTITY();", sqlConn);
-				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdUsuario.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
-				cmdUsuario.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
-				cmdUsuario.ExecuteNonQuery();
-				especialidad.ID = (int)cmdUsuario.Parameters["@ID"].Value;
+				SqlCommand cmdEspecialidad = new SqlCommand("INSERT INTO especialidades (desc_especialidad) VALUES (@desc); SET @ID = SCOPE_IDENTITY();", sqlConn);
+				cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
+				cmdEspecialidad.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
+				cmdEspecialidad.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+				cmdEspecialidad.ExecuteNonQuery();
+				especialidad.ID = (int)cmdEspecialidad.Parameters["@ID"].Value;
 				this.CloseConnection();
 			} else if (especialidad.State == BusinessEntity.States.Deleted) {
 				this.Delete(especialidad.ID);
 			} else if (especialidad.State == BusinessEntity.States.Modified) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("UPDATE especialidades SET desc_especialidad=@desc WHERE id_especialidad=@id", sqlConn);
-				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdUsuario.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
-				cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = especialidad.ID;
-				cmdUsuario.ExecuteNonQuery();
+				SqlCommand cmdEspecialidad = new SqlCommand("UPDATE especialidades SET desc_especialidad=@desc WHERE id_especialidad=@id", sqlConn);
+				cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
+				cmdEspecialidad.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
+				cmdEspecialidad.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = especialidad.ID;
+				cmdEspecialidad.ExecuteNonQuery();
 				this.CloseConnection();
 			}
 			especialidad.State = BusinessEntity.States.Unmodified;
