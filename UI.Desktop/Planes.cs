@@ -22,7 +22,7 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            PlanesLogic pl = new PlanesLogic();
+            PlanLogic pl = new PlanLogic();
             this.dvgPlanes.DataSource = pl.GetAll();
         }
 
@@ -66,7 +66,7 @@ namespace UI.Desktop
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-                PlanesLogic ul = new PlanesLogic();
+                PlanLogic ul = new PlanLogic();
                 ul.Delete(ID);
             }
             this.Listar();

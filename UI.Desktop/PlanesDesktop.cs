@@ -31,7 +31,7 @@ namespace UI.Desktop
         public PlanesDesktop(int ID, ModoForm modo) : this()
         {
             MF = modo;
-            PlanesLogic ul = new PlanesLogic();
+            PlanLogic ul = new PlanLogic();
             PlanActual = ul.GetOne(ID);
             MapearDeDatos();
         }
@@ -81,7 +81,7 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            PlanesLogic pl = new PlanesLogic();
+            PlanLogic pl = new PlanLogic();
             pl.Save(PlanActual);
         }
 
@@ -116,7 +116,7 @@ namespace UI.Desktop
                 this.btnAceptar.Text = "Aceptar";
             }
             this.txtDescripcion.Text = this.PlanActual.Descripcion;
-            this.txtEspecialidad.Text = this.PlanActual.IDEspecialidad.ToString();           
+            this.txtEspecialidad.Text = this.PlanActual.IDEspecialidad.ToString(); //ATENCION ACA          
         }
 
         private void CargaComboBox()
