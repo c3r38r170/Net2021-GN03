@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Logic
 {
-    public class PlanLogic
+    public class PlanLogic: BusinessLogic
     {
         public PlanAdapter PlanData { get; set; }
         public List<Plan> GetAll()

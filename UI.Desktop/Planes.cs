@@ -23,6 +23,7 @@ namespace UI.Desktop
         public void Listar()
         {
             PlanLogic pl = new PlanLogic();
+           
             this.dvgPlanes.DataSource = pl.GetAll();
         }
 
