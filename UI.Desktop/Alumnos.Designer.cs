@@ -33,16 +33,16 @@ namespace UI.Desktop
             this.tscUsuarios = new System.Windows.Forms.ToolStripContainer();
             this.tlUsuarios = new System.Windows.Forms.TableLayoutPanel();
             this.dgvAlumnos = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.tsUsuarios = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tscUsuarios.ContentPanel.SuspendLayout();
             this.tscUsuarios.TopToolStripPanel.SuspendLayout();
             this.tscUsuarios.SuspendLayout();
@@ -103,6 +103,28 @@ namespace UI.Desktop
             this.dgvAlumnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAlumnos.Size = new System.Drawing.Size(794, 390);
             this.dgvAlumnos.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "ID";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // condicion
+            // 
+            this.condicion.HeaderText = "Condición";
+            this.condicion.Name = "condicion";
+            // 
+            // idCurso
+            // 
+            this.idCurso.HeaderText = "Curso";
+            this.idCurso.Name = "idCurso";
+            // 
+            // nota
+            // 
+            this.nota.HeaderText = "Nota";
+            this.nota.Name = "nota";
             // 
             // btnActualizar
             // 
@@ -170,28 +192,6 @@ namespace UI.Desktop
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "ID";
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // condicion
-            // 
-            this.condicion.HeaderText = "Condición";
-            this.condicion.Name = "condicion";
-            // 
-            // idCurso
-            // 
-            this.idCurso.HeaderText = "Curso";
-            this.idCurso.Name = "idCurso";
-            // 
-            // nota
-            // 
-            this.nota.HeaderText = "Nota";
-            this.nota.Name = "nota";
-            // 
             // Alumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -199,7 +199,7 @@ namespace UI.Desktop
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tscUsuarios);
             this.Name = "Alumnos";
-            this.Text = "Usuarios";
+            this.Text = "Alumnos";
             this.Load += new System.EventHandler(this.Alumnos_Load);
             this.tscUsuarios.ContentPanel.ResumeLayout(false);
             this.tscUsuarios.TopToolStripPanel.ResumeLayout(false);
