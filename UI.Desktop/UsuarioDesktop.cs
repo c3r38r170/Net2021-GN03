@@ -32,7 +32,7 @@ namespace UI.Desktop {
 			UsuarioActual = ul.GetOne(ID);
 			MapearDeDatos();
 		}
-		public override void MapearDeDatos() {
+		public override void MapearDeDatos(){
 			if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta)) {
 				this.btnAceptar.Text = "Guardar";
 			} else if (MF == ModoForm.Consulta) {
@@ -63,7 +63,7 @@ namespace UI.Desktop {
 				case ModoForm.Modificacion:
 					UsuarioActual.State = BusinessEntity.States.Modified;
 					break;
-				/*case ModoForm.Baja:
+			    /*case ModoForm.Baja:
 					UsuarioActual.State = BusinessEntity.States.Deleted;
 					break;*/
 			}
@@ -73,7 +73,7 @@ namespace UI.Desktop {
 			UsuarioLogic ul = new UsuarioLogic();
 			ul.Save(UsuarioActual);
 		}
-		public override bool Validar() {
+		public override bool Validar(){
 			if (string.IsNullOrWhiteSpace(this.txtNombre.Text)) {
 				NotificarError("El campo 'Nombre' está vacío");
 				return false;
@@ -111,7 +111,7 @@ namespace UI.Desktop {
 		public void NotificarError(string mensaje) {
 			this.Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 		}
-		public static bool ComprobarFormatoEmail(string sEmailAComprobar) {
+		public static bool ComprobarFormatoEmail(string sEmailAComprobar){
 			String sFormato;
 			sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
 			if (Regex.IsMatch(sEmailAComprobar, sFormato)) {
@@ -124,10 +124,10 @@ namespace UI.Desktop {
 				return false;
 			}
 		}
-		private void btnAceptar_Click(object sender, EventArgs e) {
+		private void btnAceptar_Click(object sender, EventArgs e){
 			bool v = Validar();
 			if (v) {
-				switch (MF) {
+				switch (MF){
 					case ModoForm.Alta:
 						GuardarCambios();
 						this.Close();
