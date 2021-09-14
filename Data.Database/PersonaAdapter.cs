@@ -16,9 +16,9 @@ namespace Data.Database {
 
 				SqlDataReader drPersonas = cmdPersona.ExecuteReader();
 				while (drPersonas.Read()) {
-					Persona e = new Persona();
-					e.Descripcion = (string)drPersona["desc_especialidad"];
-					personas.Add(e);
+					Persona p = new Persona();
+					fillPersonaFromDataReader(drPersonas, p);
+					personas.Add(p);
 				}
 				drPersonas.Close();
 			} catch (Exception Ex) {
@@ -34,56 +34,90 @@ namespace Data.Database {
 		public Persona GetOne(int ID) {
 			Persona persona = new Persona();
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM especialidades WHERE id_especialidad=@id", sqlConn);
-			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdPersona = new SqlCommand("SELECT * FROM personas WHERE id_persona=@id", sqlConn);
+			cmdPersona.CommandType = System.Data.CommandType.StoredProcedure;
+			cmdPersona.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			try {
-				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
-				if (drUsuario.Read()) {
-					especialidad.ID = (int)drUsuario["id_especialidad"];
-					especialidad.Descripcion = (string)drUsuario["desc_especialidad"];
+				SqlDataReader drPersona = cmdPersona.ExecuteReader();
+				if (drPersona.Read()) {
+					fillPersonaFromDataReader(drPersona, persona);
 				}
-				drUsuario.Close();
+				drPersona.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
-				Exception ExcepcionManejada = new Exception("Error al recuperar la especialidad.", Ex);
+				Exception ExcepcionManejada = new Exception("Error al recuperar la persona.", Ex);
 				throw ExcepcionManejada;
 			} finally {
 				this.CloseConnection();
 			}
-			return especialidad;
+			return persona;
 		}
 
 		public void Delete(int ID) {
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("DELETE FROM especialidades WHERE id_especialidad=@id", sqlConn);
-			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
-			cmdUsuario.ExecuteNonQuery();
+			SqlCommand cmdPersona = new SqlCommand("DELETE FROM personas WHERE id_persona=@id", sqlConn);
+			cmdPersona.CommandType = System.Data.CommandType.StoredProcedure;
+			cmdPersona.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			cmdPersona.ExecuteNonQuery();
 		}
 
-		public void Save(Especialidad especialidad) {
-			if (especialidad.State == BusinessEntity.States.New) {
+		public void Save(Persona persona) {
+			if (persona.State == BusinessEntity.States.New) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("INSERT INTO especialidades (desc_especialidad) VALUES (@desc); SET @ID = SCOPE_IDENTITY();", sqlConn);
-				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdUsuario.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
-				cmdUsuario.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
-				cmdUsuario.ExecuteNonQuery();
-				especialidad.ID = (int)cmdUsuario.Parameters["@ID"].Value;
+				SqlCommand cmdPersona = createCommandWithAttributes("INSERT INTO personas (nombre,apellido,direccion,email,telefono,fecha_nac,legajo,tipo_persona,id_plan) VALUES (@nombre,@apellido,@direccion,@email,@telefono,@fecha_nac,@legajo,@tipo_persona,@id_plan); SET @ID = SCOPE_IDENTITY();", persona);
+				cmdPersona.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+				cmdPersona.ExecuteNonQuery();
+				persona.ID = (int)cmdPersona.Parameters["@ID"].Value;
 				this.CloseConnection();
-			} else if (especialidad.State == BusinessEntity.States.Deleted) {
-				this.Delete(especialidad.ID);
-			} else if (especialidad.State == BusinessEntity.States.Modified) {
+			} else if (persona.State == BusinessEntity.States.Deleted) {
+				this.Delete(persona.ID);
+			} else if (persona.State == BusinessEntity.States.Modified) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("UPDATE especialidades SET desc_especialidad=@desc WHERE id_especialidad=@id", sqlConn);
-				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdUsuario.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
-				cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = especialidad.ID;
-				cmdUsuario.ExecuteNonQuery();
+				SqlCommand cmdPersona = createCommandWithAttributes("UPDATE personas SET desc_especialidad=@desc WHERE id_persona=@id", persona);
+				cmdPersona.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = persona.ID;
+				cmdPersona.ExecuteNonQuery();
 				this.CloseConnection();
 			}
-			especialidad.State = BusinessEntity.States.Unmodified;
+			persona.State = BusinessEntity.States.Unmodified;
+		}
+
+		private void fillPersonaFromDataReader(SqlDataReader dR,Persona p) {
+			p.ID = (int)dR["id_persona"];
+			p.Nombre = (string)dR["nombre"];
+			p.Apellido = (string)dR["apellido"];
+			p.Direccion = (string)dR["direccion"];
+			p.Email = (string)dR["email"];
+			p.Telefono = (string)dR["telefono"];
+			p.FechaNacimiento = DateTime.Parse((string)dR["fecha_nac"]);
+			p.Legajo = (int)dR["legajo"];
+			switch ((int)dR["tipo_persona"]) {
+				case 1:
+					p.TipoPersona = Persona.Tipo.Docente;
+					break;
+				case 2:
+					p.TipoPersona = Persona.Tipo.Alumno;
+					break;
+				default:
+					p.TipoPersona = Persona.Tipo.Otro;
+					break;
+			}
+			//TODO quizas querramos traer el plan y hacer una propiedad .Plan
+			p.IDPlan = (int)dR["id_plan"];
+			//p.Plan=PlanAdapter.getOne(p.IDPlan);
+		}
+
+		private SqlCommand createCommandWithAttributes(string c,Persona p) {
+			SqlCommand sc = new SqlCommand(c, sqlConn);
+			sc.CommandType = System.Data.CommandType.StoredProcedure;
+			sc.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = p.Nombre;
+			sc.Parameters.Add("@apellido", System.Data.SqlDbType.VarChar).Value = p.Apellido;
+			sc.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = p.Email;
+			sc.Parameters.Add("@telefono", System.Data.SqlDbType.VarChar).Value = p.Telefono;
+			sc.Parameters.Add("@fecha_nac", System.Data.SqlDbType.DateTime).Value = p.FechaNacimiento;
+			sc.Parameters.Add("@legajo", System.Data.SqlDbType.Int).Value = p.Legajo;
+			sc.Parameters.Add("@tipo_persona", System.Data.SqlDbType.Int).Value =(int)p.TipoPersona;
+			sc.Parameters.Add("@id_plan", System.Data.SqlDbType.Int).Value = p.IDPlan;
+			return sc;
 		}
 	}
 }
