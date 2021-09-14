@@ -13,6 +13,7 @@ namespace Business.Entities {
 		private string _Telefono;
 		private int _Legajo;
 		private int _IDPlan;
+		private Plan _Plan;
 		private DateTime _FechaNacimiento;
 		private Tipo _tipoPersona;
 
@@ -23,13 +24,15 @@ namespace Business.Entities {
 		public string Telefono { get => _Telefono; set => _Telefono = value; }
 		public int Legajo { get => _Legajo; set => _Legajo = value; }
 		public int IDPlan { get => _IDPlan; set => _IDPlan = value; }
+		public Plan Plan { get => _Plan; set => _Plan = value; }
 		public DateTime FechaNacimiento { get => _FechaNacimiento; set => _FechaNacimiento = value; }
 		public Tipo TipoPersona { get => _tipoPersona; set => _tipoPersona = value; }
 
 		public enum Tipo
 		{
-			Docente,
-			Alumno
+			Docente=1,
+			Alumno,
+			Otro
 		}
 	}
 }
