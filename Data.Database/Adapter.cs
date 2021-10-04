@@ -8,7 +8,7 @@ using System.Configuration;
 namespace Data.Database {
 
 	public class Adapter {
-		const string consKeyDefaultCnnString = "ConnStringLocal";
+		const string consKeyDefaultCnnString = "Data Source = LAPTOP - CHEHT879\\SQLEXPRESS;Initial Catalog = tp2_net; Integrated Security = true;";
 		public SqlConnection sqlConn = new SqlConnection(ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString);
 
 		protected void OpenConnection() {

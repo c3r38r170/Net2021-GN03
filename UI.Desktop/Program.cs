@@ -15,10 +15,12 @@ namespace UI.Desktop
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            //Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(menu = new Menu());
+            Login l = new Login();
+            l.Show();
+            Application.Run();
         }
     }
 }
