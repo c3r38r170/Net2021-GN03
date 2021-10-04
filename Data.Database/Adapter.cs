@@ -13,17 +13,11 @@ namespace Data.Database {
 
 		protected void OpenConnection() {
 			sqlConn.Open();
-			//throw new Exception("Metodo no implementado");
 		}
 
 		protected void CloseConnection() {
 			sqlConn.Close();
 			sqlConn = null;
-			//throw new Exception("Metodo no implementado");
-		}
-
-		protected SqlDataReader ExecuteReader(String commandText) {
-			throw new Exception("Metodo no implementado");
 		}
 	}
 }
