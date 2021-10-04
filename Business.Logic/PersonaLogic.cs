@@ -10,10 +10,10 @@ namespace Business.Logic
 {
     public class PersonaLogic: BusinessLogic
     {
-        public AlumnoAdapter AlumnoData { get; set; }
+        public PersonaAdapter AlumnoData { get; set; }
         public PersonaLogic()
         {
-            AlumnoData = new AlumnoAdapter();
+            AlumnoData = new PersonaAdapter();
         }
         public List<Persona> GetAll()
         {
