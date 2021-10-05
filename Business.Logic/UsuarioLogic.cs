@@ -24,5 +24,11 @@ namespace Business.Logic {
 		public void Delete(int ID) {
 			UsuarioData.Delete(ID);
 		}
+		public Usuario LogIn(String nombre,String contraseña) {
+			var usuarioAdapter = new UsuarioAdapter();
+			var usuario = usuarioAdapter.GetUserByUsernameAndPassword(nombre, contraseña);
+
+			return usuario;
+		}
 	}
 }

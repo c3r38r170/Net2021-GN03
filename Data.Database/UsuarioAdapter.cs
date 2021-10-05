@@ -103,5 +103,18 @@ namespace Data.Database {
 			}
 			usuario.State = BusinessEntity.States.Unmodified;
 		}
+
+		public Usuario GetUserByUsernameAndPassword(String nombre, String contraseña) {
+			this.OpenConnection();
+			SqlCommand cmdLogIn = new SqlCommand("SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave", sqlConn);
+			cmdLogIn.Parameters.Add("@nombre_usuario", System.Data.SqlDbType.VarChar).Value = nombre;
+			cmdLogIn.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = contraseña;
+			object result = cmdLogIn.ExecuteScalar();
+			if (result == null)
+				return new Usuario();
+			int ID = (int)result;
+			this.CloseConnection();
+			return GetOne(ID);
+		}
 	}
 }

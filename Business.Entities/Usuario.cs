@@ -43,6 +43,9 @@ namespace Business.Entities {
 			set { _Habilitado = value; }
 		}
 
+		public Usuario() {
+			ID = 0;//Nos ayuda a detectar si el usuario tiene datos o no.
+		}
 
 	}
 }

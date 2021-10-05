@@ -36,7 +36,6 @@ namespace Data.Database {
 			Especialidad especialidad = new Especialidad();
 			this.OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("SELECT * FROM especialidades WHERE id_especialidad=@id", sqlConn);
-			cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdEspecialidad.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			try {
 				SqlDataReader drEspecialidad = cmdEspecialidad.ExecuteReader();
@@ -58,7 +57,6 @@ namespace Data.Database {
 		public void Delete(int ID) {
 			this.OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("DELETE FROM especialidades WHERE id_especialidad=@id", sqlConn);
-			cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdEspecialidad.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			cmdEspecialidad.ExecuteNonQuery();
 		}
@@ -67,7 +65,6 @@ namespace Data.Database {
 			if (especialidad.State == BusinessEntity.States.New) {
 				this.OpenConnection();
 				SqlCommand cmdEspecialidad = new SqlCommand("INSERT INTO especialidades (desc_especialidad) VALUES (@desc); SET @ID = SCOPE_IDENTITY();", sqlConn);
-				cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
 				cmdEspecialidad.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
 				cmdEspecialidad.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
 				cmdEspecialidad.ExecuteNonQuery();
@@ -78,7 +75,6 @@ namespace Data.Database {
 			} else if (especialidad.State == BusinessEntity.States.Modified) {
 				this.OpenConnection();
 				SqlCommand cmdEspecialidad = new SqlCommand("UPDATE especialidades SET desc_especialidad=@desc WHERE id_especialidad=@id", sqlConn);
-				cmdEspecialidad.CommandType = System.Data.CommandType.StoredProcedure;
 				cmdEspecialidad.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = especialidad.Descripcion;
 				cmdEspecialidad.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = especialidad.ID;
 				cmdEspecialidad.ExecuteNonQuery();

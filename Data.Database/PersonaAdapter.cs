@@ -45,8 +45,8 @@ namespace Data.Database {
 				drPersona.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
-				Exception ExcepcionManejada = new Exception("Error al recuperar la persona.", Ex);
-				throw ExcepcionManejada;
+				Exception excepcionManejada = new Exception("Error al recuperar la persona.", Ex);
+				throw excepcionManejada;
 			} finally {
 				this.CloseConnection();
 			}
@@ -73,7 +73,7 @@ namespace Data.Database {
 				this.Delete(persona.ID);
 			} else if (persona.State == BusinessEntity.States.Modified) {
 				this.OpenConnection();
-				SqlCommand cmdPersona = createCommandWithAttributes("UPDATE personas SET desc_especialidad=@desc WHERE id_persona=@id", persona);
+				SqlCommand cmdPersona = createCommandWithAttributes("UPDATE personas SET nombre=@nombre,apellido=@apellido,direccion=@direccion,email=@email,telefono=@telefono,fecha_nac=@fecha_nac,legajo=@legajo,tipo_persona=@tipo_persona,id_plan=@id_plan WHERE id_persona=@id", persona);
 				cmdPersona.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = persona.ID;
 				cmdPersona.ExecuteNonQuery();
 				this.CloseConnection();
