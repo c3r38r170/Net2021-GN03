@@ -10,12 +10,10 @@ namespace Business.Entities {
 		private int _Cupo;
 		private int _IDComision;
 		private int _IDMateria;
-		private string _Descripcion;
 
 		public int AñoCalendario { get => _AñoCalendario; set => _AñoCalendario = value; }
 		public int Cupo { get => _Cupo; set => _Cupo = value; }
 		public int IDComision { get => _IDComision; set => _IDComision = value; }
 		public int IDMateria { get => _IDMateria; set => _IDMateria = value; }
-		public string Descripcion { get => _Descripcion; set => _Descripcion = value; }
 	}
 }
