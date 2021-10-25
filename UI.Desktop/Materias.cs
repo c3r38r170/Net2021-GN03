@@ -37,5 +37,37 @@ namespace UI.Desktop
         {
             this.Close();
         }
+
+        private void tsbNuevo_Click(object sender, EventArgs e)
+        {
+            MateriaDesktop formMateria = new MateriaDesktop(ApplicationForm.ModoForm.Alta);
+            formMateria.ShowDialog();
+            this.Listar();
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            int ID = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            MateriaDesktop md = new MateriaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+            md.ShowDialog();
+            this.Listar();
+        }
+
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            Materia m = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem);
+            int ID = m.ID;
+            string message = $"¿Desea eliminar la materia {m.Descripcion}?";
+            string title = "Eliminar materia";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                MateriaLogic ml = new MateriaLogic();
+                ml.Delete(ID);
+                // m.State = BusinessEntity.States.Deleted;
+            }
+            this.Listar();
+        }
     }
 }
