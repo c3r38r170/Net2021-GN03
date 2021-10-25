@@ -17,14 +17,26 @@ namespace UI.Desktop
         public Planes()
         {
             InitializeComponent();
-            this.dvgPlanes.AutoGenerateColumns = false;
+        }
+
+        private void Planes_Load(object sender, EventArgs e)
+        {
+            this.Listar();
         }
 
         public void Listar()
         {
-            PlanLogic pl = new PlanLogic();
-           
-            this.dvgPlanes.DataSource = pl.GetAll();
+            PlanLogic pl = new PlanLogic();      
+            this.dvgPlanes.DataSource = pl.GetPlanesEspecialidad();
+        }
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            this.Listar();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -36,40 +48,18 @@ namespace UI.Desktop
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
+            //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
+            int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
             PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
             pd.ShowDialog();
             this.Listar();
         }
 
-        private void Planes_Load(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            this.Listar();
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Plan p = ((Business.Entities.Plan)this.dvgPlanes.SelectedRows[0].DataBoundItem);
-            int ID = p.ID;
-            string message = $"¿Desea eliminar al plan seleccionado?";
-            string title = "Eliminar usuario";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
-            {
-                PlanLogic ul = new PlanLogic();
-                ul.Delete(ID);
-            }
+            //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
+            int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
+            PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Baja);
             this.Listar();
         }
     }

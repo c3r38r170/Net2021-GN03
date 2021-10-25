@@ -30,5 +30,10 @@ namespace Business.Logic
         {
             PlanData.Save(planActual);
         }
+
+        public object GetPlanesEspecialidad()
+        {
+            return PlanData.GetPlanesEspecialidad();
+        }
     }
 }

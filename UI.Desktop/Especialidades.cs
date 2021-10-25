@@ -17,12 +17,28 @@ namespace UI.Desktop
         public Especialidades()
         {
             InitializeComponent();
+            this.dgvEspecialidades.AutoGenerateColumns = false;
+        }
+
+        private void Especialidades_Load(object sender, EventArgs e)
+        {
+            Listar();
         }
 
         public void Listar()
         {
             EspecialidadLogic el = new EspecialidadLogic();
             this.dgvEspecialidades.DataSource = el.GetAll();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            Listar();
         }
 
         private void tsbNuevo_Click(object sender, EventArgs e)
@@ -57,14 +73,8 @@ namespace UI.Desktop
             this.Listar();
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+       
 
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            Listar();
-        }
+      
     }
 }

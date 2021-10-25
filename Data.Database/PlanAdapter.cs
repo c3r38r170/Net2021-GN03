@@ -1,6 +1,7 @@
 ﻿using Business.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,40 @@ namespace Data.Database
 				this.CloseConnection();
 			}
 			return listaPlanes;
+		}
+
+        public object GetPlanesEspecialidad()
+        {
+			EspecialidadAdapter ea = new EspecialidadAdapter();
+
+			List<Plan> listaPlanes = this.GetAll();
+			List<Especialidad> listaEspecialidades = ea.GetAll();
+
+			DataTable dtPlanesEspecialidades = new DataTable();
+			DataRow fila;
+			DataColumn dcIdPlan = new DataColumn("ID");
+			DataColumn dcDescPlan = new DataColumn("Descripcion Plan");
+			DataColumn dcDescEspecialidad = new DataColumn("Descripcion Especialidad");
+			dtPlanesEspecialidades.Columns.Add(dcIdPlan);
+			dtPlanesEspecialidades.Columns.Add(dcDescPlan);
+			dtPlanesEspecialidades.Columns.Add(dcDescEspecialidad);
+
+			foreach (Plan p in listaPlanes)
+			{
+				foreach (Especialidad e in listaEspecialidades)
+				{
+					if (p.IDEspecialidad == e.ID)
+					{
+						fila = dtPlanesEspecialidades.NewRow();
+						fila[dcIdPlan] = p.ID;
+						fila[dcDescPlan] = p.Descripcion;
+						fila[dcDescEspecialidad] = e.Descripcion;
+						dtPlanesEspecialidades.Rows.Add(fila);
+					}
+				}
+			}
+
+			return dtPlanesEspecialidades;
 		}
 
         public void Save(Plan plan)
