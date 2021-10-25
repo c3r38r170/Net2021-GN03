@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business.Entities;
+using Business.Logic;
+using System.Text.RegularExpressions;
 
 namespace UI.Desktop
 {
@@ -16,5 +19,11 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
+        
+        public override void MapearDeDatos() { }
+        public override void MapearADatos() { }
+        public override void GuardarCambios() { }
+        public override bool Validar() { return false; }
+
     }
 }
