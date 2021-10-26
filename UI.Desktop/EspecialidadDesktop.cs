@@ -90,7 +90,8 @@ namespace UI.Desktop
         {
             this.Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-        private void btnAceptar_Click(object sender, EventArgs e)
+
+        private void btnAceptar_Click_1(object sender, EventArgs e)
         {
             bool v = Validar();
             if (v)
@@ -108,9 +109,10 @@ namespace UI.Desktop
                 }
             }
         }
-        private void btnCancelar_Click(object sender, EventArgs e)
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
     }
 }
