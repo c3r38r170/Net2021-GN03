@@ -14,11 +14,11 @@ namespace Data.Database
     {
         public List<Plan> GetAll()
         {
-            List<Plan> listaPlanes = new List<Plan>();		
-			SqlCommand cmd = new SqlCommand("SELECT * FROM planes", sqlConn);
+            List<Plan> listaPlanes = new List<Plan>();			
 			try
 			{
 				this.OpenConnection();
+				SqlCommand cmd = new SqlCommand("SELECT * FROM planes", sqlConn);
 				SqlDataReader drPlan = cmd.ExecuteReader();
 				while (drPlan.Read())
 				{
@@ -42,7 +42,7 @@ namespace Data.Database
 			return listaPlanes;
 		}
 
-        public object GetPlanesEspecialidad()
+        public DataTable GetPlanesEspecialidad()
         {
 			EspecialidadAdapter ea = new EspecialidadAdapter();
 
