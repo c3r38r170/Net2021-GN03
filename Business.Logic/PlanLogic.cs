@@ -2,6 +2,7 @@
 using Data.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,11 @@ namespace Business.Logic
     public class PlanLogic: BusinessLogic
     {
         public PlanAdapter PlanData { get; set; }
+
+        public PlanLogic()
+        {
+            PlanData = new PlanAdapter();
+        }
         public List<Plan> GetAll()
         {
             return PlanData.GetAll();
@@ -31,7 +37,7 @@ namespace Business.Logic
             PlanData.Save(planActual);
         }
 
-        public object GetPlanesEspecialidad()
+        public DataTable GetPlanesEspecialidad()
         {
             return PlanData.GetPlanesEspecialidad();
         }
