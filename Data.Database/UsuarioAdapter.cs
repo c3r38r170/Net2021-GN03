@@ -13,15 +13,7 @@ namespace Data.Database {
 			try {
 				SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
 				while (drUsuarios.Read()) {
-					Usuario a = new Usuario();
-					a.ID = (int)drUsuarios["id_usuarios"];
-					a.NombreUsuario = (string)drUsuarios["nombre_usuario"];
-					a.Clave = (string)drUsuarios["clave"];
-					a.Habilitado = (bool)drUsuarios["habilitado"];
-					a.Nombre = (string)drUsuarios["nombre"];
-					a.Apellido = (string)drUsuarios["apellido"];
-					a.Email= (string)drUsuarios["email"];
-					usuarios.Add(a);
+					usuarios.Add(CreateUsuarioFromDataReader(drUsuarios);
 				}
 			drUsuarios.Close();
 			}catch(Exception Ex){
@@ -36,13 +28,13 @@ namespace Data.Database {
 		public Usuario GetOne(int ID) {
 			Usuario usuario = new Usuario();
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM usuarios WHERE id_usuario=@id", sqlConn);
+			SqlCommand cmdUsuario = new SqlCommand("SelectUsuarioById", sqlConn);
 			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			try { 
 				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
 				if (drUsuario.Read()) {
-					usuario.ID = (int)drUsuario["id_usuarios"];
+					usuario.ID = (int)drUsuario["id_usuario"];
 					usuario.NombreUsuario = (string)drUsuario["nombre_usuario"];
 					usuario.Clave = (string)drUsuario["clave"];
 					usuario.Habilitado = (bool)drUsuario["habilitado"];
@@ -115,6 +107,18 @@ namespace Data.Database {
 			int ID = (int)result;
 			this.CloseConnection();
 			return GetOne(ID);
+		}
+
+		private Usuario CreateUsuarioFromDataReader(SqlDataReader dR) {
+			Usuario a = new Usuario();
+			a.ID = (int)dR["id_usuarios"];
+			a.NombreUsuario = (string)dR["nombre_usuario"];
+			a.Clave = (string)dR["clave"];
+			a.Habilitado = (bool)dR["habilitado"];
+			a.Nombre = (string)dR["nombre"];
+			a.Apellido = (string)dR["apellido"];
+			a.Email = (string)dR["email"];
+			return a;
 		}
 	}
 }

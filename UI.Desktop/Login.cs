@@ -47,10 +47,15 @@ namespace UI.Desktop
 
       var usuario = new UsuarioAdapter().GetUserByUsernameAndPassword(txtUsuario.Text,txtContraseña.Text);
 
-			if (usuario.ID == 0) {
+      if (usuario.ID == 0) {
         MessageBox.Show("Las credenciales son incorrectas, intente nuevamente.");
+      }else if(!usuario.Habilitado) {
+				MessageBox.Show("Su cuenta se encuentra deshabilitada.");
 			} else {
-        MessageBox.Show("Bienvenido, "+usuario.Nombre+"!!");
+
+				/*switch(usuario.Persona.) {
+
+				}*/
 			}
 		}
 
