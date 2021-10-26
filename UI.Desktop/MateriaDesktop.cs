@@ -31,8 +31,8 @@ namespace UI.Desktop
         public MateriaDesktop(int ID, ModoForm modo) : this()
         {
             MF = modo;
-            //MateriaLogic ml = new MateriaLogic();
-            //MateriaActual = ml.GetOne(ID);
+            MateriaLogic ml = new MateriaLogic();
+            MateriaActual = ml.GetOne(ID);
             MapearDeDatos();
         }
 
