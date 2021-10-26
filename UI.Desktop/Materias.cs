@@ -19,8 +19,8 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            MateriaLogic ml = new MateriaLogic();
-            this.dgvMaterias.DataSource = ml.GetAll();
+            //MateriaLogic ml = new MateriaLogic();
+            //this.dgvMaterias.DataSource = ml.GetAll();
         }
 
         private void Materias_Load(object sender, EventArgs e)
@@ -63,8 +63,8 @@ namespace UI.Desktop
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-                MateriaLogic ml = new MateriaLogic();
-                ml.Delete(ID);
+                //MateriaLogic ml = new MateriaLogic();
+                //ml.Delete(ID);
                 // m.State = BusinessEntity.States.Deleted;
             }
             this.Listar();

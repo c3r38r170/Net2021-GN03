@@ -32,7 +32,7 @@ namespace UI.Desktop
         {
             MF = modo;
             //MateriaLogic ml = new MateriaLogic();
-            MateriaActual = ml.GetOne(ID);
+            //MateriaActual = ml.GetOne(ID);
             MapearDeDatos();
         }
 
@@ -76,8 +76,8 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            MateriaLogic ml = new MateriaLogic();
-            ml.Save(MateriaActual);
+            //MateriaLogic ml = new MateriaLogic();
+            //ml.Save(MateriaActual);
         }
         public override bool Validar()
         {

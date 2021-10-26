@@ -36,13 +36,13 @@ namespace Data.Database {
 		public Usuario GetOne(int ID) {
 			Usuario usuario = new Usuario();
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("SELECT * FROM usuarios WHERE id_usuario=@id", sqlConn);
+			SqlCommand cmdUsuario = new SqlCommand("SelectUsuarioById", sqlConn);
 			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			try { 
 				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
 				if (drUsuario.Read()) {
-					usuario.ID = (int)drUsuario["id_usuarios"];
+					usuario.ID = (int)drUsuario["id_usuario"];
 					usuario.NombreUsuario = (string)drUsuario["nombre_usuario"];
 					usuario.Clave = (string)drUsuario["clave"];
 					usuario.Habilitado = (bool)drUsuario["habilitado"];
@@ -53,7 +53,8 @@ namespace Data.Database {
 				drUsuario.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
-				Exception ExcepcionManejada = new Exception("Error al recuperar lista de usuarios", Ex);
+				Exception ExcepcionManejada =
+				new Exception("Error al recuperar lista de usuarios", Ex);
 				throw ExcepcionManejada;
 			} finally {
 				this.CloseConnection();

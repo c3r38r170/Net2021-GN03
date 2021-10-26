@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business.Entities;
 using Data.Database;
 
 namespace UI.Desktop
 {
-    public partial class Login : Form
+    public partial class Login : ApplicationForm
     {
         public Login()
         {
@@ -35,7 +36,7 @@ namespace UI.Desktop
         }
 
 		private void btnAcceder_Click(object sender, EventArgs e) {
-			if (txtUsuario.Text == "") {
+			if (txtUsuario.Text == ""){
         MessageBox.Show("Ingrese nombre de usuario.");
         return;
       }

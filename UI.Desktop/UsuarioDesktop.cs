@@ -28,9 +28,17 @@ namespace UI.Desktop {
 		}
 		public UsuarioDesktop(int ID, ModoForm modo) : this() {
 			MF = modo;
-			UsuarioLogic ul = new UsuarioLogic();
-			UsuarioActual = ul.GetOne(ID);
-			MapearDeDatos();
+            try
+            {
+				UsuarioLogic ul = new UsuarioLogic();
+				UsuarioActual = ul.GetOne(ID);
+				MapearDeDatos();
+			}
+            catch (Exception Ex)
+            {
+				MessageBox.Show(Ex.Message);
+            }
+			
 		}
 		public override void MapearDeDatos(){
 			if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta)) {
