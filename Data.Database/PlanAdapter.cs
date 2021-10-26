@@ -170,33 +170,33 @@ namespace Data.Database
 			return p;
 		}
 
-        public List<Especialidad> CargaComboBox()
-        {
-			List<Especialidad> listaEspecialidades = new List<Especialidad>();
-			SqlCommand mycomando = new SqlCommand("SELECT * FROM especialidades", sqlConn);
-            try
-            {
-				this.OpenConnection();
-				SqlDataReader mydr = mycomando.ExecuteReader();
-				while (mydr.Read())
-				{
-					Especialidad e = new Especialidad();
-					e.ID = (int)mydr["id_especialidad"];
-					e.Descripcion = (string)mydr["desc_especialidad"];
-					listaEspecialidades.Add(e);
-				}
-            }
-            catch (Exception e)
-            {
-				Exception ExcepcionManejada = new Exception("Error al Cargar el ComboBox de planes", e);
-				throw ExcepcionManejada;
-            }
-            finally
-            {
-				this.CloseConnection();
-			}
+  //      public List<Especialidad> CargaComboBox()
+  //      {
+		//	List<Especialidad> listaEspecialidades = new List<Especialidad>();
+		//	SqlCommand mycomando = new SqlCommand("SELECT * FROM especialidades", sqlConn);
+  //          try
+  //          {
+		//		this.OpenConnection();
+		//		SqlDataReader mydr = mycomando.ExecuteReader();
+		//		while (mydr.Read())
+		//		{
+		//			Especialidad e = new Especialidad();
+		//			e.ID = (int)mydr["id_especialidad"];
+		//			e.Descripcion = (string)mydr["desc_especialidad"];
+		//			listaEspecialidades.Add(e);
+		//		}
+  //          }
+  //          catch (Exception e)
+  //          {
+		//		Exception ExcepcionManejada = new Exception("Error al Cargar el ComboBox de planes", e);
+		//		throw ExcepcionManejada;
+  //          }
+  //          finally
+  //          {
+		//		this.CloseConnection();
+		//	}
 			
-			return listaEspecialidades;
-		}
+		//	return listaEspecialidades;
+		//}
     }
 }
