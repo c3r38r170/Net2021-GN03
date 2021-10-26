@@ -76,8 +76,8 @@ namespace UI.Desktop
         public override void GuardarCambios()
         {
             MapearADatos();
-            MateriaLogic ml = new MateriaLogic();
-            ml.Save(MateriaActual);
+            //MateriaLogic ml = new MateriaLogic();
+            //ml.Save(MateriaActual);
         }
         public override bool Validar()
         {

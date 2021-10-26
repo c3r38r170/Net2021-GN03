@@ -45,7 +45,8 @@ namespace Data.Database {
 				drUsuario.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
-				Exception ExcepcionManejada = new Exception("Error al recuperar lista de usuarios", Ex);
+				Exception ExcepcionManejada =
+				new Exception("Error al recuperar lista de usuarios", Ex);
 				throw ExcepcionManejada;
 			} finally {
 				this.CloseConnection();

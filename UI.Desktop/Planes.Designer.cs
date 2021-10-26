@@ -33,15 +33,15 @@ namespace UI.Desktop
             this.tcPlanesMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tlPlanesMaterias = new System.Windows.Forms.TableLayoutPanel();
             this.dvgPlanes = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcPlanesMaterias.ContentPanel.SuspendLayout();
             this.tcPlanesMaterias.TopToolStripPanel.SuspendLayout();
             this.tcPlanesMaterias.SuspendLayout();
@@ -103,27 +103,6 @@ namespace UI.Desktop
             this.dvgPlanes.Size = new System.Drawing.Size(794, 390);
             this.dvgPlanes.TabIndex = 0;
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID Plan";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // _Descripcion
-            // 
-            this._Descripcion.DataPropertyName = "Descripcion";
-            this._Descripcion.HeaderText = "Descripcion Plan";
-            this._Descripcion.Name = "_Descripcion";
-            this._Descripcion.ReadOnly = true;
-            // 
-            // idespecialidad
-            // 
-            this.idespecialidad.DataPropertyName = "IDEspecialidad";
-            this.idespecialidad.HeaderText = "ID Especialidad";
-            this.idespecialidad.Name = "idespecialidad";
-            this.idespecialidad.ReadOnly = true;
-            // 
             // btnActualizar
             // 
             this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -154,7 +133,7 @@ namespace UI.Desktop
             this.btnEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(4, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(112, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(81, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -186,6 +165,27 @@ namespace UI.Desktop
             this.btnEliminar.Size = new System.Drawing.Size(23, 22);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID Plan";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // _Descripcion
+            // 
+            this._Descripcion.DataPropertyName = "Descripcion";
+            this._Descripcion.HeaderText = "Descripcion Plan";
+            this._Descripcion.Name = "_Descripcion";
+            this._Descripcion.ReadOnly = true;
+            // 
+            // idespecialidad
+            // 
+            this.idespecialidad.DataPropertyName = "IDEspecialidad";
+            this.idespecialidad.HeaderText = "Descripcion Especialidad";
+            this.idespecialidad.Name = "idespecialidad";
+            this.idespecialidad.ReadOnly = true;
             // 
             // Planes
             // 
