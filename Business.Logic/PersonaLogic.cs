@@ -20,12 +20,12 @@ namespace Business.Logic {
 			PersonaData.Save(u);
 		}
 
-		public void Delete(int iD) {
-			PersonaData.Delete(iD);
+		public void Delete(int ID) {
+			PersonaData.Delete(ID);
 		}
 
-		public Persona GetOne(int iD) {
-			return PersonaData.GetOne(iD);
+		public Persona GetOne(int ID) {
+			return PersonaData.GetOne(ID);
 		}
 	}
 }
