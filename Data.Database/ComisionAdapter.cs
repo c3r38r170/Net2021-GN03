@@ -84,7 +84,7 @@ namespace Data.Database
 		{
 			Comision com = new Comision();
 			this.OpenConnection();
-			SqlCommand cmdComision = new SqlCommand("SELECT * FROM comisiones WHERE id_comision=@id", sqlConn);
+			SqlCommand cmdComision = new SqlCommand("SelectComisionById", sqlConn);
 			cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdComision.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			try
@@ -114,7 +114,7 @@ namespace Data.Database
 		public void Delete(int ID)
 		{
 			this.OpenConnection();
-			SqlCommand cmdComision = new SqlCommand("DELETE FROM comisiones WHERE id_comision=@id", sqlConn);
+			SqlCommand cmdComision = new SqlCommand("DeleteComision", sqlConn);
 			cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
 			cmdComision.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
 			cmdComision.ExecuteNonQuery();
@@ -125,7 +125,7 @@ namespace Data.Database
 			if (com.State == BusinessEntity.States.New)
 			{
 				this.OpenConnection();
-				SqlCommand cmdComision = new SqlCommand("INSERT INTO comisiones (anio_especialidad,desc_comision,id_plan) VALUES (@anioe,@descc,@idp); SET @ID = SCOPE_IDENTITY();", sqlConn);
+				SqlCommand cmdComision = new SqlCommand("NuevaComision", sqlConn);
 				cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
 				cmdComision.Parameters.Add("@anioe", System.Data.SqlDbType.Int).Value = com.AñoEspecialidad;
 				cmdComision.Parameters.Add("@descc", System.Data.SqlDbType.VarChar).Value = com.Descripcion;
@@ -142,7 +142,7 @@ namespace Data.Database
 			else if (com.State == BusinessEntity.States.Modified)
 			{
 				this.OpenConnection();
-				SqlCommand cmdComision = new SqlCommand("UPDATE comisiones SET anio_especialidad=@anioe,desc_comision=@descc,id_plan=@idp WHERE id_comision=@ID", sqlConn);
+				SqlCommand cmdComision = new SqlCommand("EditarComision", sqlConn);
 				cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
 				cmdComision.Parameters.Add("@anioe", System.Data.SqlDbType.Int).Value = com.AñoEspecialidad;
 				cmdComision.Parameters.Add("@descc", System.Data.SqlDbType.VarChar).Value = com.Descripcion;
