@@ -15,85 +15,84 @@ namespace UI.Desktop
 {
     public partial class MateriaDesktop : ApplicationForm
     {
-        private Materia _materiaActual;
-        private ModoForm _mf;
         public Materia MateriaActual { get; set; }
-        public ModoForm MF { get; set; }
         public MateriaDesktop()
         {
             InitializeComponent();
         }
         public MateriaDesktop(ModoForm modo) : this()
         {
-            MF = modo;
-            MateriaActual = new Materia();
+            Modo = modo;
         }
         public MateriaDesktop(int ID, ModoForm modo) : this()
         {
-            MF = modo;
-            MateriaLogic ml = new MateriaLogic();
-            MateriaActual = ml.GetOne(ID);
+            Modo = modo;
+            MateriaActual = new MateriaLogic().GetOne(ID);
             MapearDeDatos();
         }
 
         public override void MapearDeDatos()
         {
-            if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta))
-            {
-                this.btnAceptar.Text = "Guardar";
-            }
-            else if (MF == ModoForm.Consulta)
-            {
-                this.btnAceptar.Text = "Aceptar";
-            }
-            this.txtID.Text = this.MateriaActual.ID.ToString();
-            this.txtDescripcion.Text = this.MateriaActual.Descripcion;
+            this.txtIdMateria.Text = this.MateriaActual.ID.ToString();
+            this.txtDescMateria.Text = this.MateriaActual.Descripcion;
             this.txtHsSemanales.Text = this.MateriaActual.HSSemanales.ToString();
             this.txtHsTotales.Text = this.MateriaActual.HSTotales.ToString();
+            if (Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion))
+            {
+                btnAceptar.Text = "Guardar";
+            }
+            else if (Modo.Equals("Consulta"))
+            {
+                btnAceptar.Text = "Aceptar";
+            }
         }
         public override void MapearADatos()
         {
-            if (MF == ModoForm.Alta || MF == ModoForm.Modificacion)
+            if (Modo == ModoForm.Alta)
             {
-                MateriaActual.Descripcion = this.txtDescripcion.Text;
-                MateriaActual.HSSemanales = Convert.ToInt32(this.txtHsSemanales.Text);
-                MateriaActual.HSTotales = Convert.ToInt32(this.txtHsTotales.Text);
-
+                Materia m = new Materia();
+                MateriaActual = m;
+                MateriaActual.Descripcion = this.txtDescMateria.Text;
+                MateriaActual.HSSemanales = int.Parse(this.txtHsSemanales.Text);
+                MateriaActual.HSTotales = int.Parse(this.txtHsTotales.Text);
+                MateriaActual.IDPlan = ((KeyValuePair<int, string>)cBoxDescPlan.SelectedItem).Key;
+                MateriaActual.State = BusinessEntity.States.New;
             }
-            switch (MF)
+            else if (Modo == ModoForm.Modificacion)
             {
-                case ModoForm.Alta:
-                    MateriaActual.State = BusinessEntity.States.New;
-                    break;
-                case ModoForm.Modificacion:
-                    MateriaActual.State = BusinessEntity.States.Modified;
-                    break;
-                    /*case ModoForm.Baja:
-                        MateriaActual.State = BusinessEntity.States.Deleted;
-                        break;*/
+                MateriaActual.Descripcion = this.txtDescMateria.Text;
+                MateriaActual.HSSemanales = int.Parse(this.txtHsSemanales.Text);
+                MateriaActual.HSTotales = int.Parse(this.txtHsTotales.Text);
+                MateriaActual.IDPlan = ((KeyValuePair<int, string>)cBoxDescPlan.SelectedItem).Key;
+                MateriaActual.State = BusinessEntity.States.Modified;
             }
         }
         public override void GuardarCambios()
         {
             MapearADatos();
-            //MateriaLogic ml = new MateriaLogic();
-            //ml.Save(MateriaActual);
+            MateriaLogic el = new MateriaLogic();
+            el.Save(MateriaActual);
         }
         public override bool Validar()
         {
-            if (string.IsNullOrWhiteSpace(this.txtDescripcion.Text))
+            if (string.IsNullOrWhiteSpace(this.txtDescMateria.Text))
             {
-                NotificarError("El campo 'Descripcion' está vacío");
+                Notificar("Error", "Incorrect txtDescripcion en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtHsSemanales.Text))
             {
-                NotificarError("El campo 'HS Semanales' está vacío");
+                Notificar("Error", "Incorrect Horas Semanales en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.txtHsTotales.Text))
             {
-                NotificarError("El campo 'HS Totales' está vacío");
+                Notificar("Error", "Incorrect hs totales en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.cBoxDescPlan.Text))
+            {
+                Notificar("Error", "Incorrect plan en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             else
@@ -101,34 +100,53 @@ namespace UI.Desktop
                 return true;
             }
         }
-        public void NotificarError(string mensaje)
-        {
-            this.Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            bool v = Validar();
-            if (v)
+            switch (Modo)
             {
-                switch (MF)
-                {
-                    case ModoForm.Alta:
+                case ModoForm.Alta:
+                    if (Validar())
+                    {
                         GuardarCambios();
                         this.Close();
-                        break;
-                    case ModoForm.Modificacion:
+                    }
+                    break;
+                case ModoForm.Modificacion:
+                    if (Validar())
+                    {
                         GuardarCambios();
                         this.Close();
-                        break;
-                }
+                    }
+                    break;
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+                Close();
+        }
+
+        private void MateriaDesktop_Load(object sender, EventArgs e)
+        {
+                CargaComboBox();
+        }
+
+        private void CargaComboBox()
+        {
+                PlanLogic pl = new PlanLogic();
+                List<Plan> listaPlanes = pl.GetAll();
+                Dictionary<int, string> comboSource = new Dictionary<int, string>();
+
+                foreach (Plan p in listaPlanes)
+                {
+                    comboSource.Add(p.ID, p.Descripcion);
+                }
+                cBoxDescPlan.DataSource = new BindingSource(comboSource, null);
+                cBoxDescPlan.DisplayMember = "Value";
+                cBoxDescPlan.ValueMember = "Key";
+                cBoxDescPlan.Text = "";
         }
     }
-}
+} 
+
 
