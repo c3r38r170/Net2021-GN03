@@ -32,6 +32,7 @@ namespace Business.Entities {
 		{
 			Docente=1,
 			Alumno,
+			Admin,
 			Otro
 		}
 	}

@@ -53,10 +53,20 @@ namespace UI.Desktop
       }else if(!usuario.Habilitado) {
 				MessageBox.Show("Su cuenta se encuentra deshabilitada.");
 			} else {
-
-				/*switch(usuario.Persona.) {
-
-				}*/
+				switch(usuario.PersonaAsociada.TipoPersona) {
+				case Persona.Tipo.Alumno:
+					//TODO MenuAlumno
+					break;
+				case Persona.Tipo.Docente:
+					//TODO MenuDocente
+					break;
+				case Persona.Tipo.Admin:
+					MenuAdmin MenuAdmin = new MenuAdmin();
+					MenuAdmin.Show();
+					break;
+				default:
+					break;
+				}
 			}
 		}
 

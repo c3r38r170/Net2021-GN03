@@ -42,12 +42,12 @@ namespace Data.Database {
 					usuario.Nombre = (string)drUsuario["nombre"];
 					usuario.Apellido = (string)drUsuario["apellido"];
 					usuario.Email = (string)drUsuario["email"];
+					usuario.PersonaAsociada = (new PersonaAdapter()).GetOne((int)drUsuario["id_persona"]);
 				}
 				drUsuario.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
-				Exception ExcepcionManejada =
-				new Exception("Error al recuperar lista de usuarios", Ex);
+				Exception ExcepcionManejada = new Exception("Error al recuperar lista de usuarios", Ex);
 				throw ExcepcionManejada;
 			} finally {
 				this.CloseConnection();
