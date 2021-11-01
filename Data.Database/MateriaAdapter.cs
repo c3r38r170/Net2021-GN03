@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Entities;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Data.Database
 {
@@ -43,7 +44,48 @@ namespace Data.Database
 			return materias;
 		}
 
-		public Materia GetOne(int ID)
+        public object GetMateriasPlanes()
+        {
+			PlanAdapter pa = new PlanAdapter();
+
+			List<Plan> listaPlanes = pa.GetAll();
+			List<Materia> listaMateria = this.GetAll();
+
+			DataTable dtMateriasPlanes = new DataTable();
+			DataRow fila;
+			DataColumn idMateria = new DataColumn("ID");
+			DataColumn descMateria = new DataColumn("Descripcion Materia");
+			DataColumn hsSemanales = new DataColumn("Horas Semanales");
+			DataColumn hsTotales = new DataColumn("Horas Totales");
+			DataColumn descPlan = new DataColumn("Plan");
+
+			dtMateriasPlanes.Columns.Add(idMateria);
+			dtMateriasPlanes.Columns.Add(descMateria);
+			dtMateriasPlanes.Columns.Add(hsSemanales);
+			dtMateriasPlanes.Columns.Add(hsTotales);
+			dtMateriasPlanes.Columns.Add(descPlan);
+
+			foreach (Materia m in listaMateria)
+			{
+				foreach (Plan p in listaPlanes)
+				{
+					if (m.IDPlan == p.ID)
+					{
+						fila = dtMateriasPlanes.NewRow();
+						fila[idMateria] = m.ID;
+						fila[descMateria] = m.Descripcion;
+						fila[hsSemanales] = m.HSSemanales;
+						fila[hsTotales] = m.HSTotales;
+						fila[descPlan] = p.Descripcion;
+						dtMateriasPlanes.Rows.Add(fila);
+					}
+				}
+			}
+
+			return dtMateriasPlanes;
+		}
+
+        public Materia GetOne(int ID)
 		{
 			Materia materia = new Materia();
 			this.OpenConnection();

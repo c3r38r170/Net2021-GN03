@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace UI.Desktop
 {
-    public partial class MenuAdmin : Form
+    public partial class MenuAdmin : ApplicationForm
     {
         public MenuAdmin()
         {
@@ -75,7 +75,8 @@ namespace UI.Desktop
         {
             if (!detectarFormularioAbierto("Cursos"))
             {
-                 //Falta el ABM de cursos
+                Cursos c = new Cursos();
+                c.Show();
             }
             else
             {

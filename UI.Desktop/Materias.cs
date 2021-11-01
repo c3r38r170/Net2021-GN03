@@ -19,8 +19,8 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            //MateriaLogic ml = new MateriaLogic();
-            //this.dgvMaterias.DataSource = ml.GetAll();
+            MateriaLogic ml = new MateriaLogic();
+            this.dgvMaterias.DataSource = ml.GetMateriasPlanes();
         }
 
         private void Materias_Load(object sender, EventArgs e)
@@ -47,7 +47,8 @@ namespace UI.Desktop
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            //int ID = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            int ID = int.Parse(this.dgvMaterias.CurrentRow.Cells[0].Value.ToString());
             MateriaDesktop md = new MateriaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
             md.ShowDialog();
             this.Listar();
@@ -55,17 +56,17 @@ namespace UI.Desktop
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            Materia m = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem);
-            int ID = m.ID;
-            string message = $"¿Desea eliminar la materia {m.Descripcion}?";
+            //Materia m = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem);
+            int ID = int.Parse(this.dgvMaterias.CurrentRow.Cells[0].Value.ToString());
+            string message = $"¿Desea eliminar la materia {ID}?";
             string title = "Eliminar materia";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-                //MateriaLogic ml = new MateriaLogic();
-                //ml.Delete(ID);
-                // m.State = BusinessEntity.States.Deleted;
+                MateriaLogic ml = new MateriaLogic();
+                ml.Delete(ID);
+                
             }
             this.Listar();
         }

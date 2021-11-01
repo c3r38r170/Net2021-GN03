@@ -23,6 +23,12 @@ namespace Business.Logic
         {
             return MateriaData.GetAll();
         }
+
+        public object GetMateriasPlanes()
+        {
+            return MateriaData.GetMateriasPlanes();
+        }
+
         public void Save(Materia m)
         {
             MateriaData.Save(m);
