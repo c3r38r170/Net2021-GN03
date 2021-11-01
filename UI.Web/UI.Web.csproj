@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="de.lkraemer.nemmet" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Business.Entities\Business.Entities.csproj" />
     <ProjectReference Include="..\Business.Logic\Business.Logic.csproj" />
   </ItemGroup>
