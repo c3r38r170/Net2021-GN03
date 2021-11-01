@@ -14,7 +14,7 @@ namespace Data.Database {
 			try {
 				SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
 				while (drUsuarios.Read()) {
-					usuarios.Add(CreateUsuarioFromDataReader(drUsuarios);
+					usuarios.Add(CreateUsuarioFromDataReader(drUsuarios));
 				}
 			drUsuarios.Close();
 			}catch(Exception Ex){
