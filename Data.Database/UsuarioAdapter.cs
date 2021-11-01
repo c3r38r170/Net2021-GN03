@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Data.Database {
 	public class UsuarioAdapter : Adapter {
@@ -29,8 +30,8 @@ namespace Data.Database {
 			Usuario usuario = new Usuario();
 			this.OpenConnection();
 			SqlCommand cmdUsuario = new SqlCommand("SelectUsuarioById", sqlConn);
-			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			cmdUsuario.CommandType = CommandType.StoredProcedure;
+			cmdUsuario.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			try { 
 				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
 				if (drUsuario.Read()) {
@@ -56,9 +57,9 @@ namespace Data.Database {
 
 		public void Delete(int ID) {
 			this.OpenConnection();
-			SqlCommand cmdUsuario = new SqlCommand("DELETE FROM usuarios WHERE id_usuario=@id", sqlConn);
-			cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdUsuario = new SqlCommand("DeleteUsuario", sqlConn);
+			cmdUsuario.CommandType = CommandType.StoredProcedure;
+			cmdUsuario.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			cmdUsuario.ExecuteNonQuery();
 			this.CloseConnection();
 		}
@@ -66,15 +67,15 @@ namespace Data.Database {
 		public void Save(Usuario usuario) {
 			if (usuario.State == BusinessEntity.States.New) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("INSERT INTO usuarios (nombre_usuario,clave,habilitado,nombre,apellido,email) VALUES (@usuario,@clave,@habilitado,@nombre,@apellido,@email); SET @ID = SCOPE_IDENTITY();", sqlConn);
-				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdUsuario.Parameters.Add("@usuario", System.Data.SqlDbType.VarChar).Value = usuario.NombreUsuario;
-				cmdUsuario.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = usuario.Clave;
-				cmdUsuario.Parameters.Add("@habilitado", System.Data.SqlDbType.Bit).Value = usuario.Habilitado;
-				cmdUsuario.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = usuario.Nombre;
-				cmdUsuario.Parameters.Add("@apellido", System.Data.SqlDbType.VarChar).Value = usuario.Apellido;
-				cmdUsuario.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = usuario.Email;
-				cmdUsuario.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+				SqlCommand cmdUsuario = new SqlCommand("NuevoUsuario", sqlConn);
+				cmdUsuario.CommandType = CommandType.StoredProcedure;
+				cmdUsuario.Parameters.Add("@usuario", SqlDbType.VarChar).Value = usuario.NombreUsuario;
+				cmdUsuario.Parameters.Add("@clave", SqlDbType.VarChar).Value = usuario.Clave;
+				cmdUsuario.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+				cmdUsuario.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.Nombre;
+				cmdUsuario.Parameters.Add("@apellido", SqlDbType.VarChar).Value = usuario.Apellido;
+				cmdUsuario.Parameters.Add("@email", SqlDbType.VarChar).Value = usuario.Email;
+				cmdUsuario.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdUsuario.ExecuteNonQuery();
 				usuario.ID = (int)cmdUsuario.Parameters["@ID"].Value;
 				this.CloseConnection();
@@ -82,15 +83,15 @@ namespace Data.Database {
 				this.Delete(usuario.ID);
 			} else if (usuario.State == BusinessEntity.States.Modified) {
 				this.OpenConnection();
-				SqlCommand cmdUsuario = new SqlCommand("UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email WHERE id_usuario=@id", sqlConn);
-				cmdUsuario.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdUsuario.Parameters.Add("@usuario", System.Data.SqlDbType.VarChar).Value = usuario.NombreUsuario;
-				cmdUsuario.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = usuario.Clave;
-				cmdUsuario.Parameters.Add("@habilitado", System.Data.SqlDbType.Bit).Value = usuario.Habilitado;
-				cmdUsuario.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar).Value = usuario.Nombre;
-				cmdUsuario.Parameters.Add("@apellido", System.Data.SqlDbType.VarChar).Value = usuario.Apellido;
-				cmdUsuario.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = usuario.Email;
-				cmdUsuario.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = usuario.ID;
+				SqlCommand cmdUsuario = new SqlCommand("EditarUsuario", sqlConn);
+				cmdUsuario.CommandType = CommandType.StoredProcedure;
+				cmdUsuario.Parameters.Add("@usuario", SqlDbType.VarChar).Value = usuario.NombreUsuario;
+				cmdUsuario.Parameters.Add("@clave", SqlDbType.VarChar).Value = usuario.Clave;
+				cmdUsuario.Parameters.Add("@habilitado", SqlDbType.Bit).Value = usuario.Habilitado;
+				cmdUsuario.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.Nombre;
+				cmdUsuario.Parameters.Add("@apellido", SqlDbType.VarChar).Value = usuario.Apellido;
+				cmdUsuario.Parameters.Add("@email", SqlDbType.VarChar).Value = usuario.Email;
+				cmdUsuario.Parameters.Add("@id", SqlDbType.Int).Value = usuario.ID;
 				cmdUsuario.ExecuteNonQuery();
 				this.CloseConnection();
 			}
@@ -99,9 +100,10 @@ namespace Data.Database {
 
 		public Usuario GetUserByUsernameAndPassword(String nombre, String contraseña) {
 			this.OpenConnection();
-			SqlCommand cmdLogIn = new SqlCommand("SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave", sqlConn);
-			cmdLogIn.Parameters.Add("@nombre_usuario", System.Data.SqlDbType.VarChar).Value = nombre;
-			cmdLogIn.Parameters.Add("@clave", System.Data.SqlDbType.VarChar).Value = contraseña;
+			SqlCommand cmdLogIn = new SqlCommand("GetUsuarioByNombreUsuarioYContraseña", sqlConn);
+			cmdLogIn.CommandType = CommandType.StoredProcedure;
+			cmdLogIn.Parameters.Add("@nombre_usuario", SqlDbType.VarChar).Value = nombre;
+			cmdLogIn.Parameters.Add("@clave", SqlDbType.VarChar).Value = contraseña;
 			object result = cmdLogIn.ExecuteScalar();
 			if (result == null)
 				return new Usuario();

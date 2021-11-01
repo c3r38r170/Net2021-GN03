@@ -124,9 +124,9 @@ namespace Data.Database
 		{
 			Curso cur = new Curso();
 			this.OpenConnection();
-			SqlCommand cmdCurso = new SqlCommand("SELECT * FROM cursos WHERE id_curso=@id", sqlConn);
-			cmdCurso.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdCurso.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdCurso = new SqlCommand("SelectCursoById", sqlConn);
+			cmdCurso.CommandType = CommandType.StoredProcedure;
+			cmdCurso.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			try
 			{
 				SqlDataReader drCurso = cmdCurso.ExecuteReader();
@@ -155,9 +155,9 @@ namespace Data.Database
 		public void Delete(int ID)
 		{
 			this.OpenConnection();
-			SqlCommand cmdCurso = new SqlCommand("DELETE FROM cursos WHERE id_curso=@id", sqlConn);
-			cmdCurso.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdCurso.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdCurso = new SqlCommand("DeleteCurso", sqlConn);
+			cmdCurso.CommandType = CommandType.StoredProcedure;
+			cmdCurso.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			cmdCurso.ExecuteNonQuery();
 		}
 
@@ -166,13 +166,13 @@ namespace Data.Database
 			if (cur.State == BusinessEntity.States.New)
 			{
 				this.OpenConnection();
-				SqlCommand cmdCurso = new SqlCommand("INSERT INTO cursos (anio_calendario,cupo,id_comision,id_materia) VALUES (@anioc,@cupo,@idc,@idm); SET @ID = SCOPE_IDENTITY();", sqlConn);
-				cmdCurso.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdCurso.Parameters.Add("@anioc", System.Data.SqlDbType.Int).Value = cur.AñoCalendario;
-				cmdCurso.Parameters.Add("@cupo", System.Data.SqlDbType.Int).Value = cur.Cupo;
-				cmdCurso.Parameters.Add("@idc", System.Data.SqlDbType.Int).Value = cur.IDComision;
-				cmdCurso.Parameters.Add("@idm", System.Data.SqlDbType.Int).Value = cur.IDMateria;
-				cmdCurso.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+				SqlCommand cmdCurso = new SqlCommand("NuevoCurso", sqlConn);
+				cmdCurso.CommandType = CommandType.StoredProcedure;
+				cmdCurso.Parameters.Add("@anioc", SqlDbType.Int).Value = cur.AñoCalendario;
+				cmdCurso.Parameters.Add("@cupo", SqlDbType.Int).Value = cur.Cupo;
+				cmdCurso.Parameters.Add("@idc", SqlDbType.Int).Value = cur.IDComision;
+				cmdCurso.Parameters.Add("@idm", SqlDbType.Int).Value = cur.IDMateria;
+				cmdCurso.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdCurso.ExecuteNonQuery();
 				cur.ID = (int)cmdCurso.Parameters["@ID"].Value;
 				this.CloseConnection();
@@ -184,13 +184,13 @@ namespace Data.Database
 			else if (cur.State == BusinessEntity.States.Modified)
 			{
 				this.OpenConnection();
-				SqlCommand cmdCurso = new SqlCommand("UPDATE cursos SET anio_calendario=@anioc,cupo=@cupo,id_comision=@idc,id_materia=@idm WHERE id_curso=@ID", sqlConn);
-				cmdCurso.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdCurso.Parameters.Add("@anioc", System.Data.SqlDbType.Int).Value = cur.AñoCalendario;
-				cmdCurso.Parameters.Add("@cupo", System.Data.SqlDbType.Int).Value = cur.Cupo;
-				cmdCurso.Parameters.Add("@idc", System.Data.SqlDbType.Int).Value = cur.IDComision;
-				cmdCurso.Parameters.Add("@idm", System.Data.SqlDbType.Int).Value = cur.IDMateria;
-				cmdCurso.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = cur.ID;
+				SqlCommand cmdCurso = new SqlCommand("EditarCurso", sqlConn);
+				cmdCurso.CommandType = CommandType.StoredProcedure;
+				cmdCurso.Parameters.Add("@anioc", SqlDbType.Int).Value = cur.AñoCalendario;
+				cmdCurso.Parameters.Add("@cupo", SqlDbType.Int).Value = cur.Cupo;
+				cmdCurso.Parameters.Add("@idc", SqlDbType.Int).Value = cur.IDComision;
+				cmdCurso.Parameters.Add("@idm", SqlDbType.Int).Value = cur.IDMateria;
+				cmdCurso.Parameters.Add("@ID", SqlDbType.Int).Value = cur.ID;
 				cmdCurso.ExecuteNonQuery();
 				this.CloseConnection();
 			}

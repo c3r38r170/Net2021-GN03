@@ -89,9 +89,9 @@ namespace Data.Database
 		{
 			Materia materia = new Materia();
 			this.OpenConnection();
-			SqlCommand cmdMateria = new SqlCommand("SELECT * FROM materias WHERE id_materia=@id", sqlConn);
-			cmdMateria.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdMateria.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdMateria = new SqlCommand("SelectMateriaById", sqlConn);
+			cmdMateria.CommandType = CommandType.StoredProcedure;
+			cmdMateria.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			try
 			{
 				SqlDataReader drMateria = cmdMateria.ExecuteReader();
@@ -120,9 +120,9 @@ namespace Data.Database
 		public void Delete(int ID)
 		{
 			this.OpenConnection();
-			SqlCommand cmdMateria = new SqlCommand("DELETE FROM materias WHERE id_materia=@id", sqlConn);
-			cmdMateria.CommandType = System.Data.CommandType.StoredProcedure;
-			cmdMateria.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = ID;
+			SqlCommand cmdMateria = new SqlCommand("DeleteMateria", sqlConn);
+			cmdMateria.CommandType = CommandType.StoredProcedure;
+			cmdMateria.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			cmdMateria.ExecuteNonQuery();
 		}
 
@@ -131,13 +131,13 @@ namespace Data.Database
 			if (materia.State == BusinessEntity.States.New)
 			{
 				this.OpenConnection();
-				SqlCommand cmdMateria= new SqlCommand("INSERT INTO materias (desc_materia,hs_semanales,hs_totales,id_plan) VALUES (@desc,@hss,@hst,@idp); SET @ID = SCOPE_IDENTITY();", sqlConn);
-				cmdMateria.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdMateria.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = materia.Descripcion;
-				cmdMateria.Parameters.Add("@hss", System.Data.SqlDbType.Int).Value = materia.HSSemanales;
-				cmdMateria.Parameters.Add("@hst", System.Data.SqlDbType.Int).Value = materia.HSTotales;
-				cmdMateria.Parameters.Add("@idp", System.Data.SqlDbType.Int).Value = materia.IDPlan;
-				cmdMateria.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+				SqlCommand cmdMateria= new SqlCommand("NuevaMateria", sqlConn);
+				cmdMateria.CommandType = CommandType.StoredProcedure;
+				cmdMateria.Parameters.Add("@desc", SqlDbType.VarChar).Value = materia.Descripcion;
+				cmdMateria.Parameters.Add("@hss", SqlDbType.Int).Value = materia.HSSemanales;
+				cmdMateria.Parameters.Add("@hst", SqlDbType.Int).Value = materia.HSTotales;
+				cmdMateria.Parameters.Add("@idp", SqlDbType.Int).Value = materia.IDPlan;
+				cmdMateria.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdMateria.ExecuteNonQuery();
 				materia.ID = (int)cmdMateria.Parameters["@ID"].Value;
 				this.CloseConnection();
@@ -149,13 +149,13 @@ namespace Data.Database
 			else if (materia.State == BusinessEntity.States.Modified)
 			{
 				this.OpenConnection();
-				SqlCommand cmdMateria = new SqlCommand("UPDATE materias SET desc_materia=@desc,hs_semanales=@hss,hs_totales=@hst,id_plan=@idp WHERE id_materia=@ID", sqlConn);
-				cmdMateria.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdMateria.Parameters.Add("@desc", System.Data.SqlDbType.VarChar).Value = materia.Descripcion;
-				cmdMateria.Parameters.Add("@hss", System.Data.SqlDbType.Int).Value = materia.HSSemanales;
-				cmdMateria.Parameters.Add("@hst", System.Data.SqlDbType.Int).Value = materia.HSTotales;
-				cmdMateria.Parameters.Add("@idp", System.Data.SqlDbType.Int).Value = materia.IDPlan;
-				cmdMateria.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = materia.ID;
+				SqlCommand cmdMateria = new SqlCommand("EditarMateria", sqlConn);
+				cmdMateria.CommandType = CommandType.StoredProcedure;
+				cmdMateria.Parameters.Add("@desc", SqlDbType.VarChar).Value = materia.Descripcion;
+				cmdMateria.Parameters.Add("@hss", SqlDbType.Int).Value = materia.HSSemanales;
+				cmdMateria.Parameters.Add("@hst", SqlDbType.Int).Value = materia.HSTotales;
+				cmdMateria.Parameters.Add("@idp", SqlDbType.Int).Value = materia.IDPlan;
+				cmdMateria.Parameters.Add("@ID", SqlDbType.Int).Value = materia.ID;
 				cmdMateria.ExecuteNonQuery();
 				this.CloseConnection();
 			}

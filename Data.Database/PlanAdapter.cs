@@ -67,7 +67,7 @@ namespace Data.Database {
 			try {
 				this.OpenConnection();
 				if(plan.State == BusinessEntity.States.New) {
-					SqlCommand cmd = new SqlCommand("INSERT INTO planes (desc_plan,id_especialidad) VALUES (@desc,@espe); SET @ID = SCOPE_IDENTITY();", sqlConn);
+					SqlCommand cmd = new SqlCommand("NuevoPlan", sqlConn);
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.Add("@desc", SqlDbType.VarChar).Value = plan.Descripcion;
 					cmd.Parameters.Add("@espe", SqlDbType.Int).Value = plan.IDEspecialidad;
@@ -77,7 +77,7 @@ namespace Data.Database {
 				} else if(plan.State == BusinessEntity.States.Deleted) {
 					this.Delete(plan.ID);
 				} else if(plan.State == BusinessEntity.States.Modified) {
-					SqlCommand cmd = new SqlCommand("UPDATE planes SET desc_plan=@descripcionPlan,id_especialidad=@idEspecialidad WHERE id_plan=@id", sqlConn);
+					SqlCommand cmd = new SqlCommand("EditarPlan", sqlConn);
 					cmd.CommandType = CommandType.StoredProcedure;
 					cmd.Parameters.Add("@descripcionPlan", SqlDbType.VarChar).Value = plan.Descripcion;
 					cmd.Parameters.Add("@idEspecialidad", SqlDbType.Int).Value = plan.IDEspecialidad;
@@ -94,7 +94,7 @@ namespace Data.Database {
 		}
 
 		public void Delete(int ID) {
-			SqlCommand cmd = new SqlCommand("DELETE FROM planes WHERE id_plan=@id", sqlConn);
+			SqlCommand cmd = new SqlCommand("DeletePlan", sqlConn);
 			cmd.CommandType = CommandType.StoredProcedure;
 			cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			try {
@@ -112,7 +112,7 @@ namespace Data.Database {
 
 		public Plan GetOne(int iD) {
 			Plan p = new Plan();
-			SqlCommand cmd = new SqlCommand("SELECT * FROM planes WHERE id_plan=@id", sqlConn);
+			SqlCommand cmd = new SqlCommand("SelectPlanById", sqlConn);
 			cmd.CommandType = CommandType.StoredProcedure;
 			cmd.Parameters.Add("@id", SqlDbType.Int).Value = iD;
 			try {
