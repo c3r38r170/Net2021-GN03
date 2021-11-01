@@ -55,7 +55,7 @@ namespace UI.Desktop
 			} else {
 				switch(usuario.PersonaAsociada.TipoPersona) {
 				case Persona.Tipo.Alumno:
-					//TODO MenuAlumno
+					//TODO MenuAlumno(usuario.ID)
 					break;
 				case Persona.Tipo.Docente:
 					//TODO MenuDocente
