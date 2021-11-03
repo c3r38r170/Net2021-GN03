@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using UI.Web.Models;
+using Business.Logic;
+using Business.Entities;
 
 namespace UI.Web.Controllers {
 	public class HomeController : Controller {
@@ -19,7 +17,17 @@ namespace UI.Web.Controllers {
 			return View();
 		}
 
-		public IActionResult Privacy() {
+		[HttpPost]
+		public IActionResult LogIn(string username, string password) {
+			UsuarioLogic ul = new UsuarioLogic();
+			Usuario u=ul.LogIn(username,password);
+			if(u.ID == 0)
+				return Redirect("/?message=Usuario Incorrecto");
+				//return View("Index","");
+			return View(u);
+		}
+
+		public IActionResult PanelAlumno() {
 			return View();
 		}
 

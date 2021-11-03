@@ -4,7 +4,8 @@
 
 <h2>Bienvenido</h2>
 
-<form action="/LogIn" method="post" class="text-left">
+<form asp-controller="Home" asp-action="LogIn" method="post" class="text-left">
+    <span>@Context.Request.Query["message"]</span>
     <div class="form-group">
         <label>
             <span>Nombre de Usuario:</span>
