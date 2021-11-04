@@ -93,10 +93,13 @@ namespace Data.Database {
 			p.Legajo = (int)dR["legajo"];
 			switch ((int)dR["tipo_persona"]) {
 				case 1:
+					p.TipoPersona = Persona.Tipo.Alumno;
+					break;					
+				case 2:
 					p.TipoPersona = Persona.Tipo.Docente;
 					break;
-				case 2:
-					p.TipoPersona = Persona.Tipo.Alumno;
+				case 3:
+					p.TipoPersona = Persona.Tipo.Admin;
 					break;
 				default:
 					p.TipoPersona = Persona.Tipo.Otro;
