@@ -84,6 +84,47 @@ namespace UI.Desktop
             }
         }
 
+        
+
+        private void Personas_Click(object sender, EventArgs e)
+        {
+            if (!detectarFormularioAbierto("Personas"))
+            {
+                Personas p = new Personas();
+                p.Show();
+            }
+            else
+            {
+                MessageBox.Show("EL FORMULARIO YA ESTA OPEN");
+            }
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            if (!detectarFormularioAbierto("Usuarios"))
+            {
+                Usuarios u = new Usuarios();
+                u.Show();
+            }
+            else
+            {
+                MessageBox.Show("EL FORMULARIO YA ESTA OPEN");
+            }
+        }
+
+        private void btnDocentesCursos_Click(object sender, EventArgs e)
+        {
+            if (!detectarFormularioAbierto("DocenteCurso"))
+            {
+                DocentesCursos dc = new DocentesCursos();
+                dc.Show();
+            }
+            else
+            {
+                MessageBox.Show("EL FORMULARIO YA ESTA OPEN");
+            }
+        }
+
         private bool detectarFormularioAbierto(string formulario)
         {
             bool abierto = false;
@@ -94,7 +135,5 @@ namespace UI.Desktop
             }
             return abierto;
         }
-
-     
     }
 }

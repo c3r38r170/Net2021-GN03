@@ -36,6 +36,8 @@ namespace UI.Desktop
             this.txtMaterias = new System.Windows.Forms.Button();
             this.txtCursos = new System.Windows.Forms.Button();
             this.Personas = new System.Windows.Forms.Button();
+            this.btnUsuarios = new System.Windows.Forms.Button();
+            this.btnDocentesCursos = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,16 +51,20 @@ namespace UI.Desktop
             this.tableLayoutPanel1.Controls.Add(this.txtMaterias, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtCursos, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.Personas, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnUsuarios, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnDocentesCursos, 0, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(136, 402);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -120,6 +126,27 @@ namespace UI.Desktop
             this.Personas.TabIndex = 5;
             this.Personas.Text = "Personas";
             this.Personas.UseVisualStyleBackColor = true;
+            this.Personas.Click += new System.EventHandler(this.Personas_Click);
+            // 
+            // btnUsuarios
+            // 
+            this.btnUsuarios.Location = new System.Drawing.Point(3, 177);
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.Size = new System.Drawing.Size(128, 23);
+            this.btnUsuarios.TabIndex = 6;
+            this.btnUsuarios.Text = "Usuarios";
+            this.btnUsuarios.UseVisualStyleBackColor = true;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
+            // 
+            // btnDocentesCursos
+            // 
+            this.btnDocentesCursos.Location = new System.Drawing.Point(3, 207);
+            this.btnDocentesCursos.Name = "btnDocentesCursos";
+            this.btnDocentesCursos.Size = new System.Drawing.Size(128, 23);
+            this.btnDocentesCursos.TabIndex = 7;
+            this.btnDocentesCursos.Text = "Docentes Cursos";
+            this.btnDocentesCursos.UseVisualStyleBackColor = true;
+            this.btnDocentesCursos.Click += new System.EventHandler(this.btnDocentesCursos_Click);
             // 
             // MenuAdmin
             // 
@@ -143,5 +170,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Button txtMaterias;
         private System.Windows.Forms.Button txtCursos;
         private System.Windows.Forms.Button Personas;
+        private System.Windows.Forms.Button btnUsuarios;
+        private System.Windows.Forms.Button btnDocentesCursos;
     }
 }
