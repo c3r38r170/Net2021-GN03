@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 namespace Business.Entities {
 	public class DocenteCurso:BusinessEntity {
 
-		private TiposCargos _curso;
+		private tipoCargo _Cargo;
 		private int _IDCurso;
 		private int _IDDocente;
 
-		public TiposCargos Curso { get => _curso; set => _curso = value; }
 		public int IDCurso { get => _IDCurso; set => _IDCurso = value; }
 		public int IDDocente { get => _IDDocente; set => _IDDocente = value; }
-		
-		public enum TiposCargos
+		public tipoCargo Cargo { get => _Cargo; set => _Cargo = value; }
+
+		public enum tipoCargo
 		{
-			Docente,
-			Barrendero
+			DocentePractica = 1,
+			DocenteTeoria = 2,
+			Ayudante = 3,
 		}
 	}
 }
