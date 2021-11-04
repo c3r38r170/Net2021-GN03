@@ -23,7 +23,18 @@ namespace UI.Desktop
             IdProfesor = idProfesor;
         }
 
-        private void btnAgregarNota_Click(object sender, EventArgs e)
+        private bool detectarFormularioAbierto(string formulario)
+        {
+            bool abierto = false;
+
+            if (Application.OpenForms[formulario] != null)
+            {
+                abierto = true;
+            }
+            return abierto;
+        }
+
+        private void btnAgregarNota_Click_1(object sender, EventArgs e)
         {
             if (!detectarFormularioAbierto("CargarNota"))
             {
@@ -34,17 +45,6 @@ namespace UI.Desktop
             {
                 MessageBox.Show("EL FORMULARIO YA ESTA OPEN");
             }
-        }
-
-        private bool detectarFormularioAbierto(string formulario)
-        {
-            bool abierto = false;
-
-            if (Application.OpenForms[formulario] != null)
-            {
-                abierto = true;
-            }
-            return abierto;
         }
     }
 }

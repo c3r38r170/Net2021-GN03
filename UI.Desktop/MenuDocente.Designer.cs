@@ -40,6 +40,7 @@ namespace UI.Desktop
             this.btnAgregarNota.TabIndex = 0;
             this.btnAgregarNota.Text = "Agregar Notas";
             this.btnAgregarNota.UseVisualStyleBackColor = true;
+            this.btnAgregarNota.Click += new System.EventHandler(this.btnAgregarNota_Click_1);
             // 
             // MenuDocente
             // 
