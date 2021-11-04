@@ -11,7 +11,7 @@ namespace Data.Database
 {
     public class DocenteCursoAdapter: Adapter
     {
-        public List<DocenteCurso> GetAll()
+        public List<DocenteCurso> GetAll() 
         {
             List<DocenteCurso> listaDocentesCuros = new List<DocenteCurso>();
             try

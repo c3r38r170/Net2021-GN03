@@ -10,7 +10,7 @@ namespace Business.Logic
 {
     public class DocenteCursoLogic
     {
-        public DocenteCursoAdapter DocenteCursoData { get; set; }
+        public DocenteCursoAdapter DocenteCursoData { get; set; } 
 
         public DocenteCursoLogic()
         {

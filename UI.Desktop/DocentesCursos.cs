@@ -13,7 +13,7 @@ namespace UI.Desktop
 {
     public partial class DocentesCursos : Form
     {
-        public DocentesCursos()
+        public DocentesCursos() 
         {
             InitializeComponent();
         }
