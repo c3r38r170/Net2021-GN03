@@ -85,7 +85,7 @@ namespace Data.Database {
 		private void fillPersonaFromDataReader(SqlDataReader dR,Persona p) {
 			p.ID = (int)dR["id_persona"];
 			p.Nombre = (string)dR["nombre"];
-			p.Apellido = (string)dR["apellido"];
+			p.Apellido = (string)dR["apellido"]; 
 			p.Direccion = (string)dR["direccion"];
 			p.Email = (string)dR["email"];
 			p.Telefono = (string)dR["telefono"];
