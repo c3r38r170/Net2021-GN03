@@ -15,7 +15,7 @@ namespace Business.Entities {
 		private int _IDPlan;
 		private Plan _Plan;
 		private DateTime _FechaNacimiento;
-		private Tipo _tipoPersona;
+		private int _tipoPersona;
 
 		public string Apellido { get => _Apellido; set => _Apellido = value; }
 		public string Direccion { get => _Direccion; set => _Direccion = value; }
@@ -26,7 +26,7 @@ namespace Business.Entities {
 		public int IDPlan { get => _IDPlan; set => _IDPlan = value; }
 		public Plan Plan { get => _Plan; set => _Plan = value; }
 		public DateTime FechaNacimiento { get => _FechaNacimiento; set => _FechaNacimiento = value; }
-		public Tipo TipoPersona { get => _tipoPersona; set => _tipoPersona = value; }
+		public int TipoPersona { get => _tipoPersona; set => _tipoPersona = value; }
 
 		public enum Tipo
 		{
