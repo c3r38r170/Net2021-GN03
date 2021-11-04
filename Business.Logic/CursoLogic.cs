@@ -35,5 +35,10 @@ namespace Business.Logic
         {
             CursoData.Save(cursoActual);
         }
+
+        public bool yaEstaInscripto(int iD, int idPersonaActual)
+        {
+            return CursoData.yaEstaInscripto(iD, idPersonaActual);
+        }
     }
 }
