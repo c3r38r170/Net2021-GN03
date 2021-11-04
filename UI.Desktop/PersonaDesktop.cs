@@ -15,7 +15,6 @@ namespace UI.Desktop
 {
     public partial class PersonaDesktop : ApplicationForm
     {
-        public ModoForm MF { get; set; }
         public Persona PersonaActual { get; set; }
         public PersonaDesktop()
         {
@@ -24,144 +23,118 @@ namespace UI.Desktop
 
         public PersonaDesktop(ModoForm modo) : this()
         {
-            MF = modo;
-            PersonaActual = new Persona();
+			Modo = modo;
         }
 
 		public PersonaDesktop(int ID, ModoForm modo) : this()
 		{
-			MF = modo;
-			PersonaLogic ul = new PersonaLogic();
-			PersonaActual = ul.GetOne(ID);
+			Modo = modo;
+			PersonaActual = new PersonaLogic().GetOne(ID);
 			MapearDeDatos();
+		}
+
+		private void PersonaDesktop_Load(object sender, EventArgs e)
+		{
+			CargaComboBoxIDPlan();
+			CargaComboBoxTipoPersona();
 		}
 
 		public override void MapearDeDatos()
 		{
-			if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta))
-			{
-				this.btnAceptar.Text = "Guardar";
-			}
-			else if (MF == ModoForm.Consulta)
-			{
-				this.btnAceptar.Text = "Aceptar";
-			}
 			this.txtID.Text = this.PersonaActual.ID.ToString();
-			this.txtApellido.Text = this.PersonaActual.Apellido;
 			this.txtNombre.Text = this.PersonaActual.Nombre;
-			this.txtEmail.Text = this.PersonaActual.Email;
+			this.txtApellido.Text = this.PersonaActual.Apellido;
+			this.txtDireccion.Text = this.PersonaActual.Telefono;
 			this.txtDireccion.Text = this.PersonaActual.Direccion;
+			this.txtEmail.Text = this.PersonaActual.Email;
 			this.txtTelefono.Text = this.PersonaActual.Telefono;
 			this.txtLegajo.Text = this.PersonaActual.Legajo.ToString();
-			this.txtIDPlan.Text = this.PersonaActual.IDPlan.ToString();
-			this.txtFechaNacimiento.Text = this.PersonaActual.FechaNacimiento.ToString();
+			this.txtFecha.Value = this.PersonaActual.FechaNacimiento;
+			if (Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion))
+			{
+				btnAceptar.Text = "Guardar";
+			}
+			else if (Modo.Equals("Consulta"))
+			{
+				btnAceptar.Text = "Aceptar";
+			}
 		}
 
-		private void btnAceptar_Click(object sender, EventArgs e)
-        {
-            bool v = Validar();
-            if (v)
-            {
-                switch (MF)
-                {
-                    case ModoForm.Alta:
-                        GuardarCambios();
-                        this.Close();
-                        break;
-                    case ModoForm.Modificacion:
-                        GuardarCambios();
-                        this.Close();
-                        break;
-                }
-            }
-        }
-
-		public override void GuardarCambios()
+		public void CargaComboBoxIDPlan()
 		{
-			MapearADatos();
-			PersonaLogic ul = new PersonaLogic();
-			ul.Save(PersonaActual);
+			PlanLogic pl = new PlanLogic();
+			List<Plan> listaPlanes = pl.GetAll();
+			Dictionary<int, string> comboSourcePlan = new Dictionary<int, string>();
+
+			foreach (Plan p in listaPlanes)
+			{
+				comboSourcePlan.Add(p.ID, p.Descripcion);
+			}
+
+			cBoxIDPlan.DataSource = new BindingSource(comboSourcePlan, null);
+			cBoxIDPlan.DisplayMember = "Value";
+			cBoxIDPlan.ValueMember = "Key";
+			cBoxIDPlan.Text = "";
 		}
 
-		public override void MapearADatos()
+		public void CargaComboBoxTipoPersona()
 		{
-			if (MF == ModoForm.Alta || MF == ModoForm.Modificacion)
-			{
-				PersonaActual.Nombre = this.txtNombre.Text;
-				PersonaActual.Apellido = this.txtApellido.Text;
-				PersonaActual.Email = this.txtEmail.Text;
-				PersonaActual.Direccion = this.txtDireccion.Text;
-				PersonaActual.Telefono = this.txtTelefono.Text;
-				PersonaActual.Legajo = Int32.Parse(this.txtLegajo.Text);
-				PersonaActual.IDPlan = Int32.Parse(this.txtIDPlan.Text);
-				PersonaActual.ID = Int32.Parse(this.txtID.Text);
-				PersonaActual.FechaNacimiento = DateTime.Parse(this.txtFechaNacimiento.Text);
-
-			}
-			switch (MF)
-			{
-				case ModoForm.Alta:
-					PersonaActual.State = BusinessEntity.States.New;
-					break;
-				case ModoForm.Modificacion:
-					PersonaActual.State = BusinessEntity.States.Modified;
-					break;
-					/*case ModoForm.Baja:
-						UsuarioActual.State = BusinessEntity.States.Deleted;
-						break;*/
-			}
+			cBoxTipoPersona.Items.Add("Alumno");
+			cBoxTipoPersona.Items.Add("Profesor");
+			cBoxTipoPersona.Items.Add("Admin");
+			cBoxTipoPersona.Text = "";
 		}
 
 		public override bool Validar()
 		{
-			if (string.IsNullOrWhiteSpace(this.txtNombre.Text))
+			if (string.IsNullOrWhiteSpace(this.txtApellido.Text))
 			{
-				NotificarError("El campo 'Nombre' está vacío");
+				Notificar("Error", "Incorrect txtApellido en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtApellido.Text))
+			else if (string.IsNullOrWhiteSpace(this.txtDireccion.Text))
 			{
-				NotificarError("El campo 'Apellido' está vacío");
+				Notificar("Error", "Incorrect txtDireccion en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
 			else if (string.IsNullOrWhiteSpace(this.txtEmail.Text))
 			{
-				NotificarError("El campo 'Email' está vacío");
-				return false;
-			}
-			else if (!ComprobarFormatoEmail(this.txtEmail.Text))
-			{
-				NotificarError("El Email no es válido");
-				return false;
-			}
-			else if  (string.IsNullOrWhiteSpace(this.txtDireccion.Text))
-			{
-				NotificarError("El campo 'Nombre' está vacío");
-				return false;
-			}
-			else if (string.IsNullOrWhiteSpace(this.txtTelefono.Text))
-            {
-				NotificarError("El campo 'Nombre' está vacío");
+				Notificar("Error", "Incorrect Email en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
 			else if (string.IsNullOrWhiteSpace(this.txtLegajo.Text))
-            {
-				NotificarError("El campo 'Nombre' está vacío");
+			{
+				Notificar("Error", "Incorrect Legajo en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtIDPlan.Text))
-            {
-				NotificarError("El campo 'Nombre' está vacío");
+			else if (string.IsNullOrWhiteSpace(this.txtNombre.Text))
+			{
+				Notificar("Error", "Incorrect nombre en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtFechaNacimiento.Text))
-            {
-				NotificarError("El campo 'Nombre' está vacío");
+			else if (string.IsNullOrWhiteSpace(this.txtTelefono.Text))
+			{
+				Notificar("Error", "Incorrect telefono en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtTipo.Text))
-            {
-				NotificarError("El campo 'Nombre' está vacío");
+			else if (!CompruebaNroTelefono(this.txtTelefono.Text))
+			{
+				Notificar("Error", "Incorrect telefono", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			else if (string.IsNullOrWhiteSpace(this.cBoxIDPlan.Text))
+			{
+				Notificar("Error", "Incorrect cBoxIDPlan en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			else if (string.IsNullOrWhiteSpace(this.cBoxTipoPersona.Text))
+			{
+				Notificar("Error", "Incorrect cBoxTipoPersona en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			else if (!CompruebaEmail(this.txtEmail.Text))
+			{
+				Notificar("Error", "Incorrect email", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
 			else
@@ -170,7 +143,88 @@ namespace UI.Desktop
 			}
 		}
 
-		public static bool ComprobarFormatoEmail(string sEmailAComprobar)
+		public override void MapearADatos()
+		{
+			if (Modo == ModoForm.Alta)
+			{
+				Persona p = new Persona();
+				PersonaActual = p;
+				PersonaActual.Apellido = this.txtApellido.Text;
+				PersonaActual.Nombre = this.txtNombre.Text;
+				PersonaActual.Direccion = this.txtDireccion.Text;
+				PersonaActual.Email = this.txtEmail.Text;
+				PersonaActual.Telefono = this.txtTelefono.Text;
+				PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
+				PersonaActual.FechaNacimiento = this.txtFecha.Value;
+				PersonaActual.IDPlan = ((KeyValuePair<int, string>)cBoxIDPlan.SelectedItem).Key;
+				PersonaActual.State = BusinessEntity.States.New;
+				if (this.cBoxTipoPersona.Text.Equals("Alumno"))
+				{
+					PersonaActual.TipoPersona = 1;
+				}
+				else if (this.cBoxTipoPersona.Text.Equals("Profesor"))
+				{
+					PersonaActual.TipoPersona = 2;
+				}
+				else if (this.cBoxTipoPersona.Text.Equals("Admin"))
+				{
+					PersonaActual.TipoPersona = 3;
+				}
+			}
+			else if (Modo == ModoForm.Modificacion)
+			{
+				PersonaActual.Apellido = this.txtApellido.Text;
+				PersonaActual.Nombre = this.txtNombre.Text;
+				PersonaActual.Direccion = this.txtDireccion.Text;
+				PersonaActual.Email = this.txtEmail.Text;
+				PersonaActual.Telefono = this.txtTelefono.Text;
+				PersonaActual.Legajo = int.Parse(this.txtLegajo.Text);
+				PersonaActual.FechaNacimiento = this.txtFecha.Value;
+				PersonaActual.IDPlan = ((KeyValuePair<int, string>)cBoxIDPlan.SelectedItem).Key;
+				PersonaActual.State = BusinessEntity.States.Modified;
+				if (this.cBoxTipoPersona.Text.Equals("Alumno"))
+				{
+					PersonaActual.TipoPersona = 1;
+				}
+				else if (this.cBoxTipoPersona.Text.Equals("Profesor"))
+				{
+					PersonaActual.TipoPersona = 2;
+				}
+				else if (this.cBoxTipoPersona.Text.Equals("Admin"))
+				{
+					PersonaActual.TipoPersona = 3;
+				}
+			}
+		}
+
+		public override void GuardarCambios()
+		{
+			MapearADatos();
+			PersonaLogic ul = new PersonaLogic();
+			ul.Save(PersonaActual);
+		}
+		private void btnAceptar_Click(object sender, EventArgs e)
+        {
+			switch (Modo)
+			{
+				case ModoForm.Alta:
+					if (Validar())
+					{
+						GuardarCambios();
+						this.Close();
+					}
+					break;
+				case ModoForm.Modificacion:
+					if (Validar())
+					{
+						GuardarCambios();
+						this.Close();
+					}
+					break;
+			}
+		}
+
+		public static bool CompruebaEmail(string sEmailAComprobar)
 		{
 			String sFormato;
 			sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
@@ -191,9 +245,25 @@ namespace UI.Desktop
 			}
 		}
 
+		public static bool CompruebaNroTelefono(string strNumber)
+		{
+			Regex regex = new Regex("\\A[0-9]{7,10}\\z");
+			Match match = regex.Match(strNumber);
+
+			if (match.Success)
+				return true;
+			else
+				return false;
+		}
+
 		public void NotificarError(string mensaje)
 		{
 			this.Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 		}
-	}
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+			this.Close();
+        }
+    }
 }

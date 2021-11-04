@@ -52,6 +52,12 @@ namespace UI.Desktop
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtTipo = new System.Windows.Forms.ComboBox();
+            this.cBoxTipoPersona = new System.Windows.Forms.ComboBox();
+            this.cBoxIDPlan = new System.Windows.Forms.ComboBox();
+            this.txtFecha = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,20 +88,30 @@ namespace UI.Desktop
             this.tableLayoutPanel1.Controls.Add(this.txtIDPlan, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtFechaNacimiento, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtEmail, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 3, 5);
             this.tableLayoutPanel1.Controls.Add(this.txtTipo, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 3, 9);
+            this.tableLayoutPanel1.Controls.Add(this.cBoxTipoPersona, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.cBoxIDPlan, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtFecha, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label12, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label13, 0, 8);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 10;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(483, 177);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(584, 267);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -136,36 +152,36 @@ namespace UI.Desktop
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(66, 3);
+            this.txtID.Location = new System.Drawing.Point(112, 3);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(156, 23);
+            this.txtID.Size = new System.Drawing.Size(211, 23);
             this.txtID.TabIndex = 4;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(66, 32);
+            this.txtNombre.Location = new System.Drawing.Point(112, 32);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(156, 23);
+            this.txtNombre.Size = new System.Drawing.Size(211, 23);
             this.txtNombre.TabIndex = 5;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(66, 61);
+            this.txtApellido.Location = new System.Drawing.Point(112, 61);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(156, 23);
+            this.txtApellido.Size = new System.Drawing.Size(211, 23);
             this.txtApellido.TabIndex = 6;
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(66, 90);
+            this.txtDireccion.Location = new System.Drawing.Point(112, 90);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(156, 23);
+            this.txtDireccion.Size = new System.Drawing.Size(211, 23);
             this.txtDireccion.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(228, 0);
+            this.label5.Location = new System.Drawing.Point(329, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 15);
             this.label5.TabIndex = 8;
@@ -174,7 +190,7 @@ namespace UI.Desktop
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(228, 29);
+            this.label6.Location = new System.Drawing.Point(329, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 15);
             this.label6.TabIndex = 9;
@@ -183,7 +199,7 @@ namespace UI.Desktop
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(228, 58);
+            this.label7.Location = new System.Drawing.Point(329, 58);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 15);
             this.label7.TabIndex = 10;
@@ -192,7 +208,7 @@ namespace UI.Desktop
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(228, 87);
+            this.label8.Location = new System.Drawing.Point(329, 87);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(103, 15);
             this.label8.TabIndex = 11;
@@ -210,7 +226,7 @@ namespace UI.Desktop
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(228, 116);
+            this.label10.Location = new System.Drawing.Point(329, 116);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(30, 15);
             this.label10.TabIndex = 13;
@@ -218,42 +234,43 @@ namespace UI.Desktop
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(337, 3);
+            this.txtTelefono.Location = new System.Drawing.Point(438, 3);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(138, 23);
             this.txtTelefono.TabIndex = 14;
             // 
             // txtLegajo
             // 
-            this.txtLegajo.Location = new System.Drawing.Point(337, 32);
+            this.txtLegajo.Location = new System.Drawing.Point(438, 32);
             this.txtLegajo.Name = "txtLegajo";
             this.txtLegajo.Size = new System.Drawing.Size(138, 23);
             this.txtLegajo.TabIndex = 15;
             // 
             // txtIDPlan
             // 
-            this.txtIDPlan.Location = new System.Drawing.Point(337, 61);
+            this.txtIDPlan.Location = new System.Drawing.Point(438, 61);
             this.txtIDPlan.Name = "txtIDPlan";
             this.txtIDPlan.Size = new System.Drawing.Size(138, 23);
             this.txtIDPlan.TabIndex = 16;
             // 
             // txtFechaNacimiento
             // 
-            this.txtFechaNacimiento.Location = new System.Drawing.Point(337, 90);
+            this.txtFechaNacimiento.Location = new System.Drawing.Point(438, 90);
             this.txtFechaNacimiento.Name = "txtFechaNacimiento";
             this.txtFechaNacimiento.Size = new System.Drawing.Size(138, 23);
             this.txtFechaNacimiento.TabIndex = 17;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(66, 119);
+            this.txtEmail.Location = new System.Drawing.Point(112, 119);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(156, 23);
+            this.txtEmail.Size = new System.Drawing.Size(211, 23);
             this.txtEmail.TabIndex = 18;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(228, 148);
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.Location = new System.Drawing.Point(357, 240);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 20;
@@ -263,12 +280,14 @@ namespace UI.Desktop
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(337, 148);
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(501, 240);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 21;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Salir";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // txtTipo
             // 
@@ -281,21 +300,72 @@ namespace UI.Desktop
             this.txtTipo.Items.AddRange(new object[] {
             "Alumno",
             "Docente"});
-            this.txtTipo.Location = new System.Drawing.Point(337, 119);
+            this.txtTipo.Location = new System.Drawing.Point(438, 119);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(138, 23);
             this.txtTipo.TabIndex = 22;
+            // 
+            // cBoxTipoPersona
+            // 
+            this.cBoxTipoPersona.FormattingEnabled = true;
+            this.cBoxTipoPersona.Location = new System.Drawing.Point(112, 209);
+            this.cBoxTipoPersona.Name = "cBoxTipoPersona";
+            this.cBoxTipoPersona.Size = new System.Drawing.Size(211, 23);
+            this.cBoxTipoPersona.TabIndex = 23;
+            // 
+            // cBoxIDPlan
+            // 
+            this.cBoxIDPlan.FormattingEnabled = true;
+            this.cBoxIDPlan.Location = new System.Drawing.Point(112, 178);
+            this.cBoxIDPlan.Name = "cBoxIDPlan";
+            this.cBoxIDPlan.Size = new System.Drawing.Size(211, 23);
+            this.cBoxIDPlan.TabIndex = 24;
+            // 
+            // txtFecha
+            // 
+            this.txtFecha.Location = new System.Drawing.Point(112, 148);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(211, 23);
+            this.txtFecha.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 145);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(103, 15);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Fecha Nacimiento";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 175);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 15);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "ID Plan";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 206);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 15);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Tipo Persona";
             // 
             // PersonaDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 177);
+            this.ClientSize = new System.Drawing.Size(584, 267);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PersonaDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PersonaDesktop";
+            this.Load += new System.EventHandler(this.PersonaDesktop_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -331,5 +401,11 @@ namespace UI.Desktop
         private System.Windows.Forms.TextBox txtIDPlan;
         private System.Windows.Forms.TextBox txtFechaNacimiento;
         private System.Windows.Forms.ComboBox txtTipo;
+        private System.Windows.Forms.ComboBox cBoxTipoPersona;
+        private System.Windows.Forms.ComboBox cBoxIDPlan;
+        private System.Windows.Forms.DateTimePicker txtFecha;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }

@@ -14,45 +14,17 @@ namespace UI.Desktop
 {
     public partial class Personas : ApplicationForm
     {
-        //private ToolStripContainer toolStripContainer1;
-        //private ToolStrip toolStrip1;
-        //private ToolStripButton toolStripButton1 = new ToolStripButton();
-        //private ToolStripButton toolStripButton2;
-        //private ToolStripButton toolStripButton3;
-
-
+   
         public Personas()
         {
             InitializeComponent();
             this.dgvUsuarios.AutoGenerateColumns = false;
-            //toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            //toolStrip1 = new System.Windows.Forms.ToolStrip();
-
-            // Add items to the ToolStrip.
-
-            //toolStripButton2 = new ToolStripButton();
-            //toolStripButton3 = new ToolStripButton();
-            //toolStripButton1.Enabled = true;
-            //toolStripButton2.Enabled = true;
-            //toolStripButton3.Enabled = true;
-
-            //toolStrip1.Items.Add(toolStripButton1);
-            //toolStrip1.Items.Add(toolStripButton2);
-            //toolStrip1.Items.Add(toolStripButton3);
-
-            // Add the ToolStrip to the top panel of the ToolStripContainer.
-
-            //toolStripContainer1.TopToolStripPanel.Controls.Add(toolStrip1);
-
-            // Add the ToolStripContainer to the form.
-
-            //Controls.Add(toolStripContainer1);
         }
 
         public void Listar()
         {
-            PersonaLogic ul = new PersonaLogic();
-            this.dgvUsuarios.DataSource = ul.GetAll();
+            PersonaLogic pl = new PersonaLogic();
+            this.dgvUsuarios.DataSource = pl.GetAll();
         }
 
         private void Alumnos_Load(object sender, EventArgs e)
