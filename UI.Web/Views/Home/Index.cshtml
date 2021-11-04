@@ -5,7 +5,7 @@
 <h2>Bienvenido</h2>
 
 <form asp-controller="Home" asp-action="LogIn" method="post" class="text-left">
-    <span>@Context.Request.Query["message"]</span>
+    <span style="color:red;">@Context.Request.Query["message"]</span>
     <div class="form-group">
         <label>
             <span>Nombre de Usuario:</span>
@@ -20,3 +20,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<a asp-action="UsuarioIndex" asp-controller="Usuario">Lista de Usuarios</a> |
+<a asp-action="PersonaIndex" asp-controller="Persona">Lista de Personas</a>
