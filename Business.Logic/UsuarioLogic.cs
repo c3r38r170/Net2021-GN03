@@ -10,7 +10,7 @@ namespace Business.Logic {
 	public class UsuarioLogic:BusinessLogic {
 		public UsuarioAdapter UsuarioData {get;set;}
 		public UsuarioLogic() {
-			UsuarioData = new UsuarioAdapter ();
+			UsuarioData = new UsuarioAdapter();
 		}
 		public Usuario GetOne(int ID) {
 			return UsuarioData.GetOne(ID);

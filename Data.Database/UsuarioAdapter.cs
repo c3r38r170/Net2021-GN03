@@ -142,7 +142,7 @@ namespace Data.Database {
 
 		private Usuario CreateUsuarioFromDataReader(SqlDataReader dR) {
 			Usuario a = new Usuario();
-			a.ID = (int)dR["id_usuarios"];
+			a.ID = (int)dR["id_usuario"];
 			a.NombreUsuario = (string)dR["nombre_usuario"];
 			a.Clave = (string)dR["clave"];
 			a.Habilitado = (bool)dR["habilitado"];
