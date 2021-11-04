@@ -43,12 +43,8 @@ namespace Business.Entities {
 			set { _Habilitado = value; }
 		}
 
-		private Persona _PersonaAsociada;
-		public Persona PersonaAsociada {
-			get => _PersonaAsociada;
-			set => _PersonaAsociada = value;
-		}
-
+		private int _ID_Persona;
+		public int ID_Persona { get => _ID_Persona; set => _ID_Persona = value; }
 		public Usuario() {
 			ID = 0;//Nos ayuda a detectar si el usuario tiene datos o no.
 		}
