@@ -19,6 +19,7 @@ namespace Data.Database {
 				SqlDataReader drEspecialidades = cmdEspecialidad.ExecuteReader();
 				while (drEspecialidades.Read()) {
 					Especialidad e = new Especialidad();
+					e.ID = (int)drEspecialidades["id_especialidad"];
 					e.Descripcion = (string)drEspecialidades["desc_especialidad"];
 					especialidades.Add(e);
 				}

@@ -31,7 +31,7 @@ namespace Business.Entities {
 		public Tipo TipoPersona { get => _tipoPersona; set => _tipoPersona = value; }
 		public enum Tipo
 		{
-			Docente=1,
+			Docente,
 			Alumno,
 			Admin,
 			Otro

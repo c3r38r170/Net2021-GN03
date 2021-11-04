@@ -126,7 +126,7 @@ namespace Data.Database {
 			usuario.State = BusinessEntity.States.Unmodified;
 		}
 
-		public Usuario GetUserByUsernameAndPassword(String nombre, String contraseña) {
+		public Usuario GetUserByUsernameAndPassword(string nombre, string contraseña) {
 			this.OpenConnection();
 			SqlCommand cmdLogIn = new SqlCommand("GetUsuarioByNombreUsuarioYContraseña", sqlConn);
 			cmdLogIn.CommandType = CommandType.StoredProcedure;

@@ -37,7 +37,7 @@ namespace Business.Logic
             PlanData.Save(planActual);
         }
 
-        public DataTable GetPlanesEspecialidad()
+        public object GetPlanesEspecialidad()
         {
             return PlanData.GetPlanesEspecialidad();
         }

@@ -160,15 +160,16 @@ namespace UI.Desktop
 				PersonaActual.State = BusinessEntity.States.New;
 				if (this.cBoxTipoPersona.Text.Equals("Alumno"))
 				{
-					PersonaActual.TipoPersona = 1;
+                    PersonaActual.TipoPersona = Persona.Tipo.Alumno;
+					
 				}
 				else if (this.cBoxTipoPersona.Text.Equals("Profesor"))
 				{
-					PersonaActual.TipoPersona = 2;
+					PersonaActual.TipoPersona = Persona.Tipo.Docente;
 				}
 				else if (this.cBoxTipoPersona.Text.Equals("Admin"))
 				{
-					PersonaActual.TipoPersona = 3;
+					PersonaActual.TipoPersona = Persona.Tipo.Admin;
 				}
 			}
 			else if (Modo == ModoForm.Modificacion)
@@ -184,15 +185,15 @@ namespace UI.Desktop
 				PersonaActual.State = BusinessEntity.States.Modified;
 				if (this.cBoxTipoPersona.Text.Equals("Alumno"))
 				{
-					PersonaActual.TipoPersona = 1;
+					PersonaActual.TipoPersona = Persona.Tipo.Alumno;
 				}
 				else if (this.cBoxTipoPersona.Text.Equals("Profesor"))
 				{
-					PersonaActual.TipoPersona = 2;
+					PersonaActual.TipoPersona = Persona.Tipo.Docente;
 				}
 				else if (this.cBoxTipoPersona.Text.Equals("Admin"))
 				{
-					PersonaActual.TipoPersona = 3;
+					PersonaActual.TipoPersona = Persona.Tipo.Admin;
 				}
 			}
 		}
