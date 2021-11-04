@@ -89,7 +89,7 @@ namespace Data.Database {
 			p.Direccion = (string)dR["direccion"];
 			p.Email = (string)dR["email"];
 			p.Telefono = (string)dR["telefono"];
-			p.FechaNacimiento = DateTime.Parse((string)dR["fecha_nac"]);
+			p.FechaNacimiento = Convert.ToDateTime(dR["fecha_nac"]);
 			p.Legajo = (int)dR["legajo"];
 			switch ((int)dR["tipo_persona"]) {
 				case 1:
