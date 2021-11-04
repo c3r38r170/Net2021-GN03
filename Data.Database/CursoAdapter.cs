@@ -44,6 +44,38 @@ namespace Data.Database
 			return cursos;
 		}
 
+        public bool yaEstaInscripto(int iD, int idPersonaActual)
+        {
+			bool existe = false;
+			try
+			{
+				this.OpenConnection();
+				SqlCommand cmd = new SqlCommand("SELECT id_inscripcion FROM alumnos_inscripciones WHERE id_alumno=@idPersonaActual AND id_curso=@iD", sqlConn);
+				cmd.Parameters.Add("@idPersonaActual", SqlDbType.Int).Value = idPersonaActual;
+				cmd.Parameters.Add("@iD", SqlDbType.Int).Value = iD;
+				SqlDataReader dr = cmd.ExecuteReader();
+				if (dr.Read())
+				{
+					existe = true;
+				}
+				else
+				{
+					existe = false;
+				}
+			}
+			catch (Exception Ex)
+			{
+				Exception ExcepcionManejada = new Exception("Error al recuperar lista de Cursos.", Ex);
+				throw ExcepcionManejada;
+			}
+			finally
+			{
+				this.CloseConnection();
+			}
+
+			return existe;
+		}
+
         public object GetCursosMateriasComisiones()
         {
 			ComisionAdapter ca = new ComisionAdapter();
