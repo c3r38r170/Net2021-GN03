@@ -31,6 +31,10 @@ namespace UI.Desktop
             MapearDeDatos();
         }
 
+        private void MateriaDesktop_Load(object sender, EventArgs e)
+        {
+            CargaComboBox();
+        }
         public override void MapearDeDatos()
         {
             this.txtIdMateria.Text = this.MateriaActual.ID.ToString();
@@ -44,6 +48,50 @@ namespace UI.Desktop
             else if (Modo.Equals("Consulta"))
             {
                 btnAceptar.Text = "Aceptar";
+            }
+        }
+
+        private void CargaComboBox()
+        {
+            PlanLogic pl = new PlanLogic();
+            List<Plan> listaPlanes = pl.GetAll();
+            Dictionary<int, string> comboSource = new Dictionary<int, string>();
+
+            foreach (Plan p in listaPlanes)
+            {
+                comboSource.Add(p.ID, p.Descripcion);
+            }
+            cBoxDescPlan.DataSource = new BindingSource(comboSource, null);
+            cBoxDescPlan.DisplayMember = "Value";
+            cBoxDescPlan.ValueMember = "Key";
+            cBoxDescPlan.Text = "";
+        }
+
+        public override bool Validar()
+        {
+            if (string.IsNullOrWhiteSpace(this.txtDescMateria.Text))
+            {
+                Notificar("Error", "Incorrect txtDescripcion en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.txtHsSemanales.Text))
+            {
+                Notificar("Error", "Incorrect Horas Semanales en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.txtHsTotales.Text))
+            {
+                Notificar("Error", "Incorrect hs totales en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.cBoxDescPlan.Text))
+            {
+                Notificar("Error", "Incorrect plan en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
         public override void MapearADatos()
@@ -73,33 +121,7 @@ namespace UI.Desktop
             MateriaLogic el = new MateriaLogic();
             el.Save(MateriaActual);
         }
-        public override bool Validar()
-        {
-            if (string.IsNullOrWhiteSpace(this.txtDescMateria.Text))
-            {
-                Notificar("Error", "Incorrect txtDescripcion en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            else if (string.IsNullOrWhiteSpace(this.txtHsSemanales.Text))
-            {
-                Notificar("Error", "Incorrect Horas Semanales en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            else if (string.IsNullOrWhiteSpace(this.txtHsTotales.Text))
-            {
-                Notificar("Error", "Incorrect hs totales en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            else if (string.IsNullOrWhiteSpace(this.cBoxDescPlan.Text))
-            {
-                Notificar("Error", "Incorrect plan en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+       
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -126,26 +148,7 @@ namespace UI.Desktop
                 Close();
         }
 
-        private void MateriaDesktop_Load(object sender, EventArgs e)
-        {
-                CargaComboBox();
-        }
-
-        private void CargaComboBox()
-        {
-                PlanLogic pl = new PlanLogic();
-                List<Plan> listaPlanes = pl.GetAll();
-                Dictionary<int, string> comboSource = new Dictionary<int, string>();
-
-                foreach (Plan p in listaPlanes)
-                {
-                    comboSource.Add(p.ID, p.Descripcion);
-                }
-                cBoxDescPlan.DataSource = new BindingSource(comboSource, null);
-                cBoxDescPlan.DisplayMember = "Value";
-                cBoxDescPlan.ValueMember = "Key";
-                cBoxDescPlan.Text = "";
-        }
+       
     }
 } 
 
