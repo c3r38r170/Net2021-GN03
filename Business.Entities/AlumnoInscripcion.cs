@@ -14,6 +14,6 @@ namespace Business.Entities {
 		public string Condicion { get => _Condicion; set => _Condicion = value; }
 		public int IDAlumno { get => _IDAlumno; set => _IDAlumno = value; }
 		public int IDCurso { get => _IDCurso; set => _IDCurso = value; }
-		public int IDNota { get => _IDNota; set => _IDNota = value; }
+		public int Nota { get => _IDNota; set => _IDNota = value; }
 	}
 }
