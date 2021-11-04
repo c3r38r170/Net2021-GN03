@@ -11,7 +11,6 @@ namespace UI.Desktop
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
-        public static Menu menu;
         [STAThread]
         static void Main()
         {
