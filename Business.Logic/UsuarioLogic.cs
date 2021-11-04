@@ -30,5 +30,10 @@ namespace Business.Logic {
 
 			return usuario;
 		}
-	}
+
+        public int GetIdPerson(int iD)
+        {
+			return UsuarioData.GetIdPerson(iD);
+		}
+    }
 }
