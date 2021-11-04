@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Entities;
+using Business.Logic;
 using Data.Database;
 
 namespace UI.Desktop
@@ -53,13 +54,18 @@ namespace UI.Desktop
       }else if(!usuario.Habilitado) {
 				MessageBox.Show("Su cuenta se encuentra deshabilitada.");
 			} else {
+                int id_persona = new UsuarioLogic().GetIdPerson(usuario.ID);
 				switch(usuario.PersonaAsociada.TipoPersona) {
 				case Persona.Tipo.Alumno:
-					//TODO MenuAlumno(usuario.ID)
-					break;
+                        MenuAlumno ma = new MenuAlumno(id_persona);
+                        ma.Show();
+                        this.Close();
+                        break;
 				case Persona.Tipo.Docente:
-					//TODO MenuDocente
-					break;
+                        MenuDocente md = new MenuDocente(id_persona);
+                        md.Show();
+                        this.Close();
+                        break;
 				case Persona.Tipo.Admin:
 					MenuAdmin MenuAdmin = new MenuAdmin();
 					MenuAdmin.Show();
