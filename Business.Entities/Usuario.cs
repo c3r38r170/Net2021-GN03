@@ -49,5 +49,12 @@ namespace Business.Entities {
 			ID = 0;//Nos ayuda a detectar si el usuario tiene datos o no.
 		}
 
+		private Persona _PersonaAsociada;
+		public Persona PersonaAsociada
+		{
+			get => _PersonaAsociada;
+			set => _PersonaAsociada = value;
+		}
+
 	}
 }
