@@ -31,6 +31,11 @@ namespace Business.Logic
             return CursoData.GetOne(iD);
         }
 
+        public List<Curso> GetAll()
+        {
+            return CursoData.GetAll();
+        }
+
         public void Save(Curso cursoActual)
         {
             CursoData.Save(cursoActual);
