@@ -1,7 +1,9 @@
 ﻿
 @{
-  ViewData["Title"] = "LogIn";
+    ViewData["Title"] = "LogIn";
 }
 
-<h1>LogIn @Model.Nombre</h1>
+<h1>Bienvenido @Model.Nombre</h1>
 
+<a asp-action="UsuarioIndex" asp-controller="Usuario">Lista de Usuarios</a> |
+<a asp-action="PersonaIndex" asp-controller="Persona">Lista de Personas</a>
