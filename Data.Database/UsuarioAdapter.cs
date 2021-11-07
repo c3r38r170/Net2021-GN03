@@ -55,34 +55,6 @@ namespace Data.Database {
 			return usuario;
 		}
 
-        public int GetIdPerson(int iD)
-        {
-			int id_person = 0;
-			try
-			{
-				this.OpenConnection();
-				SqlCommand cmd = new SqlCommand("select id_persona from usuarios where id_usuario = @id", sqlConn);
-				cmd.Parameters.Add("@id", SqlDbType.Int).Value = iD;
-				SqlDataReader dr = cmd.ExecuteReader();
-				if (dr.Read())
-				{
-					id_person = (int)dr["id_persona"];
-				}
-				dr.Close();
-			}
-			catch (Exception Ex)
-			{
-				Exception ExcepcionManejada =
-				new Exception("Error", Ex);
-				throw ExcepcionManejada;
-			}
-			finally
-			{
-				this.CloseConnection();
-			}
-			return id_person;
-		}
-
         public void Delete(int ID) {
 			this.OpenConnection();
 			SqlCommand cmdUsuario = new SqlCommand("DeleteUsuario", sqlConn);

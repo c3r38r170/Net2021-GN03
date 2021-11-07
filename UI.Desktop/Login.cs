@@ -54,25 +54,24 @@ namespace UI.Desktop
       }else if(!usuario.Habilitado) {
 				MessageBox.Show("Su cuenta se encuentra deshabilitada.");
 			} else {
-                int id_persona = new UsuarioLogic().GetIdPerson(usuario.ID);
+        int id_persona = usuario.PersonaAsociada.ID;
 				switch(usuario.PersonaAsociada.TipoPersona) {
 				case Persona.Tipo.Alumno:
-                        MenuAlumno ma = new MenuAlumno(id_persona);
-                        ma.Show();
-                        this.Close();
-                        break;
+          MenuAlumno ml = new MenuAlumno(id_persona);
+          ml.ShowDialog(this);
+          break;
 				case Persona.Tipo.Docente:
-                        MenuDocente md = new MenuDocente(id_persona);
-                        md.Show();
-                        this.Close();
-                        break;
+          MenuDocente md = new MenuDocente(id_persona);
+          md.ShowDialog(this);
+          break;
 				case Persona.Tipo.Admin:
-					MenuAdmin MenuAdmin = new MenuAdmin();
-					MenuAdmin.Show();
+					MenuAdmin ma = new MenuAdmin();
+					ma.ShowDialog(this);
 					break;
 				default:
 					break;
 				}
+				//this.Close();
 			}
 		}
 
