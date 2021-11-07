@@ -50,7 +50,7 @@ namespace UI.Desktop
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+            int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
             ed.ShowDialog();
             this.Listar();
@@ -58,7 +58,7 @@ namespace UI.Desktop
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            Especialidad esp = ((Business.Entities.Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
+            Especialidad esp = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
             int ID = esp.ID;
             string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
             string title = "Eliminar especialidad";
@@ -68,13 +68,8 @@ namespace UI.Desktop
             {
                 EspecialidadLogic el = new EspecialidadLogic();
                 el.Delete(ID);
-                // u.State = BusinessEntity.States.Deleted;
             }
             this.Listar();
         }
-
-       
-
-      
     }
 }
