@@ -15,10 +15,10 @@ namespace Data.Database {
 			this.OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("SELECT * FROM especialidades", sqlConn);
 			try {
-
 				SqlDataReader drEspecialidades = cmdEspecialidad.ExecuteReader();
 				while (drEspecialidades.Read()) {
 					Especialidad e = new Especialidad();
+					e.ID = (int)drEspecialidades["id_especialidad"];
 					e.Descripcion = (string)drEspecialidades["desc_especialidad"];
 					especialidades.Add(e);
 				}
