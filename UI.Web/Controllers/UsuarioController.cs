@@ -14,6 +14,7 @@ namespace UI.Web.Controllers
 {
     public class UsuarioController : Controller
     {
+        // GET: UsuarioController
         [HttpGet]
         public ActionResult UsuarioIndex()
         {

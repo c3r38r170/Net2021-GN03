@@ -18,73 +18,55 @@ namespace UI.Web.Controllers
             return View(pl.GetAll());
         }
 
-        // GET: PersonaController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: PersonaController/Create
-        public ActionResult Create()
+        public ActionResult PersonaCreate()
         {
-            return View();
+            return View(new Persona());
         }
 
         // POST: PersonaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult PersonaCreate(Persona per)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            PersonaLogic pl = new PersonaLogic();
+            pl.Save(per);
+            return RedirectToAction("PersonaIndex");
         }
 
         // GET: PersonaController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult PersonaEdit(int id)
         {
-            return View();
+            PersonaLogic pl = new PersonaLogic();
+            return View(pl.GetOne(id));
         }
 
         // POST: PersonaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult PersonaEdit(Persona per)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            PersonaLogic pl = new PersonaLogic();
+            per.State = BusinessEntity.States.Modified;
+            pl.Save(per);
+            return RedirectToAction("PersonaIndex");
         }
 
         // GET: PersonaController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult PersonaDelete(int id)
         {
-            return View();
+            PersonaLogic pl = new PersonaLogic();
+            return View(pl.GetOne(id));
         }
 
         // POST: PersonaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult PersonaDelete(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            PersonaLogic pl = new PersonaLogic();
+            pl.Delete(id);
+            return RedirectToAction("UsuarioIndex");
         }
     }
 }
