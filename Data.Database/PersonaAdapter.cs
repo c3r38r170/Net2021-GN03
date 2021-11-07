@@ -92,15 +92,18 @@ namespace Data.Database {
 			p.FechaNacimiento = Convert.ToDateTime(dR["fecha_nac"]);
 			p.Legajo = (int)dR["legajo"];
 			switch ((int)dR["tipo_persona"]) {
-				case 1:
-					p.TipoPersona = Persona.Tipo.Docente;
-					break;
-				case 2:
-					p.TipoPersona = Persona.Tipo.Alumno;
-					break;
-				default:
-					p.TipoPersona = Persona.Tipo.Otro;
-					break;
+			case 1:
+				p.TipoPersona = Persona.Tipo.Docente;
+				break;
+			case 2:
+				p.TipoPersona = Persona.Tipo.Alumno;
+				break;
+			case 3:
+				p.TipoPersona = Persona.Tipo.Admin;
+				break;
+			default:
+				p.TipoPersona = Persona.Tipo.Otro;
+				break;
 			}
 			//TODO quizas querramos traer el plan y hacer una propiedad .Plan
 			p.IDPlan = (int)dR["id_plan"];
