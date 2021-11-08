@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Business.Entities.Plan>
+
+@{
+    ViewData["Title"] = "PlanIndex";
+}
+
+<h1>Plan</h1>
+
+<p>
+    <a asp-action="PlanCreate">Crear Plan</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDEspecialidad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDEspecialidad)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "PlanEdit", new { id=item.ID }) |
+                @Html.ActionLink("Eliminar", "PlanDelete", new { id=item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

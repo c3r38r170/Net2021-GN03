@@ -66,7 +66,7 @@ namespace UI.Web.Controllers
         {
             PersonaLogic pl = new PersonaLogic();
             pl.Delete(id);
-            return RedirectToAction("UsuarioIndex");
+            return RedirectToAction("PersonaIndex");
         }
     }
 }
