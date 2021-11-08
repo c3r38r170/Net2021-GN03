@@ -12,14 +12,14 @@ END;
 
 CREATE PROCEDURE [dbo].[DeleteComision]
   @id INT
-AS
+A
   BEGIN
   DELETE FROM comisiones WHERE id_comision=@id;
 END;
 
 CREATE PROCEDURE [dbo].[NuevaComision]
   @anioe INT
-  ,@descc VARCHAR(50)
+  ,@descc NVARCHAR(50)
   ,@idp INT
   ,@ID INT OUTPUT
 AS
@@ -30,7 +30,7 @@ END;
 
 CREATE PROCEDURE [dbo].[EditarComision]
   @anioe INT
-  ,@descc VARCHAR(50)
+  ,@descc NVARCHAR(50)
   ,@idp INT
   ,@ID INT
 AS
@@ -94,7 +94,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevaEspecialidad]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@ID INT OUTPUT
 AS
   BEGIN
@@ -103,7 +103,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarEspecialidad]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@ID INT
 AS
   BEGIN
@@ -127,7 +127,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevaMateria]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@hss INT
   ,@hst INT
   ,@idp INT
@@ -139,7 +139,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarMateria]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@hss INT
   ,@hst INT
   ,@idp INT
@@ -166,11 +166,11 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevaPersona]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@direccion VARCHAR(50)
-  ,@email VARCHAR(50)
-  ,@telefono VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@direccion NVARCHAR(50)
+  ,@email NVARCHAR(50)
+  ,@telefono NVARCHAR(50)
   ,@fecha_nac DATETIME
   ,@legajo INT
   ,@tipo_persona INT
@@ -183,11 +183,11 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarPersona]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@direccion VARCHAR(50)
-  ,@email VARCHAR(50)
-  ,@telefono VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@direccion NVARCHAR(50)
+  ,@email NVARCHAR(50)
+  ,@telefono NVARCHAR(50)
   ,@fecha_nac DATETIME
   ,@legajo INT
   ,@tipo_persona INT
@@ -215,7 +215,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevoPlan]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@espe INT
   ,@ID INT OUTPUT
 AS
@@ -225,7 +225,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarPlan]
-  @descripcionPlan VARCHAR(50)
+  @descripcionPlan NVARCHAR(50)
   ,@idEspecialidad INT
   ,@ID INT
 AS
@@ -250,12 +250,12 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevoUsuario]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@clave VARCHAR(50)
-  ,@usuario VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@clave NVARCHAR(50)
+  ,@usuario NVARCHAR(50)
   ,@habilitado BIT
-  ,@email VARCHAR(50)
+  ,@email NVARCHAR(50)
   ,@ID INT OUTPUT
 AS
   BEGIN
@@ -264,12 +264,12 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarUsuario]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@clave VARCHAR(50)
-  ,@usuario VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@clave NVARCHAR(50)
+  ,@usuario NVARCHAR(50)
   ,@habilitado BIT
-  ,@email VARCHAR(50)
+  ,@email NVARCHAR(50)
   ,@ID INT
 AS
   BEGIN
@@ -277,8 +277,8 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContraseña]
-	@nombre_usuario VARCHAR(50)
-	,@clave VARCHAR(50)
+	@nombre_usuario NVARCHAR(50)
+	,@clave NVARCHAR(50)
 AS
 	BEGIN
 	SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave;
