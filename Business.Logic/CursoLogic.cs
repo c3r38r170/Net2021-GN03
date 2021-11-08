@@ -45,5 +45,6 @@ namespace Business.Logic
         {
             return CursoData.yaEstaInscripto(iD, idPersonaActual);
         }
+
     }
 }

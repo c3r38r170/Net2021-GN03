@@ -83,27 +83,28 @@ namespace Data.Database {
 		}
 
 		private void fillPersonaFromDataReader(SqlDataReader dR,Persona p) {
-			p.ID = (int)dR["id_persona"];
+			p.ID = (int)dR["id_persona"];  
 			p.Nombre = (string)dR["nombre"];
-			p.Apellido = (string)dR["apellido"];
+			p.Apellido = (string)dR["apellido"]; 
 			p.Direccion = (string)dR["direccion"];
 			p.Email = (string)dR["email"];
 			p.Telefono = (string)dR["telefono"];
 			p.FechaNacimiento = Convert.ToDateTime(dR["fecha_nac"]);
 			p.Legajo = (int)dR["legajo"];
 			switch ((int)dR["tipo_persona"]) {
-			case 1:
-				p.TipoPersona = Persona.Tipo.Docente;
-				break;
-			case 2:
-				p.TipoPersona = Persona.Tipo.Alumno;
-				break;
-			case 3:
-				p.TipoPersona = Persona.Tipo.Admin;
-				break;
-			default:
-				p.TipoPersona = Persona.Tipo.Otro;
-				break;
+				case 1:
+					p.TipoPersona = Persona.Tipo.Alumno;
+					break;					
+				case 2:
+					p.TipoPersona = Persona.Tipo.Docente;
+					break;
+				case 3:
+					p.TipoPersona = Persona.Tipo.Admin;
+					break;
+				default:
+					p.TipoPersona = Persona.Tipo.Otro;
+					break;
+
 			}
 			//TODO quizas querramos traer el plan y hacer una propiedad .Plan
 			p.IDPlan = (int)dR["id_plan"];

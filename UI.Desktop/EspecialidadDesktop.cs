@@ -13,12 +13,8 @@ using Business.Logic;
 namespace UI.Desktop
 {
     public partial class EspecialidadDesktop : ApplicationForm
-    {
-        private Especialidad _especialidadActual;
-        private ModoForm _MF;
-
+    {    
         public Especialidad EspecialidadActual { get; set; }
-        public ModoForm MF { get; set; }
 
         public EspecialidadDesktop()
         {
@@ -26,46 +22,44 @@ namespace UI.Desktop
         }
         public EspecialidadDesktop(ModoForm modo) : this()
         {
-            MF = modo;
-            EspecialidadActual = new Especialidad();
+            Modo = modo;
         }
         public EspecialidadDesktop(int ID, ModoForm modo) : this()
         {
-            MF = modo;
-            EspecialidadLogic el = new EspecialidadLogic();
-            EspecialidadActual = el.GetOne(ID);
+            Modo = modo;
+            EspecialidadActual = new EspecialidadLogic().GetOne(ID);
             MapearDeDatos();
         }
         public override void MapearDeDatos()
         {
-            if ((MF == ModoForm.Alta) || (MF == ModoForm.Alta))
-            {
-                this.btnAceptar.Text = "Guardar";
-            }
-            else if (MF == ModoForm.Consulta)
-            {
-                this.btnAceptar.Text = "Aceptar";
-            }
-            this.txtID.Text = this.EspecialidadActual.ID.ToString();
             this.txtDescripcion.Text = this.EspecialidadActual.Descripcion;
+            this.txtID.Text = this.EspecialidadActual.ID.ToString();
+            if (Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion))
+            {
+                btnAceptar.Text = "Guardar";
+            }
+            else if (Modo.Equals(ModoForm.Baja))
+            {
+                btnAceptar.Text = "Eliminar";
+            }
+            else if (Modo.Equals("Consulta"))
+            {
+                btnAceptar.Text = "Aceptar";
+            }
         }
         public override void MapearADatos()
         {
-            if (MF == ModoForm.Alta || MF == ModoForm.Modificacion)
+            if (Modo == ModoForm.Alta)
+            {
+                Especialidad e = new Especialidad();
+                EspecialidadActual = e;
+                EspecialidadActual.Descripcion = this.txtDescripcion.Text;
+                EspecialidadActual.State = BusinessEntity.States.New;
+            }
+            else if (Modo == ModoForm.Modificacion)
             {
                 EspecialidadActual.Descripcion = this.txtDescripcion.Text;
-            }
-            switch (MF)
-            {
-                case ModoForm.Alta:
-                    EspecialidadActual.State = BusinessEntity.States.New;
-                    break;
-                case ModoForm.Modificacion:
-                    EspecialidadActual.State = BusinessEntity.States.Modified;
-                    break;
-                    /*case ModoForm.Baja:
-                        EspecialidadActual.State = BusinessEntity.States.Deleted;
-                        break;*/
+                EspecialidadActual.State = BusinessEntity.States.Modified;
             }
         }
         public override void GuardarCambios()
@@ -93,23 +87,24 @@ namespace UI.Desktop
 
         private void btnAceptar_Click_1(object sender, EventArgs e)
         {
-            bool v = Validar();
-            if (v)
+            switch (Modo)
             {
-                switch (MF)
-                {
-                    case ModoForm.Alta:
+                case ModoForm.Alta:
+                    if (Validar())
+                    {
                         GuardarCambios();
                         this.Close();
-                        break;
-                    case ModoForm.Modificacion:
+                    }
+                    break;
+                case ModoForm.Modificacion:
+                    if (Validar())
+                    {
                         GuardarCambios();
                         this.Close();
-                        break;
-                }
+                    }
+                    break;
             }
         }
-
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();

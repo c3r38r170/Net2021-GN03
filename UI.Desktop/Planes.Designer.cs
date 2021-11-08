@@ -32,9 +32,6 @@ namespace UI.Desktop
             this.tcPlanesMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tlPlanesMaterias = new System.Windows.Forms.TableLayoutPanel();
             this.dvgPlanes = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idespecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -89,39 +86,15 @@ namespace UI.Desktop
             this.dvgPlanes.AllowUserToAddRows = false;
             this.dvgPlanes.AllowUserToDeleteRows = false;
             this.dvgPlanes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgPlanes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this._Descripcion,
-            this.idespecialidad});
             this.tlPlanesMaterias.SetColumnSpan(this.dvgPlanes, 2);
             this.dvgPlanes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dvgPlanes.Location = new System.Drawing.Point(3, 3);
             this.dvgPlanes.Name = "dvgPlanes";
             this.dvgPlanes.ReadOnly = true;
             this.dvgPlanes.RowTemplate.Height = 25;
+            this.dvgPlanes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dvgPlanes.Size = new System.Drawing.Size(794, 390);
             this.dvgPlanes.TabIndex = 0;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID Plan";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // _Descripcion
-            // 
-            this._Descripcion.DataPropertyName = "Descripcion";
-            this._Descripcion.HeaderText = "Descripcion Plan";
-            this._Descripcion.Name = "_Descripcion";
-            this._Descripcion.ReadOnly = true;
-            // 
-            // idespecialidad
-            // 
-            this.idespecialidad.DataPropertyName = "IDEspecialidad";
-            this.idespecialidad.HeaderText = "Descripcion Especialidad";
-            this.idespecialidad.Name = "idespecialidad";
-            this.idespecialidad.ReadOnly = true;
             // 
             // btnActualizar
             // 
@@ -153,7 +126,7 @@ namespace UI.Desktop
             this.btnEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(4, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(112, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(81, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // btnNuevo
@@ -219,8 +192,5 @@ namespace UI.Desktop
         private System.Windows.Forms.DataGridView dvgPlanes;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idespecialidad;
     }
 }

@@ -160,7 +160,10 @@ namespace UI.Desktop
 				PersonaActual.State = BusinessEntity.States.New;
 				if (this.cBoxTipoPersona.Text.Equals("Alumno"))
 				{
-					PersonaActual.TipoPersona = Persona.Tipo.Alumno;
+
+                    PersonaActual.TipoPersona = Persona.Tipo.Alumno;
+					
+
 				}
 				else if (this.cBoxTipoPersona.Text.Equals("Profesor"))
 				{

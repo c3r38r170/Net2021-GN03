@@ -33,7 +33,7 @@ namespace Data.Database {
 			return listaPlanes;
 		}
 
-		public DataTable GetPlanesEspecialidad() {
+		public object GetPlanesEspecialidad() {
 			EspecialidadAdapter ea = new EspecialidadAdapter();
 
 			List<Plan> listaPlanes = this.GetAll();
@@ -85,7 +85,7 @@ namespace Data.Database {
 					cmd.ExecuteNonQuery();
 				}
 				plan.State = BusinessEntity.States.Unmodified;
-			} catch(Exception Ex) {
+			} catch(Exception Ex){
 				Exception ExcepcionManejada = new Exception("Error al recuperar Planes", Ex);
 				throw ExcepcionManejada;
 			} finally {

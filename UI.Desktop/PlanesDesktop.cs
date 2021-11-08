@@ -71,7 +71,7 @@ namespace UI.Desktop
             cBoxEspecialidad.DataSource = new BindingSource(comboSource, null);
             cBoxEspecialidad.DisplayMember = "Value";
             cBoxEspecialidad.ValueMember = "Key";
-            cBoxEspecialidad.Text = "Eliga especialidad";
+            cBoxEspecialidad.Text = "";
         }
 
         public override bool Validar()

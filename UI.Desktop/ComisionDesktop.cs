@@ -126,7 +126,12 @@ namespace UI.Desktop
             el.Save(ComisionActual);
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAceptar_Click_1(object sender, EventArgs e)
         {
             switch (Modo)
             {
@@ -149,11 +154,6 @@ namespace UI.Desktop
                     this.Close();
                     break;
             }
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
