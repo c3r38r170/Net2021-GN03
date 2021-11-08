@@ -6,47 +6,42 @@
 
 <h1>Borrar Materia</h1>
 
-<h3>¿Estás seguro que quieres borrar este usuario?</h3>
+<h3>¿Estás seguro que quieres borrar esta materia?</h3>
 <div>
     <h4>Materia</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HSSemanales)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HSSemanales)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HSTotales)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HSTotales)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IDPlan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IDPlan)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ID)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.State)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HSSemanales)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HSSemanales)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HSTotales)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HSTotales)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IDPlan)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IDPlan)
+        </dd>
+
     </dl>
     
     <form asp-action="MateriaDelete">

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Business.Entities.Curso>
+@{
+    ViewData["Title"] = "CursoIndex";
+}
+
+<h1>Curso</h1>
+
+<p>
+    <a asp-action="CursoCreate">Crear Curso</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AñoCalendario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cupo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDComision)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDMateria)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AñoCalendario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cupo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDComision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDMateria)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "CursoEdit", new { id = item.ID }) |
+                        @Html.ActionLink("Eliminar", "CursoDelete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
