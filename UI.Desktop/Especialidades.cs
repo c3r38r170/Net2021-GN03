@@ -17,7 +17,7 @@ namespace UI.Desktop
         public Especialidades()
         {   
             InitializeComponent();
-            this.dgvEspecialidades.AutoGenerateColumns = false;
+            dgvEspecialidades.AutoGenerateColumns = false;
         }
 
         private void Especialidades_Load(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -82,25 +82,18 @@ namespace UI.Desktop
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            try
+            Especialidad esp = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
+            int ID = esp.ID;
+            string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
+            string title = "Eliminar especialidad";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
             {
-                Especialidad esp = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
-                int ID = esp.ID;
-                string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
-                string title = "Eliminar especialidad";
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = MessageBox.Show(message, title, buttons);
-                if (result == DialogResult.Yes)
-                {
-                    EspecialidadLogic el = new EspecialidadLogic();
-                    el.Delete(ID);
-                }
-                this.Listar();
+                EspecialidadLogic el = new EspecialidadLogic();
+                el.Delete(ID);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            this.Listar();
         }
     }
 }
