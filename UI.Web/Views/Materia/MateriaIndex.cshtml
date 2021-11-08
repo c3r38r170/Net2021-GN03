@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Business.Entities.Materia>
+
+@{
+    ViewData["Title"] = "MateriaIndex";
+}
+
+<h1>Materia</h1>
+
+<p>
+    <a asp-action="MateriaCreate">Crear Materia</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HSSemanales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HSTotales)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HSSemanales)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "MateriaEdit", new { id = item.ID }) |
+                    @Html.ActionLink("Eliminar", "MateriaDelete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

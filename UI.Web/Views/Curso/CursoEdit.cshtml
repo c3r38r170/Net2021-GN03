@@ -1,0 +1,47 @@
+﻿@model Business.Entities.Curso
+
+@{
+    ViewData["Title"] = "CursoEdit";
+}
+
+<h1>Modificar Curso</h1>
+
+<h4>Curso</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CursoEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.ID)
+            <div class="form-group">
+                <label asp-for="AñoCalendario" class="control-label"></label>
+                <input asp-for="AñoCalendario" class="form-control" />
+                <span asp-validation-for="AñoCalendario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cupo" class="control-label"></label>
+                <input asp-for="Cupo" class="form-control" />
+                <span asp-validation-for="Cupo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDComision" class="control-label"></label>
+                <input asp-for="IDComision" class="form-control" />
+                <span asp-validation-for="IDComision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDMateria" class="control-label"></label>
+                <input asp-for="IDMateria" class="form-control" />
+                <span asp-validation-for="IDMateria" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="CursoIndex">Volver atrás</a>
+</div>
+
