@@ -22,7 +22,7 @@ namespace Data.Database {
 		}
 
 		private static SqlConnection NewSqlConn() {
-			return new SqlConnection(ConfigurationManager.ConnectionStrings["ConnStringLocal"].ConnectionString);
+			return new SqlConnection("Data Source=LAPTOP-CHEHT879\\SQLEXPRESS;Initial Catalog=tp2_net;Integrated Security=true;");
 		}
 	}
 }

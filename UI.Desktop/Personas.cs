@@ -53,8 +53,8 @@ namespace UI.Desktop
         {
             try
             {
-                int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-                PersonaDesktop ud = new PersonaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                //int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                PersonaDesktop ud = new PersonaDesktop(((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem), ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
                 this.Listar();
             }

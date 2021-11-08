@@ -110,7 +110,7 @@ namespace UI.Desktop
 				Notificar("Error", "Incorrect Legajo en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (VerificaLegajo(this.txtLegajo.Text))
+			else if (!VerificaLegajo(this.txtLegajo.Text))
 			{
 				Notificar("Error", "Legajo existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
@@ -150,46 +150,67 @@ namespace UI.Desktop
 
 		public override void MapearADatos()
 		{
-			if(Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion)) {
-				if(Modo == ModoForm.Alta) {
-					Persona p = new Persona();
-					PersonaActual = p;
-					PersonaActual.State = BusinessEntity.States.New;
-				} else {
-					PersonaActual.State = BusinessEntity.States.Modified;
+            try
+            {
+				if (Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion))
+				{
+					if (Modo == ModoForm.Alta)
+					{
+						Persona p = new Persona();
+						PersonaActual = p;
+						PersonaActual.State = BusinessEntity.States.New;
+					}
+					else
+					{
+						PersonaActual.State = BusinessEntity.States.Modified;
+					}
+					PersonaActual.Apellido = txtApellido.Text;
+					PersonaActual.Nombre = txtNombre.Text;
+					PersonaActual.Direccion = txtDireccion.Text;
+					PersonaActual.Email = txtEmail.Text;
+					PersonaActual.Telefono = txtTelefono.Text;
+					PersonaActual.Legajo = int.Parse(txtLegajo.Text);
+					PersonaActual.FechaNacimiento = txtFecha.Value;
+					PersonaActual.IDPlan = ((KeyValuePair<int, string>)cBoxIDPlan.SelectedItem).Key;
+					Persona.Tipo t;
+					switch (cBoxTipoPersona.Text)
+					{
+						case "Alumno":
+							t = Persona.Tipo.Alumno;
+							break;
+						case "Docente":
+							t = Persona.Tipo.Docente;
+							break;
+						case "Admin":
+							t = Persona.Tipo.Admin;
+							break;
+						default:
+							t = Persona.Tipo.Otro;
+							break;
+					}
+					PersonaActual.TipoPersona = t;
 				}
-				PersonaActual.Apellido = txtApellido.Text;
-				PersonaActual.Nombre = txtNombre.Text;
-				PersonaActual.Direccion = txtDireccion.Text;
-				PersonaActual.Email = txtEmail.Text;
-				PersonaActual.Telefono = txtTelefono.Text;
-				PersonaActual.Legajo = int.Parse(txtLegajo.Text);
-				PersonaActual.FechaNacimiento = txtFecha.Value;
-				PersonaActual.IDPlan = ((KeyValuePair<int, string>)cBoxIDPlan.SelectedItem).Key;
-				Persona.Tipo t;
-				switch(cBoxTipoPersona.Text) {
-				case "Alumno":
-					t = Persona.Tipo.Alumno;
-					break;
-				case "Docente":
-					t = Persona.Tipo.Docente;
-					break;
-				case "Admin":
-					t = Persona.Tipo.Admin;
-					break;
-				default:
-					t = Persona.Tipo.Otro;
-					break;
-				}
-				PersonaActual.TipoPersona = t;
 			}
+			catch(Exception e)
+            {
+				MessageBox.Show(e.Message);
+            }
+		
 		}
 
 		public override void GuardarCambios()
 		{
-			MapearADatos();
-			PersonaLogic ul = new PersonaLogic();
-			ul.Save(PersonaActual);
+            try
+            {
+				MapearADatos();
+				PersonaLogic ul = new PersonaLogic();
+				ul.Save(PersonaActual);
+			}
+            catch (Exception e)
+            {
+				MessageBox.Show(e.Message);
+            }
+			
 		}
 		private void btnAceptar_Click(object sender, EventArgs e)
         {

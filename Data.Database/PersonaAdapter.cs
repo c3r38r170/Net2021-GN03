@@ -63,23 +63,41 @@ namespace Data.Database {
 		}
 
 		public void Save(Persona persona) {
-			if (persona.State == BusinessEntity.States.New) {
-				OpenConnection();
-				SqlCommand cmdPersona = createCommandWithAttributes("NuevaPersona", persona);
-				cmdPersona.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
-				cmdPersona.ExecuteNonQuery();
-				persona.ID = (int)cmdPersona.Parameters["@ID"].Value;
-				CloseConnection();
-			} else if (persona.State == BusinessEntity.States.Deleted) {
-				Delete(persona.ID);
-			} else if (persona.State == BusinessEntity.States.Modified) {
-				OpenConnection();
-				SqlCommand cmdPersona = createCommandWithAttributes("EditarPersona", persona);
-				cmdPersona.Parameters.Add("@id", SqlDbType.Int).Value = persona.ID;
-				cmdPersona.ExecuteNonQuery();
+            try
+            {
+				if (persona.State == BusinessEntity.States.New)
+				{
+					OpenConnection();
+					SqlCommand cmdPersona = createCommandWithAttributes("NuevaPersona", persona);
+					cmdPersona.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
+					cmdPersona.ExecuteNonQuery();
+					persona.ID = (int)cmdPersona.Parameters["@ID"].Value;
+					CloseConnection();
+				}
+				else if (persona.State == BusinessEntity.States.Deleted)
+				{
+					Delete(persona.ID);
+				}
+				else if (persona.State == BusinessEntity.States.Modified)
+				{
+					OpenConnection();
+					SqlCommand cmdPersona = createCommandWithAttributes("EditarPersona", persona);
+					cmdPersona.Parameters.Add("@id", SqlDbType.Int).Value = persona.ID;
+					cmdPersona.ExecuteNonQuery();
+					CloseConnection();
+				}
+				persona.State = BusinessEntity.States.Unmodified;
+			}
+            catch (Exception e)
+            {
+				Exception ExcepcionManejada = new Exception("Error ", e);
+				throw ExcepcionManejada;
+			}
+            finally
+            {
 				CloseConnection();
 			}
-			persona.State = BusinessEntity.States.Unmodified;
+			
 		}
 
 		private void fillPersonaFromDataReader(SqlDataReader dR,Persona p) {
