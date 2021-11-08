@@ -14,6 +14,10 @@ namespace UI.Web.Controllers
 {
     public class UsuarioController : Controller
     {
+<<<<<<< HEAD
+=======
+        // GET: UsuarioController
+>>>>>>> 1e64f281defcecc17b68ca359011ea3c05c66df0
         [HttpGet]
         public ActionResult UsuarioIndex()
         {

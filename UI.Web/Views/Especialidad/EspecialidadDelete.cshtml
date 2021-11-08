@@ -1,0 +1,32 @@
+﻿@model Business.Entities.Especialidad
+
+@{
+    ViewData["Title"] = "EspecialidadDelete";
+}
+
+<h1>Borrar Especialidad</h1>
+
+<h3>¿Estás seguro que quieres borrar esta especialidad?</h3>
+<div>
+    <h4>Especialidad</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+    
+    <form asp-action="EspecialidadDelete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="EspecialidadIndex">Volver atrás</a>
+    </form>
+</div>

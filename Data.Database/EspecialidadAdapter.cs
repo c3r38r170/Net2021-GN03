@@ -15,7 +15,6 @@ namespace Data.Database {
 			this.OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("SELECT * FROM especialidades", sqlConn);
 			try {
-
 				SqlDataReader drEspecialidades = cmdEspecialidad.ExecuteReader();
 				while (drEspecialidades.Read()) {
 					Especialidad e = new Especialidad();
