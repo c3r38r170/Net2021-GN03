@@ -63,8 +63,7 @@ namespace Data.Database {
 		}
 
 		public void Save(Persona persona) {
-            try
-            {
+           
 				if (persona.State == BusinessEntity.States.New)
 				{
 					OpenConnection();
@@ -87,16 +86,8 @@ namespace Data.Database {
 					CloseConnection();
 				}
 				persona.State = BusinessEntity.States.Unmodified;
-			}
-            catch (Exception e)
-            {
-				Exception ExcepcionManejada = new Exception("Error ", e);
-				throw ExcepcionManejada;
-			}
-            finally
-            {
-				CloseConnection();
-			}
+			
+            
 			
 		}
 

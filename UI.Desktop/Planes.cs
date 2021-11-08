@@ -74,16 +74,25 @@ namespace UI.Desktop
         {
             try
             {
-                //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
                 int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
-                PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Baja);
-                this.Listar();  
+                string message = $"¿Desea eliminar?";
+                string title = "Eliminar";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    PlanLogic ul = new PlanLogic();
+                    ul.Delete(ID);
+                    // u.State = BusinessEntity.States.Deleted;
+                }
+                this.Listar();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-    
+            
+
         }
     }
 }

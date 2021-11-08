@@ -57,11 +57,20 @@ namespace Data.Database {
 		}
 
 		public void Delete(int ID) {
-			OpenConnection();
-			SqlCommand cmdEspecialidad = new SqlCommand("DeleteEspecialidad", sqlConn);
-			cmdEspecialidad.CommandType = CommandType.StoredProcedure;
-			cmdEspecialidad.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-			cmdEspecialidad.ExecuteNonQuery();
+            try
+            {
+				OpenConnection();
+				SqlCommand cmdEspecialidad = new SqlCommand("DeleteEspecialidad", sqlConn);
+				cmdEspecialidad.CommandType = CommandType.StoredProcedure;
+				cmdEspecialidad.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+				cmdEspecialidad.ExecuteNonQuery();
+			}
+			catch(Exception Ex)
+            {
+				Exception ExcepcionManejada = new Exception("Error al recuperar la especialidad.", Ex);
+				throw ExcepcionManejada;
+			}
+			
 		}
 
 		public void Save(Especialidad especialidad) {

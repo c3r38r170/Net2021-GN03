@@ -117,9 +117,17 @@ namespace UI.Desktop
 
         public override void GuardarCambios()
         {
-            MapearADatos();
-            PlanLogic pl = new PlanLogic();
-            pl.Save(PlanActual);
+            try
+            {
+                MapearADatos();
+                PlanLogic pl = new PlanLogic();
+                pl.Save(PlanActual);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -143,8 +151,8 @@ namespace UI.Desktop
                     break;
                 case ModoForm.Baja:
                     GuardarCambios();
-                    //UsuarioLogic ul = new UsuarioLogic();
-                    //ul.Delete(UsuarioActual.ID);
+                    //PlanLogic ul = new PlanLogic();
+                    //ul.Delete(PlanActual.ID);
                     this.Close();
                     break;
             }

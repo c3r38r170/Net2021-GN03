@@ -118,6 +118,7 @@ namespace UI.Desktop
             this.dgvEspecialidades.Name = "dgvEspecialidades";
             this.dgvEspecialidades.ReadOnly = true;
             this.dgvEspecialidades.RowTemplate.Height = 25;
+            this.dgvEspecialidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEspecialidades.Size = new System.Drawing.Size(794, 390);
             this.dgvEspecialidades.TabIndex = 0;
             // 

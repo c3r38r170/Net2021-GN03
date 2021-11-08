@@ -67,26 +67,40 @@ namespace UI.Desktop
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-            EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            ed.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+                EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ed.ShowDialog();
+                this.Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            Especialidad esp = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem);
-            int ID = esp.ID;
-            string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
-            string title = "Eliminar especialidad";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
+            try
             {
-                EspecialidadLogic el = new EspecialidadLogic();
-                el.Delete(ID);
+                Especialidad esp = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem);
+                int ID = esp.ID;
+                string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
+                string title = "Eliminar especialidad";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    el.Delete(ID);
+                }
+                Listar();
             }
-            Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
