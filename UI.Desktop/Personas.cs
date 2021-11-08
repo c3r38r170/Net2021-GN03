@@ -39,7 +39,7 @@ namespace UI.Desktop
         {
             try
             {
-                PersonaDesktop ud = new PersonaDesktop(ApplicationForm.ModoForm.Alta);
+                PersonaDesktop ud = new PersonaDesktop(ModoForm.Alta);
                 ud.ShowDialog();
                 this.Listar();
             }
@@ -53,8 +53,7 @@ namespace UI.Desktop
         {
             try
             {
-                //int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-                PersonaDesktop ud = new PersonaDesktop(((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem), ApplicationForm.ModoForm.Modificacion);
+                PersonaDesktop ud = new PersonaDesktop((Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem, ApplicationForm.ModoForm.Modificacion);
                 ud.ShowDialog();
                 this.Listar();
             }
@@ -68,9 +67,9 @@ namespace UI.Desktop
         private void tsbEliminar_Click(object sender, EventArgs e)
         {try
             {
-                Persona u = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
+                Persona u = ((Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
                 int ID = u.ID;
-                string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
+                string message = $"¿Desea eliminar a {u.Apellido}, {u.Nombre} de la base de datos? (Esta acción no se puede deshacer.)";
                 string title = "Eliminar usuario";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, title, buttons);
