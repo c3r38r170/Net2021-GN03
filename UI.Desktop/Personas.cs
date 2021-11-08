@@ -44,8 +44,7 @@ namespace UI.Desktop
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-            PersonaDesktop ud = new PersonaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+            PersonaDesktop ud = new PersonaDesktop((Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem, ApplicationForm.ModoForm.Modificacion);
             ud.ShowDialog();
             this.Listar();
         }
