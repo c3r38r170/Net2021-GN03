@@ -46,5 +46,19 @@ namespace UI.Desktop
                 MessageBox.Show("EL FORMULARIO YA ESTA OPEN");
             }
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            string message = $"¿Desea eliminar al usuario cerrar session?";
+            string title = "Cerrar Session";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                Login l = new Login();
+                l.Show();
+                this.Close();
+            }
+        }
     }
 }
