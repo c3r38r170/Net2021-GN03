@@ -41,34 +41,58 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
-            ud.ShowDialog();
-            this.Listar();
+            try
+            {
+                UsuarioDesktop ud = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
+                ud.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString());
+            }
+         
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-            UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            ud.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                UsuarioDesktop ud = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ud.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString());
+            }
+          
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            Usuario u = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
-            int ID = u.ID;
-            string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
-            string title = "Eliminar usuario";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
-            {
-                UsuarioLogic ul = new UsuarioLogic();
-                ul.Delete(ID);
-                // u.State = BusinessEntity.States.Deleted;
+            try
+            { 
+                Usuario u = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
+                int ID = u.ID;
+                string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
+                string title = "Eliminar usuario";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    UsuarioLogic ul = new UsuarioLogic();
+                    ul.Delete(ID);
+                    // u.State = BusinessEntity.States.Deleted;
+                }
+                this.Listar();
             }
-            this.Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString());
+            }
+            
         }
     }
 }

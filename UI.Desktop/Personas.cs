@@ -37,38 +37,63 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            PersonaDesktop ud = new PersonaDesktop(ApplicationForm.ModoForm.Alta);
-            ud.ShowDialog();
-            this.Listar();
+            try
+            {
+                PersonaDesktop ud = new PersonaDesktop(ApplicationForm.ModoForm.Alta);
+                ud.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            PersonaDesktop ud = new PersonaDesktop((Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem, ApplicationForm.ModoForm.Modificacion);
-            ud.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                PersonaDesktop ud = new PersonaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ud.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
-        {
-            Persona u = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
-            int ID = u.ID;
-            string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
-            string title = "Eliminar usuario";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
+        {try
             {
-                PersonaLogic ul = new PersonaLogic();
-                ul.Delete(ID);
-                // u.State = BusinessEntity.States.Deleted;
+                Persona u = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
+                int ID = u.ID;
+                string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
+                string title = "Eliminar usuario";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    PersonaLogic ul = new PersonaLogic();
+                    ul.Delete(ID);
+                }
+                this.Listar();
             }
-            this.Listar();
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            Listar();
+            try
+            {
+                Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

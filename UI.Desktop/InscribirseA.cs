@@ -32,43 +32,60 @@ namespace UI.Desktop
 
         private void btnInscribirse_Click(object sender, EventArgs e)
         {
-            int ID = int.Parse(this.dgvCursosInscripcion.CurrentRow.Cells[0].Value.ToString());
-            Curso c = CursoLogic.GetOne(ID);
-            if (c.Cupo == 0)
+            try
             {
-                MessageBox.Show("NO QUEDAN CUPOS");
-            }
-            else
-            {
-                if (CursoLogic.yaEstaInscripto(ID, IdPersonaActual))
+                int ID = int.Parse(this.dgvCursosInscripcion.CurrentRow.Cells[0].Value.ToString());
+                Curso c = CursoLogic.GetOne(ID);
+                if (c.Cupo == 0)
                 {
-                    MessageBox.Show("YA ESTA INSCRIPTO A ESTE CURSO!");
+                    MessageBox.Show("NO QUEDAN CUPOS");
                 }
                 else
                 {
-                    AlumnoInscripcion al = new AlumnoInscripcion();
-                    al.Condicion = "cursando";
-                    al.IDAlumno = IdPersonaActual;
-                    al.IDCurso = c.ID;
-                    al.State = BusinessEntity.States.New;
-                    InscripcionLogic il = new InscripcionLogic();
-                    il.Save(al);
+                    if (CursoLogic.yaEstaInscripto(ID, IdPersonaActual))
+                    {
+                        MessageBox.Show("YA ESTA INSCRIPTO A ESTE CURSO!");
+                    }
+                    else
+                    {
+                        AlumnoInscripcion al = new AlumnoInscripcion();
+                        al.Condicion = "cursando";
+                        al.IDAlumno = IdPersonaActual;
+                        al.IDCurso = c.ID;
+                        al.State = BusinessEntity.States.New;
+                        InscripcionLogic il = new InscripcionLogic();
+                        il.Save(al);
 
-                    c.Cupo = c.Cupo - 1;
-                    c.State = BusinessEntity.States.Modified;
-                    CursoLogic.Save(c);
+                        c.Cupo = c.Cupo - 1;
+                        c.State = BusinessEntity.States.Modified;
+                        CursoLogic.Save(c);
 
-                    MessageBox.Show("INSCRIPTO CORRECTAMENTE!");
+                        MessageBox.Show("INSCRIPTO CORRECTAMENTE!");
+                    }
+
                 }
 
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
-            this.Listar();
         }
 
         public void Listar()
         {
-            this.dgvCursosInscripcion.DataSource = CursoLogic.GetCursosMateriasComisiones();
+            try
+            {
+                this.dgvCursosInscripcion.DataSource = CursoLogic.GetCursosMateriasComisiones();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

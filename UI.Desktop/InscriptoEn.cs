@@ -39,7 +39,14 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            this.dgvInscriptoEn.DataSource = InscripcionLogic.MateriasPorAlumno(IdPersonaActual);
+            try
+            {
+                this.dgvInscriptoEn.DataSource = InscripcionLogic.MateriasPorAlumno(IdPersonaActual);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

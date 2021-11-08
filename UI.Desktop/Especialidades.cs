@@ -15,20 +15,30 @@ namespace UI.Desktop
     public partial class Especialidades : Form
     {
         public Especialidades()
-        {
+        {   
             InitializeComponent();
             dgvEspecialidades.AutoGenerateColumns = false;
         }
 
         private void Especialidades_Load(object sender, EventArgs e)
         {
-            Listar();
+           
+                Listar();
+         
+            
         }
 
         public void Listar()
         {
-            EspecialidadLogic el = new EspecialidadLogic();
-            dgvEspecialidades.DataSource = el.GetAll();
+            try
+            {
+                EspecialidadLogic el = new EspecialidadLogic();
+            this.dgvEspecialidades.DataSource = el.GetAll();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -43,17 +53,24 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
-            ed.ShowDialog();
-            Listar();
+            try
+            {   
+                EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
+                ed.ShowDialog();
+                this.Listar();  
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }  
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+            int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
             ed.ShowDialog();
-            Listar();
+            this.Listar();
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)

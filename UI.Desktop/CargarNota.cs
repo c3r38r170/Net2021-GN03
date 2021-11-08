@@ -31,16 +31,31 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            DocenteCursoLogic dcl = new DocenteCursoLogic();
-            this.dgvDocenteCursos.DataSource = dcl.GetAlumnosDeCurso(IDProfesor);
+           
+            try
+            {
+                DocenteCursoLogic dcl = new DocenteCursoLogic();
+                this.dgvDocenteCursos.DataSource = dcl.GetAlumnosDeCurso(IDProfesor);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCargarNota_Click(object sender, EventArgs e)
         {
-            int ID = int.Parse(this.dgvDocenteCursos.CurrentRow.Cells[0].Value.ToString());
-            CargarNotaDesktop f = new CargarNotaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            f.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = int.Parse(this.dgvDocenteCursos.CurrentRow.Cells[0].Value.ToString());
+                CargarNotaDesktop f = new CargarNotaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                f.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

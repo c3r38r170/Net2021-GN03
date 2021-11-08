@@ -25,8 +25,15 @@ namespace UI.Desktop
 
         private void Listar()
         {
-            ComisionLogic cl = new ComisionLogic();
-            this.dgvComisiones.DataSource = cl.GetComisionesPlanes();
+            try
+            {
+                ComisionLogic cl = new ComisionLogic();
+                this.dgvComisiones.DataSource = cl.GetComisionesPlanes();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -41,27 +48,50 @@ namespace UI.Desktop
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            ComisionDesktop comDesk = new ComisionDesktop(ApplicationForm.ModoForm.Alta);
-            comDesk.ShowDialog();
-            this.Listar();
+            try
+            {
+                ComisionDesktop comDesk = new ComisionDesktop(ApplicationForm.ModoForm.Alta);
+                comDesk.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //int ID = ((Business.Entities.Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-            int ID = int.Parse(this.dgvComisiones.CurrentRow.Cells[0].Value.ToString());
-            ComisionDesktop comDesk = new ComisionDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            comDesk.ShowDialog();
-            this.Listar();
+            try
+            {//int ID = ((Business.Entities.Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
+                int ID = int.Parse(this.dgvComisiones.CurrentRow.Cells[0].Value.ToString());
+                ComisionDesktop comDesk = new ComisionDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                comDesk.ShowDialog();
+                this.Listar();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            //int ID = ((Business.Entities.Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-            int ID = int.Parse(this.dgvComisiones.CurrentRow.Cells[0].Value.ToString());
-            ComisionDesktop comDesk = new ComisionDesktop(ID, ApplicationForm.ModoForm.Baja);
-            comDesk.ShowDialog();
-            this.Listar();
+            try
+            {
+                //int ID = ((Business.Entities.Comision)this.dgvComisiones.SelectedRows[0].DataBoundItem).ID;
+                int ID = int.Parse(this.dgvComisiones.CurrentRow.Cells[0].Value.ToString());
+                ComisionDesktop comDesk = new ComisionDesktop(ID, ApplicationForm.ModoForm.Baja);
+                comDesk.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
     }
 }

@@ -41,26 +41,49 @@ namespace UI.Desktop
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            PlanesDesktop pd = new PlanesDesktop(ApplicationForm.ModoForm.Alta);
-            pd.ShowDialog();
-            this.Listar();
+            try
+            {
+                PlanesDesktop pd = new PlanesDesktop(ApplicationForm.ModoForm.Alta);
+                pd.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
-            int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
-            PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            pd.ShowDialog();
-            this.Listar();
+            try
+            {
+                //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
+                int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
+                PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                pd.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
-            int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
-            PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Baja);
-            this.Listar();
+            try
+            {
+                //int ID = ((Business.Entities.Usuario)this.dvgPlanes.SelectedRows[0].DataBoundItem).ID;
+                int ID = int.Parse(this.dvgPlanes.CurrentRow.Cells[0].Value.ToString());
+                PlanesDesktop pd = new PlanesDesktop(ID, ApplicationForm.ModoForm.Baja);
+                this.Listar();  
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+    
         }
     }
 }

@@ -25,13 +25,22 @@ namespace UI.Desktop
 
         public void Listar()
         {
+
             CursoLogic cl = new CursoLogic();
             this.dgvCursos.DataSource = cl.GetCursosMateriasComisiones();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            Listar();
+            try
+            {
+                Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -41,34 +50,58 @@ namespace UI.Desktop
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            CursoDesktop pd = new CursoDesktop(ApplicationForm.ModoForm.Alta);
-            pd.ShowDialog();
-            this.Listar();
+            try
+            {
+                CursoDesktop pd = new CursoDesktop(ApplicationForm.ModoForm.Alta);
+                pd.ShowDialog();
+                this.Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //int ID = ((Business.Entities.Plan)this.dgvPlanes.SelectedRows[0].DataBoundItem).ID;
-            int ID = int.Parse(this.dgvCursos.CurrentRow.Cells[0].Value.ToString());
-            CursoDesktop cd = new CursoDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            cd.ShowDialog();
-            this.Listar();
+            try
+            {
+                //int ID = ((Business.Entities.Plan)this.dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+                int ID = int.Parse(this.dgvCursos.CurrentRow.Cells[0].Value.ToString());
+                CursoDesktop cd = new CursoDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                cd.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+       
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int ID = int.Parse(this.dgvCursos.CurrentRow.Cells[0].Value.ToString());
-            string message = $"¿Desea eliminar curso {ID}?";
-            string title = "Eliminar Curso";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
+            try
             {
-                CursoLogic cl = new CursoLogic();
-                cl.Delete(ID);
+                int ID = int.Parse(this.dgvCursos.CurrentRow.Cells[0].Value.ToString());
+                string message = $"¿Desea eliminar curso {ID}?";
+                string title = "Eliminar Curso";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    CursoLogic cl = new CursoLogic();
+                    cl.Delete(ID);
 
+                }
+                this.Listar();
             }
-            this.Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
     }
 }

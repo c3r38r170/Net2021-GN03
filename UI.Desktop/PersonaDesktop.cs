@@ -110,7 +110,12 @@ namespace UI.Desktop
 				Notificar("Error", "Incorrect Legajo en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(txtNombre.Text))
+			else if (VerificaLegajo(this.txtLegajo.Text))
+			{
+				Notificar("Error", "Legajo existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			else if (string.IsNullOrWhiteSpace(this.txtNombre.Text))
 			{
 				Notificar("Error", "Incorrect nombre en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
@@ -224,5 +229,16 @@ namespace UI.Desktop
         {
 			Close();
         }
+
+		public static bool VerificaLegajo(string l)
+		{
+			List<Persona> listaPer = new PersonaLogic().GetAll();
+			foreach (Persona p in listaPer)
+			{
+				if (p.Legajo.Equals(l)) { return false; }
+
+			}
+			return true;
+		}
 	}
 }

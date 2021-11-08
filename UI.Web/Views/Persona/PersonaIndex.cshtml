@@ -86,3 +86,8 @@
 }
     </tbody>
 </table>
+
+<script>
+    for (let td of document.querySelectorAll("td:nth-child(9)"))
+        td.innerText = td.innerText.substring(0, td.innerText.indexOf(" "))
+</script>
