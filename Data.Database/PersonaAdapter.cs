@@ -11,7 +11,7 @@ namespace Data.Database {
 	public class PersonaAdapter : Adapter {
 		public List<Persona> GetAll() {
 			List<Persona> personas = new List<Persona>();
-			this.OpenConnection();
+			OpenConnection();
 			SqlCommand cmdPersona = new SqlCommand("SELECT * FROM personas", sqlConn);
 			try {
 
@@ -27,14 +27,14 @@ namespace Data.Database {
 				Exception ExcepcionManejada = new Exception("Error al recuperar lista de personas.", Ex);
 				throw ExcepcionManejada;
 			} finally {
-				this.CloseConnection();
+				CloseConnection();
 			}
 			return personas;
 		}
 
 		public Persona GetOne(int ID) {
 			Persona persona = new Persona();
-			this.OpenConnection();
+			OpenConnection();
 			SqlCommand cmdPersona = new SqlCommand("SelectPersonaById", sqlConn);
 			cmdPersona.CommandType = CommandType.StoredProcedure;
 			cmdPersona.Parameters.Add("@id", SqlDbType.Int).Value = ID;
@@ -49,13 +49,13 @@ namespace Data.Database {
 				Exception excepcionManejada = new Exception("Error al recuperar la persona.", Ex);
 				throw excepcionManejada;
 			} finally {
-				this.CloseConnection();
+				CloseConnection();
 			}
 			return persona;
 		}
 
 		public void Delete(int ID) {
-			this.OpenConnection();
+			OpenConnection();
 			SqlCommand cmdPersona = new SqlCommand("DeletePersona", sqlConn);
 			cmdPersona.CommandType = CommandType.StoredProcedure;
 			cmdPersona.Parameters.Add("@id", SqlDbType.Int).Value = ID;
@@ -64,20 +64,20 @@ namespace Data.Database {
 
 		public void Save(Persona persona) {
 			if (persona.State == BusinessEntity.States.New) {
-				this.OpenConnection();
+				OpenConnection();
 				SqlCommand cmdPersona = createCommandWithAttributes("NuevaPersona", persona);
 				cmdPersona.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdPersona.ExecuteNonQuery();
 				persona.ID = (int)cmdPersona.Parameters["@ID"].Value;
-				this.CloseConnection();
+				CloseConnection();
 			} else if (persona.State == BusinessEntity.States.Deleted) {
-				this.Delete(persona.ID);
+				Delete(persona.ID);
 			} else if (persona.State == BusinessEntity.States.Modified) {
-				this.OpenConnection();
+				OpenConnection();
 				SqlCommand cmdPersona = createCommandWithAttributes("EditarPersona", persona);
 				cmdPersona.Parameters.Add("@id", SqlDbType.Int).Value = persona.ID;
 				cmdPersona.ExecuteNonQuery();
-				this.CloseConnection();
+				CloseConnection();
 			}
 			persona.State = BusinessEntity.States.Unmodified;
 		}
