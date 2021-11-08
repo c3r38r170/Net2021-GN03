@@ -1,14 +1,44 @@
-﻿
+﻿@using Business.Entities
 @{
     ViewData["Title"] = "LogIn";
 }
 
 <h1>Bienvenido @Model.Nombre</h1>
 
-<a asp-action="UsuarioIndex" asp-controller="Usuario">Lista de Usuarios</a> |
-<a asp-action="PersonaIndex" asp-controller="Persona">Lista de Personas</a> |
-<a asp-action="EspecialidadIndex" asp-controller="Especialidad">Lista de Especialidades</a> |
-<a asp-action="PlanIndex" asp-controller="Plan">Lista de Planes</a> |
-<a asp-action="MateriaIndex" asp-controller="Materia">Lista de Materias</a> |
-<a asp-action="CursoIndex" asp-controller="Curso">Lista de Cursos</a> |
-<a asp-action="ComisionIndex" asp-controller="Comision">Lista de Comisiones</a> |
+@if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Docente)
+{
+    <a asp-action="" asp-controller="">Registrar notas</a>
+}
+@if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Alumno)
+{
+    <div class="form-group">
+        <a asp-action="InscripcionCreate" asp-controller="AlumnoInscripcion">Inscripción a curso</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="" asp-controller="">Cursos en los que está inscripto</a>
+    </div>
+}
+@if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Admin)
+{
+    <div class="form-group">
+        <a asp-action="UsuarioIndex" asp-controller="Usuario">Lista de Usuarios</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="PersonaIndex" asp-controller="Persona">Lista de Personas</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="EspecialidadIndex" asp-controller="Especialidad">Lista de Especialidades</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="PlanIndex" asp-controller="Plan">Lista de Planes</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="MateriaIndex" asp-controller="Materia">Lista de Materias</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="CursoIndex" asp-controller="Curso">Lista de Cursos</a>
+    </div>
+    <div class="form-group">
+        <a asp-action="ComisionIndex" asp-controller="Comision">Lista de Comisiones</a>
+    </div>
+}
