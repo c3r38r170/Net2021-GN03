@@ -71,7 +71,7 @@ namespace UI.Desktop
             {
                 MessageBox.Show(ex.Message);
             }
-          
+
         }
 
         public void Listar()
@@ -79,12 +79,13 @@ namespace UI.Desktop
             try
             {
                 this.dgvCursosInscripcion.DataSource = CursoLogic.GetCursosMateriasComisiones();
-            
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-           
+
+        }
     }
 }
