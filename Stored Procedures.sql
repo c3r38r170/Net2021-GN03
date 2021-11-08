@@ -256,10 +256,11 @@ CREATE PROCEDURE [dbo].[NuevoUsuario]
   ,@usuario NVARCHAR(50)
   ,@habilitado BIT
   ,@email NVARCHAR(50)
+  ,@id_persona INT
   ,@ID INT OUTPUT
 AS
   BEGIN
-  INSERT INTO usuarios (nombre_usuario,clave,habilitado,nombre,apellido,email) VALUES (@usuario,@clave,@habilitado,@nombre,@apellido,@email);
+  INSERT INTO usuarios (nombre_usuario,clave,habilitado,nombre,apellido,email,id_persona) VALUES (@usuario,@clave,@habilitado,@nombre,@apellido,@email,@id_persona);
   SET @ID = SCOPE_IDENTITY();
 END;
 
@@ -270,10 +271,11 @@ CREATE PROCEDURE [dbo].[EditarUsuario]
   ,@usuario NVARCHAR(50)
   ,@habilitado BIT
   ,@email NVARCHAR(50)
+  ,@id_persona INT
   ,@ID INT
 AS
   BEGIN
-  UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email WHERE id_usuario=@id;
+  UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email,id_persona=@id_persona WHERE id_usuario=@id;
 END;
 
 CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContraseña]
