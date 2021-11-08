@@ -68,6 +68,7 @@ namespace Data.Database {
 			if (especialidad.State == BusinessEntity.States.New) {
 				OpenConnection();
 				SqlCommand cmdEspecialidad = new SqlCommand("NuevaEspecialidad", sqlConn);
+				cmdEspecialidad.CommandType = CommandType.StoredProcedure;
 				cmdEspecialidad.Parameters.Add("@desc", SqlDbType.VarChar).Value = especialidad.Descripcion;
 				cmdEspecialidad.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdEspecialidad.ExecuteNonQuery();
@@ -78,6 +79,7 @@ namespace Data.Database {
 			} else if (especialidad.State == BusinessEntity.States.Modified) {
 				OpenConnection();
 				SqlCommand cmdEspecialidad = new SqlCommand("EditarEspecialidad", sqlConn);
+				cmdEspecialidad.CommandType = CommandType.StoredProcedure;
 				cmdEspecialidad.Parameters.Add("@desc", SqlDbType.VarChar).Value = especialidad.Descripcion;
 				cmdEspecialidad.Parameters.Add("@id", SqlDbType.Int).Value = especialidad.ID;
 				cmdEspecialidad.ExecuteNonQuery();
