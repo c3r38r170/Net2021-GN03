@@ -283,3 +283,34 @@ AS
 	BEGIN
 	SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave;
 END;
+
+/*Resets*/
+DROP PROCEDURE DeleteCurso;
+DROP PROCEDURE DeleteComision;
+DROP PROCEDURE DeleteEspecialidad;
+DROP PROCEDURE DeleteMateria;
+DROP PROCEDURE DeletePersona;
+DROP PROCEDURE DeletePlan;
+DROP PROCEDURE DeleteUsuario;
+DROP PROCEDURE EditarComision;
+DROP PROCEDURE EditarCurso;
+DROP PROCEDURE EditarEspecialidad;
+DROP PROCEDURE EditarMateria;
+DROP PROCEDURE EditarPersona;
+DROP PROCEDURE EditarPlan;
+DROP PROCEDURE EditarUsuario;
+DROP PROCEDURE GetUsuarioByNombreUsuarioYContraseña;
+DROP PROCEDURE NuevaComision;
+DROP PROCEDURE NuevaEspecialidad;
+DROP PROCEDURE NuevaMateria;
+DROP PROCEDURE NuevaPersona;
+DROP PROCEDURE NuevoCurso;
+DROP PROCEDURE NuevoPlan;
+DROP PROCEDURE NuevoUsuario;
+DROP PROCEDURE SelectComisionById;
+DROP PROCEDURE SelectCursoById;
+DROP PROCEDURE SelectEspecialidadById;
+DROP PROCEDURE SelectMateriaById;
+DROP PROCEDURE SelectPersonaById;
+DROP PROCEDURE SelectPlanById;
+DROP PROCEDURE SelectUsuarioById;
