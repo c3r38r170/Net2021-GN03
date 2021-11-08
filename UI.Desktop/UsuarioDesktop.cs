@@ -48,57 +48,46 @@ namespace UI.Desktop {
 			cBoxPersonas.DataSource = new BindingSource(comboSourcePlan, null);
 			cBoxPersonas.DisplayMember = "Value";
 			cBoxPersonas.ValueMember = "Key";
-			cBoxPersonas.Text = "...";
+			cBoxPersonas.Text = Modo.Equals(ModoForm.Alta) ?
+				"..."
+				: UsuarioActual.PersonaAsociada.Legajo.ToString();
 		}
 
 
 		public override void MapearDeDatos(){
-			if (Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion))
-			{
+			txtID.Text = UsuarioActual.ID.ToString();
+			chkHabilitado.Checked = UsuarioActual.Habilitado;
+			txtEmail.Text = UsuarioActual.Email;
+			txtUsuario.Text = UsuarioActual.NombreUsuario;
+			txtClave.Text = UsuarioActual.Clave;
+			txtConfirmarClave.Text = UsuarioActual.Clave;
+
+			if(Modo.Equals(ModoForm.Alta) || Modo.Equals(ModoForm.Modificacion)) {
 				btnAceptar.Text = "Guardar";
-			}
-			else if (Modo.Equals("Consulta"))
-			{
+				cBoxPersonas.Enabled = Modo.Equals(ModoForm.Alta);
+			} else if(Modo.Equals(ModoForm.Consulta)) {
 				btnAceptar.Text = "Aceptar";
 			}
-			this.txtID.Text = this.UsuarioActual.ID.ToString();
-			this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
-			this.txtEmail.Text = this.UsuarioActual.Email;
-			this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
-			this.txtClave.Text = this.UsuarioActual.Clave;
-			this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
 		}
 		public override void MapearADatos() {
 			if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion) {
-				if (Modo == ModoForm.Alta)
-				{
-					int IDPersona = ((KeyValuePair<int, int>)cBoxPersonas.SelectedItem).Key;
-					Persona p = new PersonaLogic().GetOne(IDPersona);
-
+				if (Modo == ModoForm.Alta){
 					Usuario u = new Usuario();
 					UsuarioActual = u;
-					UsuarioActual.ID_Persona = IDPersona;
-					UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-					UsuarioActual.Nombre = p.Nombre;
-					UsuarioActual.Apellido = p.Apellido;
-					UsuarioActual.Email = this.txtEmail.Text;
-					UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-					UsuarioActual.Clave = this.txtClave.Text;
 					UsuarioActual.State = BusinessEntity.States.New;
-				}
-				else if (Modo == ModoForm.Modificacion)
-				{
-					int IDPersona = ((KeyValuePair<int, int>)cBoxPersonas.SelectedItem).Key;
-					Persona p = new PersonaLogic().GetOne(IDPersona);
-					UsuarioActual.ID_Persona = IDPersona;
-					UsuarioActual.Habilitado = this.chkHabilitado.Checked;
-					UsuarioActual.Nombre = p.Nombre;
-					UsuarioActual.Apellido = p.Apellido;
-					UsuarioActual.Email = this.txtEmail.Text;
-					UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-					UsuarioActual.Clave = this.txtClave.Text;
+				}else if (Modo == ModoForm.Modificacion){
 					UsuarioActual.State = BusinessEntity.States.Modified;
 				}
+				int IDPersona = ((KeyValuePair<int, int>)cBoxPersonas.SelectedItem).Key;
+				Persona p = new PersonaLogic().GetOne(IDPersona);
+				UsuarioActual.ID_Persona = IDPersona;
+				UsuarioActual.Habilitado = chkHabilitado.Checked;
+				UsuarioActual.Nombre = p.Nombre;
+				UsuarioActual.Apellido = p.Apellido;
+				UsuarioActual.PersonaAsociada = p;
+				UsuarioActual.Email = txtEmail.Text;
+				UsuarioActual.NombreUsuario = txtUsuario.Text;
+				UsuarioActual.Clave = txtClave.Text;
 			}
 		}
 		public override void GuardarCambios() {
@@ -108,47 +97,47 @@ namespace UI.Desktop {
 		}
 		public override bool Validar()
 		{
-			if (string.IsNullOrWhiteSpace(this.cBoxPersonas.Text))
+			if (string.IsNullOrWhiteSpace(cBoxPersonas.Text))
 			{
 				Notificar("Error", "Incorrect Person", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtEmail.Text))
+			else if (string.IsNullOrWhiteSpace(txtEmail.Text))
 			{
 				Notificar("Error", "Incorrect Email", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtUsuario.Text))
+			else if (string.IsNullOrWhiteSpace(txtUsuario.Text))
 			{
 				Notificar("Error", "Incorrect Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtClave.Text))
+			else if (string.IsNullOrWhiteSpace(txtClave.Text))
 			{
 				Notificar("Error", "Incorrect clave", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (string.IsNullOrWhiteSpace(this.txtConfirmarClave.Text))
+			else if (string.IsNullOrWhiteSpace(txtConfirmarClave.Text))
 			{
 				Notificar("Error", "Incorrect clave", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if ((this.txtClave.Text).Length < 8)
+			else if ((txtClave.Text).Length < 8)
 			{
 				Notificar("Error", "Incorrect clave.\nDebe tener mas de 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if ((this.txtConfirmarClave.Text).Length < 8)
+			else if ((txtConfirmarClave.Text).Length < 8)
 			{
 				Notificar("Error", "Incorrect clave.\nDebe tener mas de 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (this.txtClave.Text != this.txtConfirmarClave.Text)
+			else if (txtClave.Text != txtConfirmarClave.Text)
 			{
 				Notificar("Error", "Incorrect. clave distinto de Confirmar Clave", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (!ComprobarFormatoEmail(this.txtEmail.Text))
+			else if (!ComprobarFormatoEmail(txtEmail.Text))
 			{
 				Notificar("Error", "Incorrect email", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
@@ -159,7 +148,7 @@ namespace UI.Desktop {
 			}
 		}
 		public void NotificarError(string mensaje) {
-			this.Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 		}
 		public static bool ComprobarFormatoEmail(string sEmailAComprobar){
 			String sFormato;
@@ -181,21 +170,21 @@ namespace UI.Desktop {
 					if (Validar())
 					{
 						GuardarCambios();
-						this.Close();
+						Close();
 					}
 					break;
 				case ModoForm.Modificacion:
 					if (Validar())
 					{
 						GuardarCambios();
-						this.Close();
+						Close();
 					}
 					break;
 				case ModoForm.Baja:
 					GuardarCambios();
 					//UsuarioLogic ul = new UsuarioLogic();
 					//ul.Delete(UsuarioActual.ID);
-					this.Close();
+					Close();
 					break;
 			}
 		}

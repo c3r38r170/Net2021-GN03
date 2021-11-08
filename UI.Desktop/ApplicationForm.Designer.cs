@@ -29,17 +29,17 @@ namespace UI.Desktop
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // ApplicationForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 555);
-            this.Name = "ApplicationForm";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.ApplicationForm_Load);
-            this.ResumeLayout(false);
+			this.SuspendLayout();
+			// 
+			// ApplicationForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(800, 555);
+			this.Name = "ApplicationForm";
+			this.Text = "Form1";
+			this.Load += new System.EventHandler(this.ApplicationForm_Load);
+			this.ResumeLayout(false);
 
         }
 

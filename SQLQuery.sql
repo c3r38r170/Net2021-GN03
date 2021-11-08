@@ -48,10 +48,10 @@ SET IDENTITY_INSERT cursos OFF;
 
 SET IDENTITY_INSERT personas ON;
 INSERT personas (id_persona,nombre, apellido, direccion, email, telefono, fecha_nac, legajo, tipo_persona, id_plan) VALUES
-	(1,'Ivan', 'Pirito', 'Pellegrini 1345', 'IvanPi@asdff.com', '341 475 2070', '09-10-2000', 68990, 2, 1),
-	(2,'Juana', 'De Arco', 'RD 8989', 'juanitanita@googler.com', '341 202 2020', '08-09-1999', 4568, 3, 1),
-	(3,'Cerena', 'Parra', '', 'Parraceri@fasfa.com', '341 68 7890', '18-01-1983', 12345, 2,1),
-	(4,'Profesor', 'Profesor', 'Aca nomas 923', 'Profesor@profesor.com', '111 111 1111', '01-01-2000', 11111, 1, 1);
+	(1,'Ivan', 'Pirito', 'Pellegrini 1345', 'IvanPi@asdff.com', '3414752070', '09-10-2000', 68990, 2, 1),
+	(2,'Juana', 'De Arco', 'RD 8989', 'juanitanita@googler.com', '3412022020', '08-09-1999', 4568, 3, 1),
+	(3,'Cerena', 'Parra', '', 'Parraceri@fasfa.com', '341687890', '18-01-1983', 12345, 2,1),
+	(4,'Profesor', 'Profesor', 'Aca nomas 923', 'Profesor@profesor.com', '1111111111', '01-01-2000', 11111, 1, 1);
 SET IDENTITY_INSERT personas OFF;
 
 SET IDENTITY_INSERT usuarios ON;

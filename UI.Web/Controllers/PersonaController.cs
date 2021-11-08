@@ -17,10 +17,12 @@ namespace UI.Web.Controllers
             PersonaLogic pl = new PersonaLogic();
             return View(pl.GetAll());
         }
-        // GET: PersonaController/Details/5
+        // GET: PersonaController/Create
         public ActionResult PersonaCreate()
         {
-            return View(new Persona());
+            Persona per = new Persona();
+            per.FechaNacimiento = DateTime.Now;
+            return View(per);
         }
 
         // POST: PersonaController/Create
@@ -29,6 +31,7 @@ namespace UI.Web.Controllers
         public ActionResult PersonaCreate(Persona per)
         {
             PersonaLogic pl = new PersonaLogic();
+            per.Plan = (new PlanLogic()).GetOne(per.IDPlan);
             pl.Save(per);
             return RedirectToAction("PersonaIndex");
         }
@@ -47,6 +50,7 @@ namespace UI.Web.Controllers
         {
             PersonaLogic pl = new PersonaLogic();
             per.State = BusinessEntity.States.Modified;
+            per.Plan = (new PlanLogic()).GetOne(per.IDPlan);
             pl.Save(per);
             return RedirectToAction("PersonaIndex");
         }
