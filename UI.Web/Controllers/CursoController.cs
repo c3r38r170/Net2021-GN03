@@ -12,6 +12,7 @@ namespace UI.Web.Controllers
     public class CursoController : Controller
     {
         // GET: CursoController
+        [HttpGet]
         public ActionResult CursoIndex()
         {
             CursoLogic cl = new CursoLogic();

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Business.Entities.Comision>
+@{
+    ViewData["Title"] = "ComisionIndex";
+}
+
+<h1>Comisiones</h1>
+<p>
+    <a asp-action="ComisionCreate">Crear Comision</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AñoEspecialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPlan)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AñoEspecialidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDPlan)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "ComisionEdit", new { id = item.ID }) 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
