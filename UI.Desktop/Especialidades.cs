@@ -22,13 +22,23 @@ namespace UI.Desktop
 
         private void Especialidades_Load(object sender, EventArgs e)
         {
-            Listar();
+           
+                Listar();
+         
+            
         }
 
         public void Listar()
         {
-            EspecialidadLogic el = new EspecialidadLogic();
+            try
+            {
+                EspecialidadLogic el = new EspecialidadLogic();
             this.dgvEspecialidades.DataSource = el.GetAll();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -43,33 +53,54 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
-            ed.ShowDialog();
-            this.Listar();
+            try
+            {
+                EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
+                ed.ShowDialog();
+                this.Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }  
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-            EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            ed.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+                EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                ed.ShowDialog();
+                this.Listar();
+            }
+             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            Especialidad esp = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
-            int ID = esp.ID;
-            string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
-            string title = "Eliminar especialidad";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
+            try
             {
-                EspecialidadLogic el = new EspecialidadLogic();
-                el.Delete(ID);
+                Especialidad esp = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
+                int ID = esp.ID;
+                string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
+                string title = "Eliminar especialidad";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    EspecialidadLogic el = new EspecialidadLogic();
+                    el.Delete(ID);
+                }
+                this.Listar();
             }
-            this.Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

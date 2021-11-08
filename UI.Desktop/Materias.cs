@@ -40,35 +40,59 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            MateriaDesktop formMateria = new MateriaDesktop(ApplicationForm.ModoForm.Alta);
-            formMateria.ShowDialog();
-            this.Listar();
+            try
+            {
+                MateriaDesktop formMateria = new MateriaDesktop(ApplicationForm.ModoForm.Alta);
+                formMateria.ShowDialog();
+                this.Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+          
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            //int ID = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem).ID;
-            int ID = int.Parse(this.dgvMaterias.CurrentRow.Cells[0].Value.ToString());
-            MateriaDesktop md = new MateriaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            md.ShowDialog();
-            this.Listar();
+            try
+            {
+                //int ID = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+                int ID = int.Parse(this.dgvMaterias.CurrentRow.Cells[0].Value.ToString());
+                MateriaDesktop md = new MateriaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                md.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            //Materia m = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem);
-            int ID = int.Parse(this.dgvMaterias.CurrentRow.Cells[0].Value.ToString());
-            string message = $"¿Desea eliminar la materia {ID}?";
-            string title = "Eliminar materia";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
+            try
             {
-                MateriaLogic ml = new MateriaLogic();
-                ml.Delete(ID);
-                
+                //Materia m = ((Business.Entities.Materia)this.dgvMaterias.SelectedRows[0].DataBoundItem);
+                int ID = int.Parse(this.dgvMaterias.CurrentRow.Cells[0].Value.ToString());
+                string message = $"¿Desea eliminar la materia {ID}?";
+                string title = "Eliminar materia";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    MateriaLogic ml = new MateriaLogic();
+                    ml.Delete(ID);
+
+                }
+                this.Listar();
             }
-            this.Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+          
         }
     }
 }
