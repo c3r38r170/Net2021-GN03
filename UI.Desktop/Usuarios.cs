@@ -73,7 +73,7 @@ namespace UI.Desktop
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
                 Usuario u = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem);
                 int ID = u.ID;
                 string message = $"¿Desea eliminar al usuario {u.Apellido}, {u.Nombre}?";
