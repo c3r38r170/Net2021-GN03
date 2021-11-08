@@ -15,7 +15,7 @@ namespace UI.Desktop
     public partial class Especialidades : Form
     {
         public Especialidades()
-        {
+        {   
             InitializeComponent();
             this.dgvEspecialidades.AutoGenerateColumns = false;
         }
