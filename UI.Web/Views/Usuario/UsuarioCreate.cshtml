@@ -1,14 +1,12 @@
 ﻿@model Business.Entities.Usuario
-
+@using Data.Database
 @{
     ViewData["Title"] = "UsuarioCreate";
 }
 
-<<<<<<< HEAD
-<h1>UsuarioCreate</h1>
-=======
+
 <h1>Alta de Usuario</h1>
->>>>>>> 1e64f281defcecc17b68ca359011ea3c05c66df0
+
 
 <h4>Usuario</h4>
 <hr />
@@ -47,6 +45,19 @@
                 </label>
             </div>
             <div class="form-group">
+                <label asp-for="PersonaAsociada" class="control-label"></label>
+                <select asp-for="PersonaAsociada" asp-items="(new PersonaAdapter()).GetAll().Select(p => new SelectListItem(p.Legajo.ToString(), p.ID.ToString()))">
+                    <!-- foreach (var pers in (new PersonaAdapter()).GetAll())
+                    {
+                        <option value="pers.ID">
+                            pers.Legajo -pers.Nombre  pers.Apellido
+                        </option>
+                    }-->
+
+                </select>
+
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -54,10 +65,8 @@
 </div>
 
 <div>
-<<<<<<< HEAD
-    <a asp-action="UsuarioIndex">Back to List</a>
-=======
+
     <a asp-action="UsuarioIndex">Volver atrás</a>
->>>>>>> 1e64f281defcecc17b68ca359011ea3c05c66df0
+
 </div>
 

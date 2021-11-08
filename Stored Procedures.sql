@@ -19,7 +19,7 @@ END;
 
 CREATE PROCEDURE [dbo].[NuevaComision]
   @anioe INT
-  ,@descc VARCHAR(50)
+  ,@descc NVARCHAR(50)
   ,@idp INT
   ,@ID INT OUTPUT
 AS
@@ -30,7 +30,7 @@ END;
 
 CREATE PROCEDURE [dbo].[EditarComision]
   @anioe INT
-  ,@descc VARCHAR(50)
+  ,@descc NVARCHAR(50)
   ,@idp INT
   ,@ID INT
 AS
@@ -94,7 +94,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevaEspecialidad]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@ID INT OUTPUT
 AS
   BEGIN
@@ -103,7 +103,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarEspecialidad]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@ID INT
 AS
   BEGIN
@@ -127,7 +127,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevaMateria]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@hss INT
   ,@hst INT
   ,@idp INT
@@ -139,7 +139,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarMateria]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@hss INT
   ,@hst INT
   ,@idp INT
@@ -166,11 +166,11 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevaPersona]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@direccion VARCHAR(50)
-  ,@email VARCHAR(50)
-  ,@telefono VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@direccion NVARCHAR(50)
+  ,@email NVARCHAR(50)
+  ,@telefono NVARCHAR(50)
   ,@fecha_nac DATETIME
   ,@legajo INT
   ,@tipo_persona INT
@@ -183,11 +183,11 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarPersona]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@direccion VARCHAR(50)
-  ,@email VARCHAR(50)
-  ,@telefono VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@direccion NVARCHAR(50)
+  ,@email NVARCHAR(50)
+  ,@telefono NVARCHAR(50)
   ,@fecha_nac DATETIME
   ,@legajo INT
   ,@tipo_persona INT
@@ -215,7 +215,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevoPlan]
-  @desc VARCHAR(50)
+  @desc NVARCHAR(50)
   ,@espe INT
   ,@ID INT OUTPUT
 AS
@@ -225,7 +225,7 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[EditarPlan]
-  @descripcionPlan VARCHAR(50)
+  @descripcionPlan NVARCHAR(50)
   ,@idEspecialidad INT
   ,@ID INT
 AS
@@ -250,36 +250,69 @@ AS
 END;
 
 CREATE PROCEDURE [dbo].[NuevoUsuario]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@clave VARCHAR(50)
-  ,@usuario VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@clave NVARCHAR(50)
+  ,@usuario NVARCHAR(50)
   ,@habilitado BIT
-  ,@email VARCHAR(50)
+  ,@email NVARCHAR(50)
+  ,@id_persona INT
   ,@ID INT OUTPUT
 AS
   BEGIN
-  INSERT INTO usuarios (nombre_usuario,clave,habilitado,nombre,apellido,email) VALUES (@usuario,@clave,@habilitado,@nombre,@apellido,@email);
+  INSERT INTO usuarios (nombre_usuario,clave,habilitado,nombre,apellido,email,id_persona) VALUES (@usuario,@clave,@habilitado,@nombre,@apellido,@email,@id_persona);
   SET @ID = SCOPE_IDENTITY();
 END;
 
 CREATE PROCEDURE [dbo].[EditarUsuario]
-  @nombre VARCHAR(50)
-  ,@apellido VARCHAR(50)
-  ,@clave VARCHAR(50)
-  ,@usuario VARCHAR(50)
+  @nombre NVARCHAR(50)
+  ,@apellido NVARCHAR(50)
+  ,@clave NVARCHAR(50)
+  ,@usuario NVARCHAR(50)
   ,@habilitado BIT
-  ,@email VARCHAR(50)
+  ,@email NVARCHAR(50)
+  ,@id_persona INT
   ,@ID INT
 AS
   BEGIN
-  UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email WHERE id_usuario=@id;
+  UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email,id_persona=@id_persona WHERE id_usuario=@id;
 END;
 
-CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContrase�a]
-	@nombre_usuario VARCHAR(50)
-	,@clave VARCHAR(50)
+CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContraseña]
+	@nombre_usuario NVARCHAR(50)
+	,@clave NVARCHAR(50)
 AS
 	BEGIN
 	SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave;
 END;
+
+/*Resets*/
+DROP PROCEDURE DeleteCurso;
+DROP PROCEDURE DeleteComision;
+DROP PROCEDURE DeleteEspecialidad;
+DROP PROCEDURE DeleteMateria;
+DROP PROCEDURE DeletePersona;
+DROP PROCEDURE DeletePlan;
+DROP PROCEDURE DeleteUsuario;
+DROP PROCEDURE EditarComision;
+DROP PROCEDURE EditarCurso;
+DROP PROCEDURE EditarEspecialidad;
+DROP PROCEDURE EditarMateria;
+DROP PROCEDURE EditarPersona;
+DROP PROCEDURE EditarPlan;
+DROP PROCEDURE EditarUsuario;
+DROP PROCEDURE GetUsuarioByNombreUsuarioYContraseña;
+DROP PROCEDURE NuevaComision;
+DROP PROCEDURE NuevaEspecialidad;
+DROP PROCEDURE NuevaMateria;
+DROP PROCEDURE NuevaPersona;
+DROP PROCEDURE NuevoCurso;
+DROP PROCEDURE NuevoPlan;
+DROP PROCEDURE NuevoUsuario;
+DROP PROCEDURE SelectComisionById;
+DROP PROCEDURE SelectCursoById;
+DROP PROCEDURE SelectEspecialidadById;
+DROP PROCEDURE SelectMateriaById;
+DROP PROCEDURE SelectPersonaById;
+DROP PROCEDURE SelectPlanById;
+DROP PROCEDURE SelectUsuarioById;

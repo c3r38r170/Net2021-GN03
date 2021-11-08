@@ -12,7 +12,7 @@ namespace Data.Database {
 
 		public List<Especialidad> GetAll() {
 			List<Especialidad> especialidades = new List<Especialidad>();
-			this.OpenConnection();
+			OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("SELECT * FROM especialidades", sqlConn);
 			try {
 				SqlDataReader drEspecialidades = cmdEspecialidad.ExecuteReader();
@@ -28,14 +28,14 @@ namespace Data.Database {
 				Exception ExcepcionManejada = new Exception("Error al recuperar lista de especialidades.", Ex);
 				throw ExcepcionManejada;
 			} finally {
-				this.CloseConnection();
+				CloseConnection();
 			}
 			return especialidades;
 		}
 
 		public Especialidad GetOne(int ID) {
 			Especialidad especialidad = new Especialidad();
-			this.OpenConnection();
+			OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("SelectEspecialidadById", sqlConn);
 			cmdEspecialidad.CommandType = CommandType.StoredProcedure;
 			cmdEspecialidad.Parameters.Add("@id", SqlDbType.Int).Value = ID;
@@ -51,13 +51,13 @@ namespace Data.Database {
 				Exception ExcepcionManejada = new Exception("Error al recuperar la especialidad.", Ex);
 				throw ExcepcionManejada;
 			} finally {
-				this.CloseConnection();
+				CloseConnection();
 			}
 			return especialidad;
 		}
 
 		public void Delete(int ID) {
-			this.OpenConnection();
+			OpenConnection();
 			SqlCommand cmdEspecialidad = new SqlCommand("DeleteEspecialidad", sqlConn);
 			cmdEspecialidad.CommandType = CommandType.StoredProcedure;
 			cmdEspecialidad.Parameters.Add("@id", SqlDbType.Int).Value = ID;
@@ -66,22 +66,24 @@ namespace Data.Database {
 
 		public void Save(Especialidad especialidad) {
 			if (especialidad.State == BusinessEntity.States.New) {
-				this.OpenConnection();
+				OpenConnection();
 				SqlCommand cmdEspecialidad = new SqlCommand("NuevaEspecialidad", sqlConn);
+				cmdEspecialidad.CommandType = CommandType.StoredProcedure;
 				cmdEspecialidad.Parameters.Add("@desc", SqlDbType.VarChar).Value = especialidad.Descripcion;
 				cmdEspecialidad.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdEspecialidad.ExecuteNonQuery();
 				especialidad.ID = (int)cmdEspecialidad.Parameters["@ID"].Value;
-				this.CloseConnection();
+				CloseConnection();
 			} else if (especialidad.State == BusinessEntity.States.Deleted) {
-				this.Delete(especialidad.ID);
+				Delete(especialidad.ID);
 			} else if (especialidad.State == BusinessEntity.States.Modified) {
-				this.OpenConnection();
+				OpenConnection();
 				SqlCommand cmdEspecialidad = new SqlCommand("EditarEspecialidad", sqlConn);
+				cmdEspecialidad.CommandType = CommandType.StoredProcedure;
 				cmdEspecialidad.Parameters.Add("@desc", SqlDbType.VarChar).Value = especialidad.Descripcion;
 				cmdEspecialidad.Parameters.Add("@id", SqlDbType.Int).Value = especialidad.ID;
 				cmdEspecialidad.ExecuteNonQuery();
-				this.CloseConnection();
+				CloseConnection();
 			}
 			especialidad.State = BusinessEntity.States.Unmodified;
 		}
