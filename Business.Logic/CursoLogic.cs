@@ -46,9 +46,5 @@ namespace Business.Logic
             return CursoData.yaEstaInscripto(iD, idPersonaActual);
         }
 
-        public List<Curso> GetAll()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
