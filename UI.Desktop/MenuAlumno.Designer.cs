@@ -32,6 +32,7 @@ namespace UI.Desktop
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnInscribirseA = new System.Windows.Forms.Button();
             this.btnInscriptoEn = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,13 +42,15 @@ namespace UI.Desktop
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.btnInscribirseA, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnInscriptoEn, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnSalir, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.88889F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 391F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 366F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(138, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -55,7 +58,7 @@ namespace UI.Desktop
             // 
             this.btnInscribirseA.Location = new System.Drawing.Point(3, 3);
             this.btnInscribirseA.Name = "btnInscribirseA";
-            this.btnInscribirseA.Size = new System.Drawing.Size(128, 22);
+            this.btnInscribirseA.Size = new System.Drawing.Size(128, 20);
             this.btnInscribirseA.TabIndex = 0;
             this.btnInscribirseA.Text = "Inscribirse A";
             this.btnInscribirseA.UseVisualStyleBackColor = true;
@@ -63,13 +66,23 @@ namespace UI.Desktop
             // 
             // btnInscriptoEn
             // 
-            this.btnInscriptoEn.Location = new System.Drawing.Point(3, 31);
+            this.btnInscriptoEn.Location = new System.Drawing.Point(3, 29);
             this.btnInscriptoEn.Name = "btnInscriptoEn";
-            this.btnInscriptoEn.Size = new System.Drawing.Size(128, 23);
+            this.btnInscriptoEn.Size = new System.Drawing.Size(128, 21);
             this.btnInscriptoEn.TabIndex = 1;
             this.btnInscriptoEn.Text = "Inscripto En";
             this.btnInscriptoEn.UseVisualStyleBackColor = true;
             this.btnInscriptoEn.Click += new System.EventHandler(this.btnInscriptoEn_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(3, 422);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(128, 23);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.Text = "Log Out";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // MenuAlumno
             // 
@@ -89,5 +102,6 @@ namespace UI.Desktop
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnInscribirseA;
         private System.Windows.Forms.Button btnInscriptoEn;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
