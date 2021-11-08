@@ -38,7 +38,6 @@ namespace UI.Desktop
 			this.ClientSize = new System.Drawing.Size(800, 555);
 			this.Name = "ApplicationForm";
 			this.Text = "Form1";
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ApplicationForm_FormClosed);
 			this.Load += new System.EventHandler(this.ApplicationForm_Load);
 			this.ResumeLayout(false);
 
