@@ -24,7 +24,7 @@ namespace UI.Web.Controllers
         // GET: ComisionController/Create
         public ActionResult ComisionCreate()
         {
-            return View(new Business.Entities.Comision());
+            return View(new Comision());
         }
 
         // POST: ComisionController/Create
@@ -32,9 +32,18 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ComisionCreate(Comision comi)
         {
-            ComisionLogic col = new ComisionLogic();
-            col.Save(comi);
-            return RedirectToAction("ComisionIndex");
+			if(comi.Descripcion != null
+				&& comi.Descripcion.Trim() != ""
+				&& comi.AñoEspecialidad >= 1959
+				&& comi.IDPlan > 0) {
+
+				comi.Descripcion = comi.Descripcion.Trim();
+				(new ComisionLogic()).Save(comi);
+				return RedirectToAction("ComisionIndex");
+			} else {
+				comi.State = BusinessEntity.States.Unmodified;
+				return View(comi);
+			}
         }
 
         // GET: ComisionController/Edit/5
