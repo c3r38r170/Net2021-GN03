@@ -12,7 +12,7 @@ END;
 
 CREATE PROCEDURE [dbo].[DeleteComision]
   @id INT
-A
+AS
   BEGIN
   DELETE FROM comisiones WHERE id_comision=@id;
 END;
@@ -278,7 +278,7 @@ AS
   UPDATE usuarios SET nombre_usuario=@usuario,clave=@clave,habilitado=@habilitado,nombre=@nombre,apellido=@apellido,email=@email,id_persona=@id_persona WHERE id_usuario=@id;
 END;
 
-CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContraseña]
+CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContraseÃ±a]
 	@nombre_usuario NVARCHAR(50)
 	,@clave NVARCHAR(50)
 AS
@@ -301,7 +301,7 @@ DROP PROCEDURE EditarMateria;
 DROP PROCEDURE EditarPersona;
 DROP PROCEDURE EditarPlan;
 DROP PROCEDURE EditarUsuario;
-DROP PROCEDURE GetUsuarioByNombreUsuarioYContraseña;
+DROP PROCEDURE GetUsuarioByNombreUsuarioYContraseÃ±a;
 DROP PROCEDURE NuevaComision;
 DROP PROCEDURE NuevaEspecialidad;
 DROP PROCEDURE NuevaMateria;
