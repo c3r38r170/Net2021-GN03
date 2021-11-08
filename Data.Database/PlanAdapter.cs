@@ -102,7 +102,7 @@ namespace Data.Database {
 				cmd.ExecuteNonQuery();
 
 			} catch(Exception Ex) {
-				Exception ExcepcionManejada = new Exception("Error al recuperar Planes", Ex);
+				Exception ExcepcionManejada = new Exception("Error al borrar Planes", Ex);
 				throw ExcepcionManejada;
 			} finally {
 				this.CloseConnection();
