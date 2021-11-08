@@ -200,18 +200,18 @@ namespace UI.Desktop
 
 		public override void GuardarCambios()
 		{
-            //try
-            //{
-				MapearADatos();
+            try
+            {
+                MapearADatos();
 				PersonaLogic ul = new PersonaLogic();
 				ul.Save(PersonaActual);
-			//}
-   //         catch (Exception e)
-   //         {
-			//	MessageBox.Show(e.Message);
-   //         }
-			
-		}
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+        }
 		private void btnAceptar_Click(object sender, EventArgs e)
         {
 			switch (Modo) {

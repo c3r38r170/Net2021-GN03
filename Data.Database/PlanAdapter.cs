@@ -64,7 +64,7 @@ namespace Data.Database {
 		}
 
 		public void Save(Plan plan) {
-			try {
+			
 				this.OpenConnection();
 				if(plan.State == BusinessEntity.States.New) {
 					SqlCommand cmd = new SqlCommand("NuevoPlan", sqlConn);
@@ -85,28 +85,28 @@ namespace Data.Database {
 					cmd.ExecuteNonQuery();
 				}
 				plan.State = BusinessEntity.States.Unmodified;
-			} catch(Exception Ex){
-				Exception ExcepcionManejada = new Exception("Error al recuperar Planes", Ex);
-				throw ExcepcionManejada;
-			} finally {
-				this.CloseConnection();
-			}
+			
 		}
 
 		public void Delete(int ID) {
-			SqlCommand cmd = new SqlCommand("DeletePlan", sqlConn);
-			cmd.CommandType = CommandType.StoredProcedure;
-			cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
-			try {
+            try
+            {
 				this.OpenConnection();
+				SqlCommand cmd = new SqlCommand("DeletePlan", sqlConn);
+				cmd.CommandType = CommandType.StoredProcedure;
+				cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 				cmd.ExecuteNonQuery();
-
-			} catch(Exception Ex) {
-				Exception ExcepcionManejada = new Exception("Error al recuperar Planes", Ex);
-				throw ExcepcionManejada;
-			} finally {
-				this.CloseConnection();
 			}
+		    catch(Exception e)
+            {
+				Exception ExcepcionManejada = new Exception("Error al recuperar Planes", e);
+				throw ExcepcionManejada;
+			}
+            finally
+            {
+				this.CloseConnection();
+            }
+	
 
 		}
 
