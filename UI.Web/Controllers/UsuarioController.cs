@@ -33,6 +33,7 @@ namespace UI.Web.Controllers
         public ActionResult UsuarioCreate(Usuario usu)
         {
             UsuarioLogic ul = new UsuarioLogic();
+            usu.PersonaAsociada = ((new PersonaLogic()).GetOne(usu.ID_Persona));
             ul.Save(usu);
             return RedirectToAction("UsuarioIndex");
         }
