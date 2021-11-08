@@ -33,14 +33,6 @@ namespace UI.Web.Controllers
             CursoLogic cl = new CursoLogic();
             cl.Save(cu);
             return RedirectToAction("CursoIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
 
         // GET: CursoController/Edit/5
@@ -59,14 +51,6 @@ namespace UI.Web.Controllers
             cu.State = BusinessEntity.States.Modified;
             cl.Save(cu);
             return RedirectToAction("CursoIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
 
         // GET: CursoController/Delete/5
@@ -84,14 +68,6 @@ namespace UI.Web.Controllers
             CursoLogic cl = new CursoLogic();
             cl.Delete(id);
             return RedirectToAction("CursoIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
     }
 }

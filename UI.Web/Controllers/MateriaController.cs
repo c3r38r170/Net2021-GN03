@@ -34,14 +34,6 @@ namespace UI.Web.Controllers
             MateriaLogic ml = new MateriaLogic();
             ml.Save(m);
             return RedirectToAction("MateriaIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
 
         // GET: MateriaController/Edit/5
@@ -60,14 +52,6 @@ namespace UI.Web.Controllers
             m.State = BusinessEntity.States.Modified;
             ml.Save(m);
             return RedirectToAction("MateriaIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
 
         // GET: MateriaController/Delete/5
@@ -85,14 +69,6 @@ namespace UI.Web.Controllers
             MateriaLogic ml = new MateriaLogic();
             ml.Delete(id);
             return RedirectToAction("MateriaIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
     }
 }

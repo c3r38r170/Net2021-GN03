@@ -35,14 +35,6 @@ namespace UI.Web.Controllers
             ComisionLogic col = new ComisionLogic();
             col.Save(comi);
             return RedirectToAction("ComisionIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
 
         // GET: ComisionController/Edit/5
@@ -61,16 +53,6 @@ namespace UI.Web.Controllers
             comi.State = BusinessEntity.States.Modified;
             col.Save(comi);
             return RedirectToAction("ComisionIndex");
-            /*try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }*/
         }
-
-        
     }
 }

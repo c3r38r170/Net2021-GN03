@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.HSTotales)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPlan)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -39,6 +42,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HSSemanales)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HSTotales)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDPlan)
                 </td>
                 <td>
                     @Html.ActionLink("Editar", "MateriaEdit", new { id = item.ID }) |
