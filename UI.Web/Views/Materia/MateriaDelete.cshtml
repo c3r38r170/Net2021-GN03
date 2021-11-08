@@ -1,0 +1,56 @@
+﻿@model Business.Entities.Materia
+
+@{
+    ViewData["Title"] = "MateriaDelete";
+}
+
+<h1>Borrar Materia</h1>
+
+<h3>¿Estás seguro que quieres borrar este usuario?</h3>
+<div>
+    <h4>Materia</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HSSemanales)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HSSemanales)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HSTotales)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HSTotales)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDPlan)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDPlan)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+    </dl>
+    
+    <form asp-action="MateriaDelete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="MateriaIndex">Volver atrás</a>
+    </form>
+</div>
