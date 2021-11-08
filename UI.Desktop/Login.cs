@@ -58,16 +58,19 @@ namespace UI.Desktop
 				switch(usuario.PersonaAsociada.TipoPersona) {
 				case Persona.Tipo.Alumno:
           MenuAlumno ml = new MenuAlumno(id_persona);
-          ml.ShowDialog(this);
+          ml.Show();
+          this.Close();
           break;
 				case Persona.Tipo.Docente:
           MenuDocente md = new MenuDocente(id_persona);
-          md.ShowDialog(this);
+          md.Show();
+          this.Close();
           break;
 				case Persona.Tipo.Admin:
 					MenuAdmin ma = new MenuAdmin();
-					ma.ShowDialog(this);
-					break;
+					ma.Show();
+                    this.Close();
+                    break;
 				default:
 					break;
 				}
