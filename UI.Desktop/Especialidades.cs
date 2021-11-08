@@ -54,10 +54,10 @@ namespace UI.Desktop
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {   
                 EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
                 ed.ShowDialog();
-                this.Listar();
+                this.Listar();  
             }
             catch(Exception ex)
             {
