@@ -30,6 +30,7 @@ namespace UI.Desktop
         private void InitializeComponent()
         {
             this.btnAgregarNota = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAgregarNota
@@ -42,11 +43,22 @@ namespace UI.Desktop
             this.btnAgregarNota.UseVisualStyleBackColor = true;
             this.btnAgregarNota.Click += new System.EventHandler(this.btnAgregarNota_Click_1);
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(12, 415);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(128, 23);
+            this.btnSalir.TabIndex = 1;
+            this.btnSalir.Text = "Log Out";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // MenuDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAgregarNota);
             this.Name = "MenuDocente";
             this.Text = "MenuDocente";
@@ -57,5 +69,6 @@ namespace UI.Desktop
         #endregion
 
         private System.Windows.Forms.Button btnAgregarNota;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
