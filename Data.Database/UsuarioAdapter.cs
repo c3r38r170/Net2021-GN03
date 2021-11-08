@@ -75,6 +75,7 @@ namespace Data.Database {
 				cmdUsuario.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.Nombre;
 				cmdUsuario.Parameters.Add("@apellido", SqlDbType.VarChar).Value = usuario.Apellido;
 				cmdUsuario.Parameters.Add("@email", SqlDbType.VarChar).Value = usuario.Email;
+				cmdUsuario.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.PersonaAsociada.ID;
 				cmdUsuario.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
 				cmdUsuario.ExecuteNonQuery();
 				usuario.ID = (int)cmdUsuario.Parameters["@ID"].Value;
@@ -91,6 +92,7 @@ namespace Data.Database {
 				cmdUsuario.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.Nombre;
 				cmdUsuario.Parameters.Add("@apellido", SqlDbType.VarChar).Value = usuario.Apellido;
 				cmdUsuario.Parameters.Add("@email", SqlDbType.VarChar).Value = usuario.Email;
+				cmdUsuario.Parameters.Add("@id_persona", SqlDbType.Int).Value = usuario.PersonaAsociada.ID;
 				cmdUsuario.Parameters.Add("@id", SqlDbType.Int).Value = usuario.ID;
 				cmdUsuario.ExecuteNonQuery();
 				this.CloseConnection();

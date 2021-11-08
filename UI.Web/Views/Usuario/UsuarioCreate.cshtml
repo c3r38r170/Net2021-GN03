@@ -1,5 +1,5 @@
 ﻿@model Business.Entities.Usuario
-
+@using Data.Database
 @{
     ViewData["Title"] = "UsuarioCreate";
 }
@@ -43,6 +43,19 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Habilitado" /> @Html.DisplayNameFor(model => model.Habilitado)
                 </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonaAsociada" class="control-label"></label>
+                <select asp-for="PersonaAsociada" asp-items="(new PersonaAdapter()).GetAll().Select(p => new SelectListItem(p.Legajo.ToString(), p.ID.ToString()))">
+                    <!-- foreach (var pers in (new PersonaAdapter()).GetAll())
+                    {
+                        <option value="pers.ID">
+                            pers.Legajo -pers.Nombre  pers.Apellido
+                        </option>
+                    }-->
+
+                </select>
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
