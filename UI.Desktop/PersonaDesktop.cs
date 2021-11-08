@@ -229,5 +229,16 @@ namespace UI.Desktop
         {
 			Close();
         }
-    }
+
+		public static bool VerificaLegajo(string l)
+		{
+			List<Persona> listaPer = new PersonaLogic().GetAll();
+			foreach (Persona p in listaPer)
+			{
+				if (p.Legajo.Equals(l)) { return false; }
+
+			}
+			return true;
+		}
+	}
 }
