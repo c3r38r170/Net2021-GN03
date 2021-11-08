@@ -21,10 +21,9 @@ namespace UI.Web.Controllers {
 		public IActionResult LogIn(string username, string password) {
 			UsuarioLogic ul = new UsuarioLogic();
 			Usuario u=ul.LogIn(username,password);
-			if(u.ID == 0)
-				return Redirect("/?message=Usuario Incorrecto");
-				//return View("Index","");
-			return View(u);
+			return u.ID == 0?
+				Redirect("/?message=Usuario Incorrecto")
+				:View(u);
 		}
 
 		public IActionResult PanelAlumno() {

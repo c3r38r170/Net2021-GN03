@@ -123,6 +123,9 @@ namespace Data.Database {
 			a.Nombre = (string)dR["nombre"];
 			a.Apellido = (string)dR["apellido"];
 			a.Email = (string)dR["email"];
+			a.ID_Persona = (int)dR["id_persona"];
+			if(a.ID_Persona != 0)
+				a.PersonaAsociada = (new PersonaAdapter()).GetOne(a.ID_Persona);
 			return a;
 		}
 	}

@@ -96,10 +96,9 @@ namespace Data.Database {
 				cmd.CommandType = CommandType.StoredProcedure;
 				cmd.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 				cmd.ExecuteNonQuery();
-			}
-		    catch(Exception e)
-            {
-				Exception ExcepcionManejada = new Exception("Error al recuperar Planes", e);
+
+			} catch(Exception Ex) {
+				Exception ExcepcionManejada = new Exception("Error al borrar Planes", Ex);
 				throw ExcepcionManejada;
 			}
             finally
