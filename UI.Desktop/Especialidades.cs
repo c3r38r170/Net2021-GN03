@@ -17,7 +17,7 @@ namespace UI.Desktop
         public Especialidades()
         {
             InitializeComponent();
-            this.dgvEspecialidades.AutoGenerateColumns = false;
+            dgvEspecialidades.AutoGenerateColumns = false;
         }
 
         private void Especialidades_Load(object sender, EventArgs e)
@@ -28,12 +28,12 @@ namespace UI.Desktop
         public void Listar()
         {
             EspecialidadLogic el = new EspecialidadLogic();
-            this.dgvEspecialidades.DataSource = el.GetAll();
+            dgvEspecialidades.DataSource = el.GetAll();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -45,20 +45,20 @@ namespace UI.Desktop
         {
             EspecialidadDesktop ed = new EspecialidadDesktop(ApplicationForm.ModoForm.Alta);
             ed.ShowDialog();
-            this.Listar();
+            Listar();
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+            int ID = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             EspecialidadDesktop ed = new EspecialidadDesktop(ID, ApplicationForm.ModoForm.Modificacion);
             ed.ShowDialog();
-            this.Listar();
+            Listar();
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            Especialidad esp = ((Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem);
+            Especialidad esp = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem);
             int ID = esp.ID;
             string message = $"¿Desea eliminar la especialidad {esp.Descripcion} ?";
             string title = "Eliminar especialidad";
@@ -69,7 +69,7 @@ namespace UI.Desktop
                 EspecialidadLogic el = new EspecialidadLogic();
                 el.Delete(ID);
             }
-            this.Listar();
+            Listar();
         }
     }
 }

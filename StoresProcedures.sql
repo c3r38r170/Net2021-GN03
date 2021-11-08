@@ -1,1 +1,0 @@
-CREATE PROCEDURE [dbo].[SelectUsuarioById]     @id INT AS     BEGIN     SELECT * FROM usuarios WHERE id_usuario=@id;  END;
