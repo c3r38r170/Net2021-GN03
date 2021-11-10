@@ -58,18 +58,26 @@ namespace UI.Desktop
 
         public void CargaComboBox()
         {
-            PlanLogic pl = new PlanLogic();
-            List<Plan> listaPlanes = pl.GetAll();
-            Dictionary<int, string> comboSource = new Dictionary<int, string>();
-
-            foreach (Plan p in listaPlanes)
+            try
             {
-                comboSource.Add(p.ID, p.Descripcion);
+                PlanLogic pl = new PlanLogic();
+                List<Plan> listaPlanes = pl.GetAll();
+                Dictionary<int, string> comboSource = new Dictionary<int, string>();
+
+                foreach (Plan p in listaPlanes)
+                {
+                    comboSource.Add(p.ID, p.Descripcion);
+                }
+                cBoxPlan.DataSource = new BindingSource(comboSource, null);
+                cBoxPlan.DisplayMember = "Value";
+                cBoxPlan.ValueMember = "key";
+                cBoxPlan.Text = "";
             }
-            cBoxPlan.DataSource = new BindingSource(comboSource, null);
-            cBoxPlan.DisplayMember = "Value";
-            cBoxPlan.ValueMember = "key";
-            cBoxPlan.Text = "";
+            catch (Exception e)
+            {
+                MessageBox.Show("Deben existir Planes");
+            }
+            
         }
 
         public override bool Validar()

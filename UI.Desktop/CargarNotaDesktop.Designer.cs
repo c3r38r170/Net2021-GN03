@@ -35,8 +35,8 @@ namespace UI.Desktop
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.txtCondicion = new System.Windows.Forms.TextBox();
             this.txtNota = new System.Windows.Forms.TextBox();
+            this.cBoxCondicion = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnGuardar
@@ -94,13 +94,6 @@ namespace UI.Desktop
             this.txtID.Size = new System.Drawing.Size(379, 23);
             this.txtID.TabIndex = 5;
             // 
-            // txtCondicion
-            // 
-            this.txtCondicion.Location = new System.Drawing.Point(84, 58);
-            this.txtCondicion.Name = "txtCondicion";
-            this.txtCondicion.Size = new System.Drawing.Size(379, 23);
-            this.txtCondicion.TabIndex = 6;
-            // 
             // txtNota
             // 
             this.txtNota.Location = new System.Drawing.Point(84, 102);
@@ -108,13 +101,21 @@ namespace UI.Desktop
             this.txtNota.Size = new System.Drawing.Size(379, 23);
             this.txtNota.TabIndex = 7;
             // 
+            // cBoxCondicion
+            // 
+            this.cBoxCondicion.FormattingEnabled = true;
+            this.cBoxCondicion.Location = new System.Drawing.Point(84, 58);
+            this.cBoxCondicion.Name = "cBoxCondicion";
+            this.cBoxCondicion.Size = new System.Drawing.Size(379, 23);
+            this.cBoxCondicion.TabIndex = 8;
+            // 
             // CargarNotaDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 213);
+            this.Controls.Add(this.cBoxCondicion);
             this.Controls.Add(this.txtNota);
-            this.Controls.Add(this.txtCondicion);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -124,6 +125,7 @@ namespace UI.Desktop
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CargarNotaDesktop";
             this.Text = "CargarNotaDesktop";
+            this.Load += new System.EventHandler(this.CargarNotaDesktop_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,7 +139,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.TextBox txtCondicion;
         private System.Windows.Forms.TextBox txtNota;
+        private System.Windows.Forms.ComboBox cBoxCondicion;
     }
 }

@@ -58,20 +58,28 @@ namespace UI.Desktop
 
         private void CargaComboBox()
         {
-            EspecialidadLogic el = new EspecialidadLogic();
-            List<Especialidad> listaEspecialidades = el.GetAll();
-            Dictionary<int, string> comboSource = new Dictionary<int, string>();
-
-            foreach (Especialidad e in listaEspecialidades)
+            try
             {
-                comboSource.Add(e.ID, e.Descripcion);
-                //cBoxEspecialidad.Items.Add(e.Descripcion);
-                //cBoxEspecialidad.Items.Add(new { id_especialidad = e.ID, desc_especialidad = e.Descripcion });
+                EspecialidadLogic el = new EspecialidadLogic();
+                List<Especialidad> listaEspecialidades = el.GetAll();
+                Dictionary<int, string> comboSource = new Dictionary<int, string>();
+
+                foreach (Especialidad e in listaEspecialidades)
+                {
+                    comboSource.Add(e.ID, e.Descripcion);
+                    //cBoxEspecialidad.Items.Add(e.Descripcion);
+                    //cBoxEspecialidad.Items.Add(new { id_especialidad = e.ID, desc_especialidad = e.Descripcion });
+                }
+                cBoxEspecialidad.DataSource = new BindingSource(comboSource, null);
+                cBoxEspecialidad.DisplayMember = "Value";
+                cBoxEspecialidad.ValueMember = "Key";
+                cBoxEspecialidad.Text = "";
             }
-            cBoxEspecialidad.DataSource = new BindingSource(comboSource, null);
-            cBoxEspecialidad.DisplayMember = "Value";
-            cBoxEspecialidad.ValueMember = "Key";
-            cBoxEspecialidad.Text = "";
+            catch(Exception e)
+            {
+                MessageBox.Show("Deben existir especialidades");
+            }
+            
         }
 
         public override bool Validar()

@@ -136,6 +136,72 @@ namespace Data.Database
             return dtADevolver;
         }
 
+        public object GetAlumnosInscriptosEnCurso(int dcurso)
+        {
+            List<AlumnoInscripcion> ListaAlumnosInscripciones = this.GetAll();
+
+            DataRow fila;
+            DataTable dt = new DataTable();
+            DataColumn IdInscripcion = new DataColumn("");
+            DataColumn IdAlumno = new DataColumn("");
+            DataColumn Condicion = new DataColumn("");
+            DataColumn Nota = new DataColumn("");
+            dt.Columns.Add(IdInscripcion);
+            dt.Columns.Add(IdAlumno);
+            dt.Columns.Add(Condicion);
+            dt.Columns.Add(Nota);
+
+            foreach (AlumnoInscripcion ai in ListaAlumnosInscripciones)
+            {
+                if (ai.IDCurso == dcurso)
+                {
+                    fila = dt.NewRow();
+                    fila[IdInscripcion] = ai.ID;
+                    fila[IdAlumno] = ai.IDAlumno;
+                    fila[Condicion] = ai.Condicion;
+                    fila[Nota] = ai.Nota;
+                    dt.Rows.Add(fila);
+                }
+            }
+
+            DataRow fila2;
+            DataTable dtQseDevuelve = new DataTable();
+            DataColumn IDInscripcion = new DataColumn("ID inscripcion");
+            DataColumn Nombre = new DataColumn("Nombre");
+            DataColumn Apellido = new DataColumn("Apellido");
+            DataColumn Legajo = new DataColumn("Legajo");
+            DataColumn Condition = new DataColumn("Condicion");
+            DataColumn Notaa = new DataColumn("Nota");
+            dtQseDevuelve.Columns.Add(IDInscripcion);
+            dtQseDevuelve.Columns.Add(Nombre);
+            dtQseDevuelve.Columns.Add(Apellido);
+            dtQseDevuelve.Columns.Add(Legajo);
+            dtQseDevuelve.Columns.Add(Condition);
+            dtQseDevuelve.Columns.Add(Notaa);
+
+            PersonaAdapter pa = new PersonaAdapter();
+            List<Persona> ListaPersonas = pa.GetAll();
+
+            foreach (Persona p in ListaPersonas)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (p.ID == int.Parse(row[IdAlumno].ToString()))
+                    {
+                        fila2 = dtQseDevuelve.NewRow();
+                        fila2[IDInscripcion] = row[IdInscripcion];
+                        fila2[Nombre] = p.Nombre;
+                        fila2[Apellido] = p.Apellido;
+                        fila2[Legajo] = p.Legajo;
+                        fila2[Condition] = row[Condicion];
+                        fila2[Notaa] = row[Nota];
+                        dtQseDevuelve.Rows.Add(fila2);
+                    }
+                }
+            }
+            return dtQseDevuelve;
+        }
+
         public AlumnoInscripcion GetOne(int iD)
         {
             AlumnoInscripcion ai = new AlumnoInscripcion();

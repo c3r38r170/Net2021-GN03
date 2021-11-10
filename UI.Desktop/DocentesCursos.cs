@@ -40,33 +40,57 @@ namespace UI.Desktop
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            DocenteCursoDesktop dcd = new DocenteCursoDesktop(ApplicationForm.ModoForm.Alta);
-            dcd.ShowDialog();
-            this.Listar();
+            try
+            {
+                DocenteCursoDesktop dcd = new DocenteCursoDesktop(ApplicationForm.ModoForm.Alta);
+                dcd.ShowDialog();
+                this.Listar();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            int ID = ((Business.Entities.DocenteCurso)this.dgvDocenteCurso.SelectedRows[0].DataBoundItem).ID;
-            DocenteCursoDesktop pd = new DocenteCursoDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-            pd.ShowDialog();
-            this.Listar();
+            try
+            {
+                int ID = ((Business.Entities.DocenteCurso)this.dgvDocenteCurso.SelectedRows[0].DataBoundItem).ID;
+                DocenteCursoDesktop pd = new DocenteCursoDesktop(ID, ApplicationForm.ModoForm.Modificacion);
+                pd.ShowDialog();
+                this.Listar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int ID = int.Parse(this.dgvDocenteCurso.CurrentRow.Cells[4].Value.ToString());
-            string message = $"¿Desea eliminar  {ID}?";
-            string title = "Eliminar";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, title, buttons);
-            if (result == DialogResult.Yes)
+            try
             {
-                DocenteCursoLogic dcl = new DocenteCursoLogic();
-                dcl.Delete(ID);
+                int ID = int.Parse(this.dgvDocenteCurso.CurrentRow.Cells[3].Value.ToString());
+                string message = $"¿Desea eliminar  {ID}?";
+                string title = "Eliminar";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    DocenteCursoLogic dcl = new DocenteCursoLogic();
+                    dcl.Delete(ID);
 
+                }
+                this.Listar();
             }
-            this.Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
     }
 }

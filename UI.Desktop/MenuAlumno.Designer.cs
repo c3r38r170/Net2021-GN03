@@ -47,9 +47,9 @@ namespace UI.Desktop
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.88889F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.11111F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 366F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.23077F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.76923F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 354F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(138, 450);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -58,7 +58,7 @@ namespace UI.Desktop
             // 
             this.btnInscribirseA.Location = new System.Drawing.Point(3, 3);
             this.btnInscribirseA.Name = "btnInscribirseA";
-            this.btnInscribirseA.Size = new System.Drawing.Size(128, 20);
+            this.btnInscribirseA.Size = new System.Drawing.Size(128, 26);
             this.btnInscribirseA.TabIndex = 0;
             this.btnInscribirseA.Text = "Inscribirse A";
             this.btnInscribirseA.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@ namespace UI.Desktop
             // 
             // btnInscriptoEn
             // 
-            this.btnInscriptoEn.Location = new System.Drawing.Point(3, 29);
+            this.btnInscriptoEn.Location = new System.Drawing.Point(3, 35);
             this.btnInscriptoEn.Name = "btnInscriptoEn";
-            this.btnInscriptoEn.Size = new System.Drawing.Size(128, 21);
+            this.btnInscriptoEn.Size = new System.Drawing.Size(128, 26);
             this.btnInscriptoEn.TabIndex = 1;
             this.btnInscriptoEn.Text = "Inscripto En";
             this.btnInscriptoEn.UseVisualStyleBackColor = true;

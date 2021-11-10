@@ -43,6 +43,40 @@ namespace Data.Database
             return listaDocentesCuros;
         }
 
+        public object GetCurosPorDocentes(int iDProfesor)
+        {
+            CursoAdapter ca = new CursoAdapter();
+            DataTable dtCursosMateriasComisiones = (DataTable)ca.GetCursosMateriasComisiones();
+
+            List<DocenteCurso> ListaDocentes_Cursos = this.GetAll();
+
+            DataRow fila;
+            DataTable dt = new DataTable();
+            DataColumn IdCurso = new DataColumn("ID Curso");
+            DataColumn Comision = new DataColumn("Comision");
+            DataColumn Materia = new DataColumn("Materia");
+            dt.Columns.Add(IdCurso);
+            dt.Columns.Add(Comision);
+            dt.Columns.Add(Materia);
+
+            foreach (DocenteCurso dc in ListaDocentes_Cursos)
+            {
+                foreach (DataRow row in dtCursosMateriasComisiones.Rows)
+                {
+                    if (dc.IDCurso == int.Parse(row["ID"].ToString()))
+                    {
+                        fila = dt.NewRow();
+                        fila[IdCurso] = dc.IDCurso;
+                        fila[Comision] = row["Descripcion Comision"];
+                        fila[Materia] = row["Descripcion Materia"];
+                        dt.Rows.Add(fila);
+
+                    }
+                }
+            }
+            return dt;
+        }
+
         public object GetAlumnosDeCurso(int IDProfesor)
         {
             DataRow fila;

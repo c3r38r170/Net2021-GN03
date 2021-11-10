@@ -33,19 +33,14 @@ namespace UI.Desktop
             InscripcionActual = ai;
             InscripcionActual.ID = int.Parse(this.txtID.Text);
             InscripcionActual.Nota = int.Parse(this.txtNota.Text);
-            InscripcionActual.Condicion = this.txtCondicion.Text;
+            InscripcionActual.Condicion = this.cBoxCondicion.Text;
             InscripcionActual.State = BusinessEntity.States.Modified;
         }
 
         public override bool Validar()
         {
 
-            if (string.IsNullOrWhiteSpace(this.txtCondicion.Text))
-            {
-                Notificar("Error", "Incorrect Condicion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            else if (!this.txtCondicion.Text.Equals("regular") && !this.txtCondicion.Text.Equals("libre") && !this.txtCondicion.Text.Equals("promovido"))
+            if (string.IsNullOrWhiteSpace(this.cBoxCondicion.Text))
             {
                 Notificar("Error", "Incorrect Condicion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
@@ -85,6 +80,19 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void CargarNotaDesktop_Load(object sender, EventArgs e)
+        {
+            CargaComboBoxCondicion();
+        }
+
+        public void CargaComboBoxCondicion()
+        {
+            this.cBoxCondicion.Items.Add("Cursando");
+            this.cBoxCondicion.Items.Add("Libre");
+            this.cBoxCondicion.Items.Add("Regular");
+            this.cBoxCondicion.Items.Add("Promovido");
         }
     }
 }

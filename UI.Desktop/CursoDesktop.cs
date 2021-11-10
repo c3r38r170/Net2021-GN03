@@ -53,34 +53,48 @@ namespace UI.Desktop
         }
         public void CargaComboBoxMaterias()
         {
-            MateriaLogic ml = new MateriaLogic();
-            List<Materia> listaMaterias = ml.GetAll();
-            Dictionary<int, string> comboSourceMateria = new Dictionary<int, string>();
-
-            foreach (Materia m in listaMaterias)
+            try
             {
-                comboSourceMateria.Add(m.ID, m.Descripcion);
+                MateriaLogic ml = new MateriaLogic();
+                List<Materia> listaMaterias = ml.GetAll();
+                Dictionary<int, string> comboSourceMateria = new Dictionary<int, string>();
+
+                foreach (Materia m in listaMaterias)
+                {
+                    comboSourceMateria.Add(m.ID, m.Descripcion);
+                }
+                cBoxMaterias.DataSource = new BindingSource(comboSourceMateria, null);
+                cBoxMaterias.DisplayMember = "Value";
+                cBoxMaterias.ValueMember = "Key";
+                cBoxMaterias.Text = "";
             }
-            cBoxMaterias.DataSource = new BindingSource(comboSourceMateria, null);
-            cBoxMaterias.DisplayMember = "Value";
-            cBoxMaterias.ValueMember = "Key";
-            cBoxMaterias.Text = "";
+            catch(Exception e)
+            {
+                MessageBox.Show("Deben existir Materias");
+            }
         }
 
         public void CargaComboBoxComisiones()
         {
-            ComisionLogic cl = new ComisionLogic();
-            List<Comision> listaComisiones = cl.GetAll();
-            Dictionary<int, string> comboSourceComision = new Dictionary<int, string>();
-
-            foreach (Comision c in listaComisiones)
+            try
             {
-                comboSourceComision.Add(c.ID, c.Descripcion);
+                ComisionLogic cl = new ComisionLogic();
+                List<Comision> listaComisiones = cl.GetAll();
+                Dictionary<int, string> comboSourceComision = new Dictionary<int, string>();
+
+                foreach (Comision c in listaComisiones)
+                {
+                    comboSourceComision.Add(c.ID, c.Descripcion);
+                }
+                cBoxComisiones.DataSource = new BindingSource(comboSourceComision, null);
+                cBoxComisiones.DisplayMember = "Value";
+                cBoxComisiones.ValueMember = "Key";
+                cBoxComisiones.Text = "";
             }
-            cBoxComisiones.DataSource = new BindingSource(comboSourceComision, null);
-            cBoxComisiones.DisplayMember = "Value";
-            cBoxComisiones.ValueMember = "Key";
-            cBoxComisiones.Text = "";
+            catch(Exception e)
+            {
+                MessageBox.Show("Deben existir Comisiones");
+            }
         }
 
         public override bool Validar()

@@ -36,9 +36,9 @@ namespace UI.Desktop
 
         private void btnAgregarNota_Click_1(object sender, EventArgs e)
         {
-            if (!detectarFormularioAbierto("CargarNota"))
+            if (!detectarFormularioAbierto("MuestraCursosMateriasComisionesPorDocente"))
             {
-                CargarNota cn = new CargarNota(IdProfesor);
+                MuestraCursosMateriasComisionesPorDocente cn = new MuestraCursosMateriasComisionesPorDocente(IdProfesor);
                 cn.Show();
             }
             else

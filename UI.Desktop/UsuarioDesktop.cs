@@ -36,21 +36,29 @@ namespace UI.Desktop {
 
 		private void CargaComboBoxPersona()
 		{
-			PersonaLogic pl = new PersonaLogic();
-			List<Persona> listaPersonas = pl.GetAll();
-			Dictionary<int, int> comboSourcePlan = new Dictionary<int, int>();
+            try
+            {
+				PersonaLogic pl = new PersonaLogic();
+				List<Persona> listaPersonas = pl.GetAll();
+				Dictionary<int, int> comboSourcePlan = new Dictionary<int, int>();
 
-			foreach (Persona p in listaPersonas)
-			{
-				comboSourcePlan.Add(p.ID, p.Legajo);
+				foreach (Persona p in listaPersonas)
+				{
+					comboSourcePlan.Add(p.ID, p.Legajo);
+				}
+
+				cBoxPersonas.DataSource = new BindingSource(comboSourcePlan, null);
+				cBoxPersonas.DisplayMember = "Value";
+				cBoxPersonas.ValueMember = "Key";
+				cBoxPersonas.Text = Modo.Equals(ModoForm.Alta) ?
+					"..."
+					: UsuarioActual.PersonaAsociada.Legajo.ToString();
 			}
-
-			cBoxPersonas.DataSource = new BindingSource(comboSourcePlan, null);
-			cBoxPersonas.DisplayMember = "Value";
-			cBoxPersonas.ValueMember = "Key";
-			cBoxPersonas.Text = Modo.Equals(ModoForm.Alta) ?
-				"..."
-				: UsuarioActual.PersonaAsociada.Legajo.ToString();
+			catch(Exception e)
+            {
+				MessageBox.Show("Deben cargarse personas");
+            }
+			
 		}
 
 

@@ -41,5 +41,10 @@ namespace Business.Logic
         {
             DocenteCursoData.Save(docenteCursoActual);
         }
+
+        public object GetCurosPorDocentes(int iDProfesor)
+        {
+            return DocenteCursoData.GetCurosPorDocentes(iDProfesor);
+        }
     }
 }

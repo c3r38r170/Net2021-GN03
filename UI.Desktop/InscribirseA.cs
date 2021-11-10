@@ -49,7 +49,7 @@ namespace UI.Desktop
                     else
                     {
                         AlumnoInscripcion al = new AlumnoInscripcion();
-                        al.Condicion = "cursando";
+                        al.Condicion = "Cursando";
                         al.IDAlumno = IdPersonaActual;
                         al.IDCurso = c.ID;
                         al.State = BusinessEntity.States.New;
@@ -86,6 +86,11 @@ namespace UI.Desktop
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void InscribirseA_Load(object sender, EventArgs e)
+        {
+            Listar();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace UI.Desktop
 {
-    partial class InscribirseA
+    partial class MuestraCursosMateriasComisionesPorDocente
     {
         /// <summary>
         /// Required designer variable.
@@ -30,11 +30,11 @@ namespace UI.Desktop
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvDocenteCursos = new System.Windows.Forms.DataGridView();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.dgvCursosInscripcion = new System.Windows.Forms.DataGridView();
-            this.btnInscribirse = new System.Windows.Forms.Button();
+            this.btnCargarNota = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCursosInscripcion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDocenteCursos)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -42,9 +42,9 @@ namespace UI.Desktop
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.dgvDocenteCursos, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnSalir, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dgvCursosInscripcion, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnInscribirse, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnCargarNota, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -54,53 +54,53 @@ namespace UI.Desktop
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // dgvDocenteCursos
+            // 
+            this.dgvDocenteCursos.AllowUserToAddRows = false;
+            this.dgvDocenteCursos.AllowUserToDeleteRows = false;
+            this.dgvDocenteCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableLayoutPanel1.SetColumnSpan(this.dgvDocenteCursos, 2);
+            this.dgvDocenteCursos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDocenteCursos.Location = new System.Drawing.Point(3, 3);
+            this.dgvDocenteCursos.Name = "dgvDocenteCursos";
+            this.dgvDocenteCursos.ReadOnly = true;
+            this.dgvDocenteCursos.RowTemplate.Height = 25;
+            this.dgvDocenteCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDocenteCursos.Size = new System.Drawing.Size(794, 415);
+            this.dgvDocenteCursos.TabIndex = 0;
+            // 
             // btnSalir
             // 
             this.btnSalir.Location = new System.Drawing.Point(722, 424);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 0;
+            this.btnSalir.TabIndex = 1;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // dgvCursosInscripcion
+            // btnCargarNota
             // 
-            this.dgvCursosInscripcion.AllowUserToAddRows = false;
-            this.dgvCursosInscripcion.AllowUserToDeleteRows = false;
-            this.dgvCursosInscripcion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableLayoutPanel1.SetColumnSpan(this.dgvCursosInscripcion, 2);
-            this.dgvCursosInscripcion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCursosInscripcion.Location = new System.Drawing.Point(3, 3);
-            this.dgvCursosInscripcion.Name = "dgvCursosInscripcion";
-            this.dgvCursosInscripcion.ReadOnly = true;
-            this.dgvCursosInscripcion.RowTemplate.Height = 25;
-            this.dgvCursosInscripcion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCursosInscripcion.Size = new System.Drawing.Size(794, 415);
-            this.dgvCursosInscripcion.TabIndex = 1;
+            this.btnCargarNota.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCargarNota.Location = new System.Drawing.Point(605, 424);
+            this.btnCargarNota.Name = "btnCargarNota";
+            this.btnCargarNota.Size = new System.Drawing.Size(111, 23);
+            this.btnCargarNota.TabIndex = 2;
+            this.btnCargarNota.Text = "Seleccionar Curso";
+            this.btnCargarNota.UseVisualStyleBackColor = true;
+            this.btnCargarNota.Click += new System.EventHandler(this.btnCargarNota_Click);
             // 
-            // btnInscribirse
-            // 
-            this.btnInscribirse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInscribirse.Location = new System.Drawing.Point(641, 424);
-            this.btnInscribirse.Name = "btnInscribirse";
-            this.btnInscribirse.Size = new System.Drawing.Size(75, 23);
-            this.btnInscribirse.TabIndex = 2;
-            this.btnInscribirse.Text = "Inscribirse";
-            this.btnInscribirse.UseVisualStyleBackColor = true;
-            this.btnInscribirse.Click += new System.EventHandler(this.btnInscribirse_Click);
-            // 
-            // InscribirseA
+            // MuestraCursosMateriasComisionesPorDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "InscribirseA";
-            this.Text = "InscribirseA";
-            this.Load += new System.EventHandler(this.InscribirseA_Load);
+            this.Name = "MuestraCursosMateriasComisionesPorDocente";
+            this.Text = "CargarNota";
+            this.Load += new System.EventHandler(this.CargarNota_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCursosInscripcion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDocenteCursos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -108,8 +108,8 @@ namespace UI.Desktop
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridView dgvDocenteCursos;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.DataGridView dgvCursosInscripcion;
-        private System.Windows.Forms.Button btnInscribirse;
+        private System.Windows.Forms.Button btnCargarNota;
     }
 }

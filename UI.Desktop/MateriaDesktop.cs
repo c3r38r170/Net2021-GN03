@@ -53,18 +53,26 @@ namespace UI.Desktop
 
         private void CargaComboBox()
         {
-            PlanLogic pl = new PlanLogic();
-            List<Plan> listaPlanes = pl.GetAll();
-            Dictionary<int, string> comboSource = new Dictionary<int, string>();
-
-            foreach (Plan p in listaPlanes)
+            try
             {
-                comboSource.Add(p.ID, p.Descripcion);
+                PlanLogic pl = new PlanLogic();
+                List<Plan> listaPlanes = pl.GetAll();
+                Dictionary<int, string> comboSource = new Dictionary<int, string>();
+
+                foreach (Plan p in listaPlanes)
+                {
+                    comboSource.Add(p.ID, p.Descripcion);
+                }
+                cBoxDescPlan.DataSource = new BindingSource(comboSource, null);
+                cBoxDescPlan.DisplayMember = "Value";
+                cBoxDescPlan.ValueMember = "Key";
+                cBoxDescPlan.Text = "";
             }
-            cBoxDescPlan.DataSource = new BindingSource(comboSource, null);
-            cBoxDescPlan.DisplayMember = "Value";
-            cBoxDescPlan.ValueMember = "Key";
-            cBoxDescPlan.Text = "";
+            catch(Exception e)
+            {
+                MessageBox.Show("Deben existir Planes");
+            }
+           
         }
 
         public override bool Validar()
@@ -96,24 +104,33 @@ namespace UI.Desktop
         }
         public override void MapearADatos()
         {
-            if (Modo == ModoForm.Alta)
+            try
             {
-                Materia m = new Materia();
-                MateriaActual = m;
-                MateriaActual.Descripcion = this.txtDescMateria.Text;
-                MateriaActual.HSSemanales = int.Parse(this.txtHsSemanales.Text);
-                MateriaActual.HSTotales = int.Parse(this.txtHsTotales.Text);
-                MateriaActual.IDPlan = ((KeyValuePair<int, string>)cBoxDescPlan.SelectedItem).Key;
-                MateriaActual.State = BusinessEntity.States.New;
+                if (Modo == ModoForm.Alta)
+                {
+                    Materia m = new Materia();
+                    MateriaActual = m;
+                    MateriaActual.Descripcion = this.txtDescMateria.Text;
+                    MateriaActual.HSSemanales = int.Parse(this.txtHsSemanales.Text);
+                    MateriaActual.HSTotales = int.Parse(this.txtHsTotales.Text);
+                    MateriaActual.IDPlan = ((KeyValuePair<int, string>)cBoxDescPlan.SelectedItem).Key;
+                    MateriaActual.State = BusinessEntity.States.New;
+                }
+                else if (Modo == ModoForm.Modificacion)
+                {
+                    MateriaActual.Descripcion = this.txtDescMateria.Text;
+                    MateriaActual.HSSemanales = int.Parse(this.txtHsSemanales.Text);
+                    MateriaActual.HSTotales = int.Parse(this.txtHsTotales.Text);
+                    MateriaActual.IDPlan = ((KeyValuePair<int, string>)cBoxDescPlan.SelectedItem).Key;
+                    MateriaActual.State = BusinessEntity.States.Modified;
+                }
+
             }
-            else if (Modo == ModoForm.Modificacion)
+            catch (Exception e)
             {
-                MateriaActual.Descripcion = this.txtDescMateria.Text;
-                MateriaActual.HSSemanales = int.Parse(this.txtHsSemanales.Text);
-                MateriaActual.HSTotales = int.Parse(this.txtHsTotales.Text);
-                MateriaActual.IDPlan = ((KeyValuePair<int, string>)cBoxDescPlan.SelectedItem).Key;
-                MateriaActual.State = BusinessEntity.States.Modified;
+                MessageBox.Show("valor inapropiado");
             }
+                
         }
         public override void GuardarCambios()
         {

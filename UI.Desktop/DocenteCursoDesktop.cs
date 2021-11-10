@@ -54,37 +54,52 @@ namespace UI.Desktop
 
         private void CargaComboBoxCursos()
         {
-            CursoLogic cl = new CursoLogic();
-            List<Curso> listaCursos = cl.GetAll();
-            Dictionary<int, int> comboSourceCurso = new Dictionary<int, int>();
-
-            foreach (Curso c in listaCursos)
+            try
             {
-                comboSourceCurso.Add(c.ID, c.ID);
+                CursoLogic cl = new CursoLogic();
+                List<Curso> listaCursos = cl.GetAll();
+                Dictionary<int, int> comboSourceCurso = new Dictionary<int, int>();
+
+                foreach (Curso c in listaCursos)
+                {
+                    comboSourceCurso.Add(c.ID, c.ID);
+                }
+                cBoxCursos.DataSource = new BindingSource(comboSourceCurso, null);
+                cBoxCursos.DisplayMember = "Value";
+                cBoxCursos.ValueMember = "Key";
+                cBoxCursos.Text = "...";
             }
-            cBoxCursos.DataSource = new BindingSource(comboSourceCurso, null);
-            cBoxCursos.DisplayMember = "Value";
-            cBoxCursos.ValueMember = "Key";
-            cBoxCursos.Text = "...";
+            catch(Exception e)
+            {
+                MessageBox.Show("Deben existir Cursos");
+            }
+           
         }
 
         private void CargaComboBoxDocentes()
         {
-            PersonaLogic pl = new PersonaLogic();
-            List<Persona> listaPersonas = pl.GetAll();
-            Dictionary<int, int> comboSourcePersona = new Dictionary<int, int>();
-
-            foreach (Persona p in listaPersonas)
+            try
             {
-                if (((int)p.TipoPersona) == 1)
+                PersonaLogic pl = new PersonaLogic();
+                List<Persona> listaPersonas = pl.GetAll();
+                Dictionary<int, int> comboSourcePersona = new Dictionary<int, int>();
+
+                foreach (Persona p in listaPersonas)
                 {
-                    comboSourcePersona.Add(p.ID, p.Legajo);
+                    if (((int)p.TipoPersona) == 1)
+                    {
+                        comboSourcePersona.Add(p.ID, p.Legajo);
+                    }
                 }
+                cBoxDocentes.DataSource = new BindingSource(comboSourcePersona, null);
+                cBoxDocentes.DisplayMember = "Value";
+                cBoxDocentes.ValueMember = "Key";
+                cBoxDocentes.Text = "...";
             }
-            cBoxDocentes.DataSource = new BindingSource(comboSourcePersona, null);
-            cBoxDocentes.DisplayMember = "Value";
-            cBoxDocentes.ValueMember = "Key";
-            cBoxDocentes.Text = "...";
+            catch(Exception e)
+            {
+                MessageBox.Show("Deben existir Docentes");
+            }
         }
 
         private void CargaComboBoxCargos()

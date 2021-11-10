@@ -62,21 +62,30 @@ namespace UI.Desktop
 
 		public void CargaComboBoxIDPlan()
 		{
-			PlanLogic pl = new PlanLogic();
-			List<Plan> listaPlanes = pl.GetAll();
-			Dictionary<int, string> comboSourcePlan = new Dictionary<int, string>();
+            try
+            {
+				PlanLogic pl = new PlanLogic();
+				List<Plan> listaPlanes = pl.GetAll();
+				Dictionary<int, string> comboSourcePlan = new Dictionary<int, string>();
+				foreach (Plan p in listaPlanes)
+				{
+					comboSourcePlan.Add(p.ID, p.Descripcion);
+				}
 
-			foreach (Plan p in listaPlanes)
-			{
-				comboSourcePlan.Add(p.ID, p.Descripcion);
+				cBoxIDPlan.DataSource = new BindingSource(comboSourcePlan, null);
+				cBoxIDPlan.DisplayMember = "Value";
+				cBoxIDPlan.ValueMember = "Key";
+				cBoxIDPlan.Text = Modo.Equals(ModoForm.Alta) ?
+					""
+					: (from l in listaPlanes where l.ID == PersonaActual.IDPlan select l.Descripcion).First();
 			}
+			catch(Exception e)
+            {
+				MessageBox.Show("Deben existir Planes");
+            }
+			
 
-			cBoxIDPlan.DataSource = new BindingSource(comboSourcePlan, null);
-			cBoxIDPlan.DisplayMember = "Value";
-			cBoxIDPlan.ValueMember = "Key";
-			cBoxIDPlan.Text = Modo.Equals(ModoForm.Alta) ?
-				""
-				: (from l in listaPlanes where l.ID==PersonaActual.IDPlan select l.Descripcion).First();
+			
 		}
 
 		public void CargaComboBoxTipoPersona() {
@@ -110,7 +119,7 @@ namespace UI.Desktop
 				Notificar("Error", "Incorrect Legajo en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (!VerificaLegajo(this.txtLegajo.Text))
+			else if (!VerificaLegajo(PersonaActual, int.Parse(this.txtLegajo.Text)))
 			{
 				Notificar("Error", "Legajo existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
@@ -251,14 +260,29 @@ namespace UI.Desktop
 			Close();
         }
 
-		public static bool VerificaLegajo(string l)
+		public bool VerificaLegajo(Persona persona, int l)
 		{
 			List<Persona> listaPer = new PersonaLogic().GetAll();
-			foreach (Persona p in listaPer)
-			{
-				if (p.Legajo.Equals(l)) { return false; }
 
+			if (Modo == ModoForm.Modificacion)
+			{
+				for (int i = 0; i < listaPer.Count(); i++)
+				{
+					if (listaPer[i].Legajo == l)
+					{
+						listaPer.RemoveAt(i);
+					}
+				}
 			}
+			else
+			{
+				foreach (Persona p in listaPer)
+				{
+					if (p.Legajo.Equals(l)) { return false; }
+				}
+			}
+
+
 			return true;
 		}
 	}

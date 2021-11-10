@@ -34,5 +34,10 @@ namespace Business.Logic
         {
             return InscripcionData.GetAll();
         }
+
+        public object GetAlumnosInscriptosEnCurso(int dcurso)
+        {
+            return InscripcionData.GetAlumnosInscriptosEnCurso(dcurso);
+        }
     }
 }

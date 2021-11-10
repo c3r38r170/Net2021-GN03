@@ -1,66 +1,42 @@
 ﻿using Business.Logic;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UI.Desktop
 {
-    public partial class CargarNota : ApplicationForm
+    public partial class CargarNota : Form
     {
-        public int IDProfesor { get; set; }
+        public int IDcurso { get; set; }
         public CargarNota()
         {
             InitializeComponent();
         }
-
         public CargarNota(int id) : this()
         {
-            IDProfesor = id;
+            IDcurso = id;
         }
 
-        private void CargarNota_Load(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, System.EventArgs e)
         {
-            Listar();
+            this.Close();
+        }
+
+        private void btnCargarNota_Click(object sender, System.EventArgs e)
+        {
+            int ID = int.Parse(this.dgvListaAlumnos.CurrentRow.Cells[0].Value.ToString());
+            CargarNotaDesktop cnd = new CargarNotaDesktop(ID, ApplicationForm.ModoForm.Consulta);
+            cnd.ShowDialog();
+            this.Listar();
         }
 
         public void Listar()
         {
-           
-            try
-            {
-                DocenteCursoLogic dcl = new DocenteCursoLogic();
-                this.dgvDocenteCursos.DataSource = dcl.GetAlumnosDeCurso(IDProfesor);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            InscripcionLogic il = new InscripcionLogic();
+            this.dgvListaAlumnos.DataSource = il.GetAlumnosInscriptosEnCurso(IDcurso);
         }
 
-        private void btnCargarNota_Click(object sender, EventArgs e)
+        private void CargarNota_Load(object sender, System.EventArgs e)
         {
-            try
-            {
-                int ID = int.Parse(this.dgvDocenteCursos.CurrentRow.Cells[0].Value.ToString());
-                CargarNotaDesktop f = new CargarNotaDesktop(ID, ApplicationForm.ModoForm.Modificacion);
-                f.ShowDialog();
-                this.Listar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            } 
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            Listar();
         }
     }
 }

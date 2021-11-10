@@ -128,38 +128,47 @@ namespace Data.Database
 
 		public void Save(Materia materia)
 		{
-			if (materia.State == BusinessEntity.States.New)
-			{
-				this.OpenConnection();
-				SqlCommand cmdMateria= new SqlCommand("NuevaMateria", sqlConn);
-				cmdMateria.CommandType = CommandType.StoredProcedure;
-				cmdMateria.Parameters.Add("@desc", SqlDbType.VarChar).Value = materia.Descripcion;
-				cmdMateria.Parameters.Add("@hss", SqlDbType.Int).Value = materia.HSSemanales;
-				cmdMateria.Parameters.Add("@hst", SqlDbType.Int).Value = materia.HSTotales;
-				cmdMateria.Parameters.Add("@idp", SqlDbType.Int).Value = materia.IDPlan;
-				cmdMateria.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
-				cmdMateria.ExecuteNonQuery();
-				materia.ID = (int)cmdMateria.Parameters["@ID"].Value;
-				this.CloseConnection();
+            try
+            {
+				if (materia.State == BusinessEntity.States.New)
+				{
+					this.OpenConnection();
+					SqlCommand cmdMateria = new SqlCommand("NuevaMateria", sqlConn);
+					cmdMateria.CommandType = CommandType.StoredProcedure;
+					cmdMateria.Parameters.Add("@desc", SqlDbType.VarChar).Value = materia.Descripcion;
+					cmdMateria.Parameters.Add("@hss", SqlDbType.Int).Value = materia.HSSemanales;
+					cmdMateria.Parameters.Add("@hst", SqlDbType.Int).Value = materia.HSTotales;
+					cmdMateria.Parameters.Add("@idp", SqlDbType.Int).Value = materia.IDPlan;
+					cmdMateria.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
+					cmdMateria.ExecuteNonQuery();
+					materia.ID = (int)cmdMateria.Parameters["@ID"].Value;
+					this.CloseConnection();
+				}
+				else if (materia.State == BusinessEntity.States.Deleted)
+				{
+					this.Delete(materia.ID);
+				}
+				else if (materia.State == BusinessEntity.States.Modified)
+				{
+					this.OpenConnection();
+					SqlCommand cmdMateria = new SqlCommand("EditarMateria", sqlConn);
+					cmdMateria.CommandType = CommandType.StoredProcedure;
+					cmdMateria.Parameters.Add("@desc", SqlDbType.VarChar).Value = materia.Descripcion;
+					cmdMateria.Parameters.Add("@hss", SqlDbType.Int).Value = materia.HSSemanales;
+					cmdMateria.Parameters.Add("@hst", SqlDbType.Int).Value = materia.HSTotales;
+					cmdMateria.Parameters.Add("@idp", SqlDbType.Int).Value = materia.IDPlan;
+					cmdMateria.Parameters.Add("@ID", SqlDbType.Int).Value = materia.ID;
+					cmdMateria.ExecuteNonQuery();
+					this.CloseConnection();
+				}
+				materia.State = BusinessEntity.States.Unmodified;
 			}
-			else if (materia.State == BusinessEntity.States.Deleted)
-			{
-				this.Delete(materia.ID);
+            catch (Exception ex)
+            {
+				Exception ExcepcionManejada = new Exception("Error al recuperar la materia.", ex);
+				throw ExcepcionManejada;
 			}
-			else if (materia.State == BusinessEntity.States.Modified)
-			{
-				this.OpenConnection();
-				SqlCommand cmdMateria = new SqlCommand("EditarMateria", sqlConn);
-				cmdMateria.CommandType = CommandType.StoredProcedure;
-				cmdMateria.Parameters.Add("@desc", SqlDbType.VarChar).Value = materia.Descripcion;
-				cmdMateria.Parameters.Add("@hss", SqlDbType.Int).Value = materia.HSSemanales;
-				cmdMateria.Parameters.Add("@hst", SqlDbType.Int).Value = materia.HSTotales;
-				cmdMateria.Parameters.Add("@idp", SqlDbType.Int).Value = materia.IDPlan;
-				cmdMateria.Parameters.Add("@ID", SqlDbType.Int).Value = materia.ID;
-				cmdMateria.ExecuteNonQuery();
-				this.CloseConnection();
-			}
-			materia.State = BusinessEntity.States.Unmodified;
+			
 		}
 	}
 }
