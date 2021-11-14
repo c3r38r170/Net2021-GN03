@@ -68,7 +68,7 @@ namespace UI.Desktop
                 cBoxMaterias.ValueMember = "Key";
                 cBoxMaterias.Text = "";
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 MessageBox.Show("Deben existir Materias");
             }

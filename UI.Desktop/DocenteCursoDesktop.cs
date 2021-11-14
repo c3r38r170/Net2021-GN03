@@ -69,7 +69,7 @@ namespace UI.Desktop
                 cBoxCursos.ValueMember = "Key";
                 cBoxCursos.Text = "...";
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 MessageBox.Show("Deben existir Cursos");
             }

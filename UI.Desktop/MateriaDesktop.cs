@@ -68,7 +68,7 @@ namespace UI.Desktop
                 cBoxDescPlan.ValueMember = "Key";
                 cBoxDescPlan.Text = "";
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 MessageBox.Show("Deben existir Planes");
             }

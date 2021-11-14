@@ -79,7 +79,7 @@ namespace UI.Desktop
 					""
 					: (from l in listaPlanes where l.ID == PersonaActual.IDPlan select l.Descripcion).First();
 			}
-			catch(Exception e)
+			catch(Exception)
             {
 				MessageBox.Show("Deben existir Planes");
             }
