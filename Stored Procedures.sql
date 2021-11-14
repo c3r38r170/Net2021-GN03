@@ -286,6 +286,21 @@ AS
 	SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave;
 END;
 
+
+CREATE PROCEDURE cargaReporteCursos
+AS
+BEGIN
+SELECT cursos.id_curso, cursos.anio_calendario, comisiones.desc_comision, materias.desc_materia,  cursos.cupo
+FROM cursos INNER JOIN materias ON cursos.id_materia = materias.id_materia INNER JOIN comisiones ON cursos.id_comision=comisiones.id_comision
+END
+
+CREATE PROCEDURE cargaReportePlanes
+AS
+BEGIN
+SELECT planes.id_plan, planes.desc_plan, especialidades.desc_especialidad
+FROM planes INNER JOIN especialidades ON planes.id_especialidad = especialidades.id_especialidad
+END
+
 /*Resets*/
 DROP PROCEDURE DeleteCurso;
 DROP PROCEDURE DeleteComision;
