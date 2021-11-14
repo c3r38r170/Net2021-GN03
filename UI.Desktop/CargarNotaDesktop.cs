@@ -26,6 +26,10 @@ namespace UI.Desktop
             InscripcionActual = new InscripcionLogic().GetOne(ID);
             MapearDeDatos();
         }
+        public override void MapearDeDatos()
+        {
+            this.txtID.Text = this.InscripcionActual.ID.ToString();
+        }
 
         public override void MapearADatos()
         {
