@@ -164,7 +164,7 @@ namespace Data.Database
 				SqlDataReader drCurso = cmdCurso.ExecuteReader();
 				if (drCurso.Read())
 				{
-					cur.ID = (int)drCurso["id_comision"];
+					cur.ID = (int)drCurso["id_curso"];
 					cur.AñoCalendario = (int)drCurso["anio_calendario"];
 					cur.Cupo = (int)drCurso["cupo"];
 					cur.IDComision = (int)drCurso["id_comision"];

@@ -331,8 +331,8 @@ namespace Data.Database
             catch (Exception Ex)
             {
                 Exception ExcepcionManejada =
-                new Exception("Error al Insertar el puto plan", Ex);
-                throw ExcepcionManejada;
+                new Exception("Error en la inscripcion:", Ex);
+                //throw ExcepcionManejada;
             }
             finally
             {
