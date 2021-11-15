@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,6 +55,11 @@ namespace UI.Desktop
                 Notificar("Error", "Incorrect txtNota", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
+            else if (!isNumeric(this.txtNota.Text))
+            {
+                Notificar("Error", "Nota debe ser un numero", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
             else if (int.Parse(this.txtNota.Text) < 1 || int.Parse(this.txtNota.Text) > 10)
             {
                 Notificar("Error", "Incorrect txtNota", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -97,6 +103,15 @@ namespace UI.Desktop
             this.cBoxCondicion.Items.Add("Libre");
             this.cBoxCondicion.Items.Add("Regular");
             this.cBoxCondicion.Items.Add("Promovido");
+        }
+
+        public bool isNumeric(string x)
+        {
+            if (Regex.IsMatch(x, @"^[0-9]+$"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
