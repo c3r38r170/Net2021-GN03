@@ -96,7 +96,7 @@ namespace UI.Desktop
                 cBoxDocentes.ValueMember = "Key";
                 cBoxDocentes.Text = "...";
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 MessageBox.Show("Deben existir Docentes");
             }
@@ -118,17 +118,17 @@ namespace UI.Desktop
 
         public override bool Validar()
         {
-            if (cBoxDocentes.Text.Equals("..."))
+            if (cBoxDocentes.Text.Equals("(Collection)") || cBoxDocentes.Text.Equals("..."))
             {
                 Notificar("Error", "Incorrect No selecciono Docente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            else if (cBoxCursos.Text.Equals("..."))
+            else if (cBoxCursos.Text.Equals("(Collection)") || cBoxCursos.Text.Equals("..."))
             {
                 Notificar("Error", "Incorrect No selecciono Curso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            else if (cBoxCargos.Text.Equals("..."))
+            else if (cBoxCargos.Text.Equals("(Collection)") || cBoxCargos.Text.Equals("..."))
             {
                 Notificar("Error", "Incorrect No selecciono Cargos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;

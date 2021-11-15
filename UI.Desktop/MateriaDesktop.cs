@@ -97,6 +97,16 @@ namespace UI.Desktop
                 Notificar("Error", "Incorrect plan en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
+            else if (!isNumeric(this.txtHsTotales.Text))
+            {
+                Notificar("Error", "Error en Horas Totales", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (!isNumeric(this.txtHsSemanales.Text))
+            {
+                Notificar("Error", "Error en Horas semanales", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
             else
             {
                 return true;
@@ -165,7 +175,15 @@ namespace UI.Desktop
                 Close();
         }
 
-       
+        public bool isNumeric(string x)
+        {
+            if (Regex.IsMatch(x, @"^[0-9]+$"))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 } 
 

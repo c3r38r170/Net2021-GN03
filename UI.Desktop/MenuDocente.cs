@@ -49,7 +49,7 @@ namespace UI.Desktop
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            string message = $"¿Desea eliminar al usuario cerrar session?";
+            string message = $"¿Desea cerrar session?";
             string title = "Cerrar Session";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, title, buttons);

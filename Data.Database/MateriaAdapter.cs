@@ -130,7 +130,7 @@ namespace Data.Database
 		{
             try
             {
-				if (materia.State == BusinessEntity.States.New)
+                if (materia.State == BusinessEntity.States.New)
 				{
 					this.OpenConnection();
 					SqlCommand cmdMateria = new SqlCommand("NuevaMateria", sqlConn);
@@ -162,13 +162,13 @@ namespace Data.Database
 					this.CloseConnection();
 				}
 				materia.State = BusinessEntity.States.Unmodified;
-			}
+            }
             catch (Exception ex)
             {
 				Exception ExcepcionManejada = new Exception("Error al recuperar la materia.", ex);
 				throw ExcepcionManejada;
 			}
-			
-		}
+
+}
 	}
 }

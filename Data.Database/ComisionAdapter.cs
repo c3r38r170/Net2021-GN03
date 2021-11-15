@@ -122,36 +122,38 @@ namespace Data.Database
 
 		public void Save(Comision com)
 		{
-			if (com.State == BusinessEntity.States.New)
-			{
-				this.OpenConnection();
-				SqlCommand cmdComision = new SqlCommand("NuevaComision", sqlConn);
-				cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdComision.Parameters.Add("@anioe", System.Data.SqlDbType.Int).Value = com.AñoEspecialidad;
-				cmdComision.Parameters.Add("@descc", System.Data.SqlDbType.VarChar).Value = com.Descripcion;
-				cmdComision.Parameters.Add("@idp", System.Data.SqlDbType.Int).Value = com.IDPlan;
-				cmdComision.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
-				cmdComision.ExecuteNonQuery();
-				com.ID = (int)cmdComision.Parameters["@ID"].Value;
-				this.CloseConnection();
-			}
-			else if (com.State == BusinessEntity.States.Deleted)
-			{
-				this.Delete(com.ID);
-			}
-			else if (com.State == BusinessEntity.States.Modified)
-			{
-				this.OpenConnection();
-				SqlCommand cmdComision = new SqlCommand("EditarComision", sqlConn);
-				cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
-				cmdComision.Parameters.Add("@anioe", System.Data.SqlDbType.Int).Value = com.AñoEspecialidad;
-				cmdComision.Parameters.Add("@descc", System.Data.SqlDbType.VarChar).Value = com.Descripcion;
-				cmdComision.Parameters.Add("@idp", System.Data.SqlDbType.Int).Value = com.IDPlan;
-				cmdComision.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = com.ID;
-				cmdComision.ExecuteNonQuery();
-				this.CloseConnection();
-			}
-			com.State = BusinessEntity.States.Unmodified;
+
+				if (com.State == BusinessEntity.States.New)
+				{
+					this.OpenConnection();
+					SqlCommand cmdComision = new SqlCommand("NuevaComision", sqlConn);
+					cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
+					cmdComision.Parameters.Add("@anioe", System.Data.SqlDbType.Int).Value = com.AñoEspecialidad;
+					cmdComision.Parameters.Add("@descc", System.Data.SqlDbType.VarChar).Value = com.Descripcion;
+					cmdComision.Parameters.Add("@idp", System.Data.SqlDbType.Int).Value = com.IDPlan;
+					cmdComision.Parameters.Add("@ID", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+					cmdComision.ExecuteNonQuery();
+					com.ID = (int)cmdComision.Parameters["@ID"].Value;
+					this.CloseConnection();
+				}
+				else if (com.State == BusinessEntity.States.Deleted)
+				{
+					this.Delete(com.ID);
+				}
+				else if (com.State == BusinessEntity.States.Modified)
+				{
+					this.OpenConnection();
+					SqlCommand cmdComision = new SqlCommand("EditarComision", sqlConn);
+					cmdComision.CommandType = System.Data.CommandType.StoredProcedure;
+					cmdComision.Parameters.Add("@anioe", System.Data.SqlDbType.Int).Value = com.AñoEspecialidad;
+					cmdComision.Parameters.Add("@descc", System.Data.SqlDbType.VarChar).Value = com.Descripcion;
+					cmdComision.Parameters.Add("@idp", System.Data.SqlDbType.Int).Value = com.IDPlan;
+					cmdComision.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = com.ID;
+					cmdComision.ExecuteNonQuery();
+					this.CloseConnection();
+				}
+				com.State = BusinessEntity.States.Unmodified;
+				
 		}
 	}
 }

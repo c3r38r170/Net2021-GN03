@@ -104,6 +104,11 @@ namespace UI.Desktop
 				Notificar("Error", "Incorrect txtApellido en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
+			else if (!VerificaNombre(txtApellido.Text))
+            {
+				Notificar("Error", "Incorrect Apellido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
 			else if (string.IsNullOrWhiteSpace(txtDireccion.Text))
 			{
 				Notificar("Error", "Incorrect txtDireccion en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -119,6 +124,11 @@ namespace UI.Desktop
 				Notificar("Error", "Incorrect Legajo en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
+			else if (!isNumeric(txtLegajo.Text))
+            {
+				Notificar("Error", "Legajo debe ser un numero", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
 			else if (!VerificaLegajo(PersonaActual, int.Parse(this.txtLegajo.Text)))
 			{
 				Notificar("Error", "Legajo existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -127,6 +137,11 @@ namespace UI.Desktop
 			else if (string.IsNullOrWhiteSpace(this.txtNombre.Text))
 			{
 				Notificar("Error", "Incorrect nombre en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			else if (!VerificaNombre(this.txtNombre.Text))
+            {
+				Notificar("Error", "Incorrect name", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
 			else if (string.IsNullOrWhiteSpace(txtTelefono.Text))
@@ -225,7 +240,13 @@ namespace UI.Desktop
         {
 			switch (Modo) {
 			case ModoForm.Modificacion:
-			case ModoForm.Alta:
+					if (Validar())
+					{
+						GuardarCambios();
+						this.Close();
+					}
+					break;
+				case ModoForm.Alta:
 				if (Validar()){
 					GuardarCambios();
 					Close();
@@ -263,7 +284,7 @@ namespace UI.Desktop
 		public bool VerificaLegajo(Persona persona, int l)
 		{
 			List<Persona> listaPer = new PersonaLogic().GetAll();
-
+			
 			if (Modo == ModoForm.Modificacion)
 			{
 				for (int i = 0; i < listaPer.Count(); i++)
@@ -281,9 +302,26 @@ namespace UI.Desktop
 					if (p.Legajo.Equals(l)) { return false; }
 				}
 			}
-
-
 			return true;
+		}
+
+		public bool isNumeric(string x)
+		{
+			if (Regex.IsMatch(x, @"^[0-9]+$"))
+			{
+				return true;
+			}
+			return false;
+		}
+		public bool VerificaNombre(string n)
+        {
+			Regex name_validation = new Regex(@"^[a-zA-Z]+$");
+
+			if (name_validation.IsMatch(n))
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 }

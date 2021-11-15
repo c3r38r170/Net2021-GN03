@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -97,6 +98,11 @@ namespace UI.Desktop
                 Notificar("Error", "Incorrect txtDescripcion en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
+            else if (!isNumeric(this.txtAñoEspecialidad.Text))
+            {
+                Notificar("Error", "Año Especialidad Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
             else
             {
                 return true;
@@ -105,26 +111,28 @@ namespace UI.Desktop
 
         public override void MapearADatos()
         {
-            if (Modo == ModoForm.Alta)
-            {
-                Comision c = new Comision();
-                ComisionActual = c;
-                ComisionActual.AñoEspecialidad = int.Parse(this.txtAñoEspecialidad.Text);
-                ComisionActual.Descripcion = this.txtDescripcion.Text;
-                ComisionActual.IDPlan = ((KeyValuePair<int, string>)cBoxPlan.SelectedItem).Key;
-                ComisionActual.State = BusinessEntity.States.New;
-            }
-            else if (Modo == ModoForm.Modificacion)
-            {
-                ComisionActual.AñoEspecialidad = int.Parse(this.txtAñoEspecialidad.Text);
-                ComisionActual.Descripcion = this.txtDescripcion.Text;
-                ComisionActual.IDPlan = ((KeyValuePair<int, string>)cBoxPlan.SelectedItem).Key;
-                ComisionActual.State = BusinessEntity.States.Modified;
-            }
-            else if (Modo == ModoForm.Baja)
-            {
-                ComisionActual.State = BusinessEntity.States.Deleted;
-            }
+ 
+                if (Modo == ModoForm.Alta)
+                {
+                    Comision c = new Comision();
+                    ComisionActual = c;
+                    ComisionActual.AñoEspecialidad = int.Parse(this.txtAñoEspecialidad.Text);
+                    ComisionActual.Descripcion = this.txtDescripcion.Text;
+                    ComisionActual.IDPlan = ((KeyValuePair<int, string>)cBoxPlan.SelectedItem).Key;
+                    ComisionActual.State = BusinessEntity.States.New;
+                }
+                else if (Modo == ModoForm.Modificacion)
+                {
+                    ComisionActual.AñoEspecialidad = int.Parse(this.txtAñoEspecialidad.Text);
+                    ComisionActual.Descripcion = this.txtDescripcion.Text;
+                    ComisionActual.IDPlan = ((KeyValuePair<int, string>)cBoxPlan.SelectedItem).Key;
+                    ComisionActual.State = BusinessEntity.States.Modified;
+                }
+                else if (Modo == ModoForm.Baja)
+                {
+                    ComisionActual.State = BusinessEntity.States.Deleted;
+                }
+
         }
 
         public override void GuardarCambios()
@@ -162,6 +170,15 @@ namespace UI.Desktop
                     this.Close();
                     break;
             }
+        }
+
+        public bool isNumeric(string x)
+        {
+            if (Regex.IsMatch(x, @"^[0-9]+$"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

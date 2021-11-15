@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -104,9 +105,19 @@ namespace UI.Desktop
                 Notificar("Error", "Incorrect txtAñosCalendario en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
+            else if (!isNumeric(this.txtAñoCalendario.Text))
+            {
+                Notificar("Error", "Año debe ser un numero", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
             else if (string.IsNullOrWhiteSpace(this.txtCupo.Text))
             {
                 Notificar("Error", "Incorrect txtCupo en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (!isNumeric(this.txtCupo.Text))
+            {
+                Notificar("Error", "Cupo debe ser un numero", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             else if (string.IsNullOrWhiteSpace(this.cBoxMaterias.Text))
@@ -114,7 +125,12 @@ namespace UI.Desktop
                 Notificar("Error", "Incorrect cBoxMaterias en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
-            else if (string.IsNullOrWhiteSpace(this.cBoxComisiones.Text))
+            else if (string.IsNullOrWhiteSpace(this.cBoxComisiones.Text) || this.cBoxComisiones.Text.Equals("(Collection)"))
+            {
+                Notificar("Error", "Incorrect cBoxComisiones en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(this.cBoxMaterias.Text) || this.cBoxComisiones.Text.Equals("(Collection)"))
             {
                 Notificar("Error", "Incorrect cBoxComisiones en blanco", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
@@ -148,9 +164,11 @@ namespace UI.Desktop
         }
         public override void GuardarCambios()
         {
-            MapearADatos();
-            CursoLogic cl = new CursoLogic();
-            cl.Save(cursoActual);
+        
+                MapearADatos();
+                CursoLogic cl = new CursoLogic();
+                cl.Save(cursoActual);
+                 
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -177,6 +195,15 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public bool isNumeric(string x)
+        {
+            if (Regex.IsMatch(x, @"^[0-9]+$"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
