@@ -62,6 +62,7 @@ namespace UI.Desktop
             this.Controls.Add(this.btnAgregarNota);
             this.Name = "MenuDocente";
             this.Text = "MenuDocente";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuDocente_FormClosing);
             this.ResumeLayout(false);
 
         }

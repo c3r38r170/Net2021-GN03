@@ -60,5 +60,10 @@ namespace UI.Desktop
                 this.Close();
             }
         }
+
+        private void MenuDocente_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

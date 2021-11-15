@@ -149,5 +149,10 @@ namespace UI.Desktop
                 this.Close();
             }
         }
+
+        private void MenuAdmin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -92,6 +92,7 @@ namespace UI.Desktop
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MenuAlumno";
             this.Text = "Inscripto En";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuAlumno_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
