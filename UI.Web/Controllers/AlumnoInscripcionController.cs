@@ -12,9 +12,11 @@ namespace UI.Web.Controllers
     public class AlumnoInscripcionController : Controller
     {
         // GET: AlumnoInscripcionController/Create
-        public ActionResult InscripcionCreate()
+        public ActionResult InscripcionCreate(int per)
         {
-            return View(new AlumnoInscripcion());
+            AlumnoInscripcion ai = new AlumnoInscripcion();
+            ai.IDAlumno = per;
+            return View(ai);
         }
 
         // POST: AlumnoInscripcionController/Create
@@ -22,14 +24,11 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult InscripcionCreate(AlumnoInscripcion ai)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            InscripcionLogic il = new InscripcionLogic();
+            ai.Condicion = "cursando";
+            il.Save(ai);
+            //return RedirectToAction("LogIn","Home");
+            return RedirectToAction("Panel", "Home");
         }
     }
 }

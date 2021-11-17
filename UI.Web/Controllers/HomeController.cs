@@ -12,7 +12,7 @@ namespace UI.Web.Controllers {
 		public HomeController(ILogger<HomeController> logger) {
 			_logger = logger;
 		}
-
+		
 		public IActionResult Index() {
 			return View();
 		}
@@ -21,10 +21,23 @@ namespace UI.Web.Controllers {
 		public IActionResult LogIn(string username, string password) {
 			UsuarioLogic ul = new UsuarioLogic();
 			Usuario u=ul.LogIn(username,password);
-			return u.ID == 0?
-				Redirect("/?message=Usuario Incorrecto")
-				:View(u);
+			if (u.ID == 0)
+            {
+				return Redirect("/?message=Usuario Incorrecto");
+
+			}
+            else
+            {
+				//Session["usuario"] = u; //SetObject("usuario", u);
+				//this.Session;
+				return Panel(u);
+            }
 		}
+
+		public IActionResult Panel(Usuario u)
+        {
+			return View(u);
+        }
 
 		public IActionResult PanelAlumno() {
 			return View();
