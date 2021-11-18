@@ -76,7 +76,7 @@ namespace UI.Desktop
 
         private void MenuAlumno_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+           //Application.Exit();
         }
     }
 }

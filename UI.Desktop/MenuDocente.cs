@@ -63,7 +63,7 @@ namespace UI.Desktop
 
         private void MenuDocente_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
         }
     }
 }

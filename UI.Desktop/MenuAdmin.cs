@@ -136,6 +136,11 @@ namespace UI.Desktop
             return abierto;
         }
 
+        private void MenuAdmin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Application.Exit();
+        }
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             string message = $"¿Desea cerrar session?";
@@ -150,9 +155,6 @@ namespace UI.Desktop
             }
         }
 
-        private void MenuAdmin_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
+        
     }
 }
