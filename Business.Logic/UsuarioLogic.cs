@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Business.Entities;
 using Data.Database;
@@ -25,11 +26,12 @@ namespace Business.Logic {
 			UsuarioData.Delete(ID);
 		}
 		public Usuario LogIn(String nombre,String contraseña) {
-			var usuarioAdapter = new UsuarioAdapter();
-			var usuario = usuarioAdapter.GetUserByUsernameAndPassword(nombre, contraseña);
-
-			return usuario;
+			return (new UsuarioAdapter()).GetUserByUsernameAndPassword(nombre, contraseña);
+		}
+		public static bool ComprobarFormatoEmail(string sEmailAComprobar) {
+			String sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+			return Regex.IsMatch(sEmailAComprobar, sFormato) && Regex.Replace(sEmailAComprobar, sFormato, String.Empty).Length == 0;
 		}
 
-  }
+	}
 }

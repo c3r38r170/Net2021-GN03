@@ -130,12 +130,7 @@ namespace UI.Desktop {
 				Notificar("Error", "Incorrect clave", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if ((txtClave.Text).Length < 8)
-			{
-				Notificar("Error", "Incorrect clave.\nDebe tener mas de 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				return false;
-			}
-			else if ((txtConfirmarClave.Text).Length < 8)
+			else if (txtClave.Text.Length < 8)
 			{
 				Notificar("Error", "Incorrect clave.\nDebe tener mas de 8 caracteres", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
@@ -145,7 +140,7 @@ namespace UI.Desktop {
 				Notificar("Error", "Incorrect. clave distinto de Confirmar Clave", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			else if (!ComprobarFormatoEmail(txtEmail.Text))
+			else if (!UsuarioLogic.ComprobarFormatoEmail(txtEmail.Text))
 			{
 				Notificar("Error", "Incorrect email", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
@@ -157,19 +152,6 @@ namespace UI.Desktop {
 		}
 		public void NotificarError(string mensaje) {
 			Notificar("Error", mensaje, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-		}
-		public static bool ComprobarFormatoEmail(string sEmailAComprobar){
-			String sFormato;
-			sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-			if (Regex.IsMatch(sEmailAComprobar, sFormato)) {
-				if (Regex.Replace(sEmailAComprobar, sFormato, String.Empty).Length == 0) {
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
 		}
 		private void btnAceptar_Click(object sender, EventArgs e){
 			switch (Modo)
