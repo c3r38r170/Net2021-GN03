@@ -55,7 +55,7 @@ namespace Data.Database {
 			return usuario;
 		}
 
-        public void Delete(int ID) {
+		public void Delete(int ID) {
 			this.OpenConnection();
 			SqlCommand cmdUsuario = new SqlCommand("DeleteUsuario", sqlConn);
 			cmdUsuario.CommandType = CommandType.StoredProcedure;
@@ -128,5 +128,19 @@ namespace Data.Database {
 				a.PersonaAsociada = (new PersonaAdapter()).GetOne(a.ID_Persona);
 			return a;
 		}
+
+		public object GetByPersonaAsociadaId(int IDAlumno) {
+			this.OpenConnection();
+			SqlCommand cmdLogIn = new SqlCommand("GetUsuarioByPersonaAsociadaId", sqlConn);
+			cmdLogIn.CommandType = CommandType.StoredProcedure;
+			cmdLogIn.Parameters.Add("@persona_id", SqlDbType.Int).Value = IDAlumno;
+			object result = cmdLogIn.ExecuteScalar();
+			if(result == null)
+				return new Usuario();
+			int ID = (int)result;
+			this.CloseConnection();
+			return GetOne(ID);
+		}
+
 	}
 }

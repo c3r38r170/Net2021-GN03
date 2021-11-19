@@ -33,5 +33,8 @@ namespace Business.Logic {
 			return Regex.IsMatch(sEmailAComprobar, sFormato) && Regex.Replace(sEmailAComprobar, sFormato, String.Empty).Length == 0;
 		}
 
+		public object GetByPersonaAsociadaId(int IDAlumno) {
+			return UsuarioData.GetByPersonaAsociadaId(IDAlumno);
+		}
 	}
 }

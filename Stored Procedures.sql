@@ -1,4 +1,4 @@
-/*Ejecutar cada procedimiento aparte.
+﻿/*Ejecutar cada procedimiento aparte.
 No olvidar especificar la base de datos (ej: "USE academia;")*/
 
 /*Comisiones*/
@@ -284,6 +284,13 @@ CREATE PROCEDURE [dbo].[GetUsuarioByNombreUsuarioYContraseña]
 AS
 	BEGIN
 	SELECT id_usuario FROM usuarios WHERE nombre_usuario=@nombre_usuario AND clave=@clave;
+END;
+
+CREATE PROCEDURE [dbo].[GetUsuarioByPersonaAsociadaId]
+	@persona_id INT
+AS
+	BEGIN
+	SELECT id_usuario FROM usuarios WHERE id_persona=@persona_id;
 END;
 
 
