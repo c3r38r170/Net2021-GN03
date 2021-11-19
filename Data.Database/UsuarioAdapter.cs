@@ -34,16 +34,8 @@ namespace Data.Database {
 			cmdUsuario.Parameters.Add("@id", SqlDbType.Int).Value = ID;
 			try { 
 				SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
-				if (drUsuario.Read()) {
-					usuario.ID = (int)drUsuario["id_usuario"];
-					usuario.NombreUsuario = (string)drUsuario["nombre_usuario"];
-					usuario.Clave = (string)drUsuario["clave"];
-					usuario.Habilitado = (bool)drUsuario["habilitado"];
-					usuario.Nombre = (string)drUsuario["nombre"];
-					usuario.Apellido = (string)drUsuario["apellido"];
-					usuario.Email = (string)drUsuario["email"];
-					usuario.PersonaAsociada = (new PersonaAdapter()).GetOne((int)drUsuario["id_persona"]);
-				}
+				if (drUsuario.Read())
+					usuario = CreateUsuarioFromDataReader(drUsuario);
 				drUsuario.Close();
 			} catch (Exception Ex) {
 				// TODO try catch finally en la donde llamen acá
