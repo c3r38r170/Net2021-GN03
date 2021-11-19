@@ -22,13 +22,7 @@ namespace Data.Database
 				SqlDataReader drCurso = cmdCurso.ExecuteReader();
 				while (drCurso.Read())
 				{
-					Curso cur = new Curso();
-					cur.ID = (int)drCurso["id_curso"];
-					cur.AñoCalendario = (int)drCurso["anio_calendario"];
-					cur.Cupo = (int)drCurso["cupo"];
-					cur.IDComision = (int)drCurso["id_comision"];
-					cur.IDMateria = (int)drCurso["id_materia"];
-					cursos.Add(cur);
+					cursos.Add(CreateCursoFromDataReader(drCurso));
 				}
 				drCurso.Close();
 			}
@@ -154,7 +148,7 @@ namespace Data.Database
 
         public Curso GetOne(int ID)
 		{
-			Curso cur = new Curso();
+			Curso cur=null;
 			this.OpenConnection();
 			SqlCommand cmdCurso = new SqlCommand("SelectCursoById", sqlConn);
 			cmdCurso.CommandType = CommandType.StoredProcedure;
@@ -164,11 +158,7 @@ namespace Data.Database
 				SqlDataReader drCurso = cmdCurso.ExecuteReader();
 				if (drCurso.Read())
 				{
-					cur.ID = (int)drCurso["id_curso"];
-					cur.AñoCalendario = (int)drCurso["anio_calendario"];
-					cur.Cupo = (int)drCurso["cupo"];
-					cur.IDComision = (int)drCurso["id_comision"];
-					cur.IDMateria = (int)drCurso["id_materia"];
+					cur = CreateCursoFromDataReader(drCurso);
 				}
 				drCurso.Close();
 			}
@@ -227,6 +217,18 @@ namespace Data.Database
 				this.CloseConnection();
 			}
 			cur.State = BusinessEntity.States.Unmodified;
+		}
+
+		private Curso CreateCursoFromDataReader(SqlDataReader dR) {
+			Curso c = new Curso();
+			c.ID = (int)dR["id_curso"];
+			c.AñoCalendario = (int)dR["anio_calendario"];
+			c.Cupo = (int)dR["cupo"];
+			c.IDComision = (int)dR["id_comision"];
+			c.IDMateria = (int)dR["id_materia"];
+			c.ComisionAsociada = (new ComisionAdapter()).GetOne(c.IDComision);
+			c.MateriaAsociada = (new MateriaAdapter()).GetOne(c.IDMateria);
+			return c;
 		}
 	}
 }

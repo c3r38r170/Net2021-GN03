@@ -141,28 +141,23 @@ namespace UI.Desktop
             }
         }
 
-        public override void MapearADatos()
-        {
-            if (Modo == ModoForm.Alta)
-            {
-                Curso c = new Curso();
-                cursoActual = c;
-                cursoActual.AñoCalendario = int.Parse(this.txtAñoCalendario.Text);
-                cursoActual.Cupo = int.Parse(this.txtCupo.Text);
-                cursoActual.IDComision = ((KeyValuePair<int, string>)cBoxComisiones.SelectedItem).Key;
-                cursoActual.IDMateria = ((KeyValuePair<int, string>)cBoxMaterias.SelectedItem).Key;
-                cursoActual.State = BusinessEntity.States.New;
-            }
-            else if (Modo == ModoForm.Modificacion)
-            {
-                cursoActual.AñoCalendario = int.Parse(this.txtAñoCalendario.Text);
-                cursoActual.Cupo = int.Parse(this.txtCupo.Text);
-                cursoActual.IDComision = ((KeyValuePair<int, string>)cBoxComisiones.SelectedItem).Key;
-                cursoActual.IDMateria = ((KeyValuePair<int, string>)cBoxMaterias.SelectedItem).Key;
-                cursoActual.State = BusinessEntity.States.Modified;
-            }
-        }
-        public override void GuardarCambios()
+		public override void MapearADatos() {
+			if(Modo == ModoForm.Alta) {
+				Curso c = new Curso();
+				cursoActual = c;
+				cursoActual.State = BusinessEntity.States.New;
+			} else if(Modo == ModoForm.Modificacion) {
+				cursoActual.State = BusinessEntity.States.Modified;
+			} else if(Modo == ModoForm.Baja)
+				return;
+			cursoActual.AñoCalendario = int.Parse(this.txtAñoCalendario.Text);
+			cursoActual.Cupo = int.Parse(this.txtCupo.Text);
+			cursoActual.IDComision = ((KeyValuePair<int, string>)cBoxComisiones.SelectedItem).Key;
+			cursoActual.ComisionAsociada = (new ComisionLogic()).GetOne(cursoActual.IDComision);
+			cursoActual.IDMateria = ((KeyValuePair<int, string>)cBoxMaterias.SelectedItem).Key;
+			cursoActual.MateriaAsociada = (new MateriaLogic()).GetOne(cursoActual.IDMateria);
+		}
+		public override void GuardarCambios()
         {
         
                 MapearADatos();
