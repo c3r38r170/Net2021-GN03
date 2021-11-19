@@ -27,5 +27,9 @@ namespace Business.Entities {
 			get => _MateriaAsociada;
 			set => _MateriaAsociada = value;
 		}
+
+		public string Descripcion {
+			get => ComisionAsociada.Descripcion + " " + MateriaAsociada.Descripcion;
+		}
 	}
 }

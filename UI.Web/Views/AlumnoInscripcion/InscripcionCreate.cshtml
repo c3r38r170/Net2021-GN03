@@ -1,4 +1,6 @@
 ﻿@model Business.Entities.AlumnoInscripcion
+@using Data.Database;
+@using Business.Logic;
 
 @{
     ViewData["Title"] = "InscripcionCreate";
@@ -10,10 +12,12 @@
     <div class="col-md-4">
         <form asp-action="InscripcionCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="IDAlumno" type="hidden"/>
+            <input asp-for="IDAlumno" type="hidden" />
             <div class="form-group">
                 <label asp-for="IDCurso" class="control-label"></label>
-                <input asp-for="IDCurso" class="form-control" />
+                <select asp-for="IDCurso" class="form-control" asp-items="(new CursoAdapter()).GetAll().Where(c=>!(new CursoLogic()).yaEstaInscripto(c.ID,Model.IDAlumno)).Select(c => new SelectListItem(c.Descripcion, c.ID.ToString()))" required>
+                    <option></option>
+                </select>
                 <span asp-validation-for="IDCurso" class="text-danger"></span>
             </div>
             <div class="form-group">
