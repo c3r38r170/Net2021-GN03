@@ -18,7 +18,7 @@
                 <select asp-for="IDCurso" class="form-control" asp-items="(new CursoAdapter()).GetAll().Where(c=>!(new CursoLogic()).yaEstaInscripto(c.ID,Model.IDAlumno)).Select(c => new SelectListItem(c.Descripcion, c.ID.ToString()))" required>
                     <option></option>
                 </select>
-                <span asp-validation-for="IDCurso" class="text-danger"></span>
+                <span asp-validation-for="IDCurso" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && (new CursoLogic()).yaEstaInscripto(Model.IDCurso, Model.IDAlumno))@Html.Raw("No puede inscribirse a un curso al que ya está escrito.")</span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

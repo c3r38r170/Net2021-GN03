@@ -19,16 +19,19 @@ namespace UI.Web.Controllers
             return View(ai);
         }
 
-        // POST: AlumnoInscripcionController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult InscripcionCreate(AlumnoInscripcion ai)
-        {
-            InscripcionLogic il = new InscripcionLogic();
-            ai.Condicion = "cursando";
-            il.Save(ai);
-            //return RedirectToAction("LogIn","Home");
-            return RedirectToAction("Panel", "Home");
-        }
-    }
+		// POST: AlumnoInscripcionController/Create
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult InscripcionCreate(AlumnoInscripcion ai) {
+			if((new CursoLogic()).yaEstaInscripto(ai.IDCurso, ai.IDAlumno)) {
+				ai.State = BusinessEntity.States.Unmodified;
+				return View(ai);
+			}
+
+			InscripcionLogic il = new InscripcionLogic();
+			ai.Condicion = "Cursando";
+			il.Save(ai);
+			return RedirectToAction("Panel", "Home");
+		}
+	}
 }
