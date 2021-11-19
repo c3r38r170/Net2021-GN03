@@ -70,7 +70,7 @@ namespace Data.Database
 			return existe;
 		}
 
-        public object GetCursosMateriasComisiones()
+		public object GetCursosMateriasComisiones()
         {
 			ComisionAdapter ca = new ComisionAdapter();
 			MateriaAdapter ma = new MateriaAdapter();
@@ -229,6 +229,23 @@ namespace Data.Database
 			c.ComisionAsociada = (new ComisionAdapter()).GetOne(c.IDComision);
 			c.MateriaAsociada = (new MateriaAdapter()).GetOne(c.IDMateria);
 			return c;
+		}
+
+		public bool YaExiste(int año, int IDComision,int IDMateria) {
+			try {
+				this.OpenConnection();
+				SqlCommand cmd = new SqlCommand("SELECT * FROM id_curso WHERE anio_calendario=@año AND id_comision=@idComision AND id_materia=@idMateria", sqlConn);
+				cmd.Parameters.Add("@año", SqlDbType.Int).Value = año;
+				cmd.Parameters.Add("@idComision", SqlDbType.Int).Value = IDComision;
+				cmd.Parameters.Add("@idMateria", SqlDbType.Int).Value = IDMateria;
+				SqlDataReader dr = cmd.ExecuteReader();
+				return dr.Read();
+			} catch(Exception Ex) {
+				Exception ExcepcionManejada = new Exception("Error al recuperar lista de Cursos.", Ex);
+				throw ExcepcionManejada;
+			} finally {
+				this.CloseConnection();
+			}
 		}
 	}
 }

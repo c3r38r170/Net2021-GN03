@@ -1,5 +1,5 @@
 ﻿@model Business.Entities.Curso
-@using Data.Database;
+@using Business.Logic;
 @{
     ViewData["Title"] = "CursoCreate";
 }
@@ -11,26 +11,30 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CursoCreate">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.ID == -1)@Html.Raw("Un curso para esta comisión, materia y año ya existe.")</div>
             <div class="form-group">
                 <label asp-for="AñoCalendario" class="control-label"></label>
-                <input asp-for="AñoCalendario" class="form-control" />
-                <span asp-validation-for="AñoCalendario" class="text-danger"></span>
+                <input asp-for="AñoCalendario" class="form-control" min="1959" required/>
+                <span asp-validation-for="AñoCalendario" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.AñoCalendario < 1959)@Html.Raw("El año no puede ser menor a 1959.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="Cupo" class="control-label"></label>
-                <input asp-for="Cupo" class="form-control" />
-                <span asp-validation-for="Cupo" class="text-danger"></span>
+                <input asp-for="Cupo" class="form-control" required min="1"/>
+                <span asp-validation-for="Cupo" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.Cupo < 1)@Html.Raw("El cupo es necesario, y debe ser un número entero positivo.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="IDComision" class="control-label"></label>
-                <select asp-for="IDComision" asp-items="(new ComisionAdapter()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))">
+                <select asp-for="IDComision" asp-items="(new ComisionLogic()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))" required>
+                    <option></option>
                 </select>
+                <span asp-validation-for="IDComision" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.IDComision < 1)@Html.Raw("Debe elegir una comisión.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="IDMateria" class="control-label"></label>
-                <select asp-for="IDMateria" asp-items="(new MateriaAdapter()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))">
+                <select asp-for="IDMateria" asp-items="(new MateriaLogic()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))" required>
+                    <option></option>
                 </select>
+                <span asp-validation-for="IDMateria" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.IDMateria < 1)@Html.Raw("Debe elegir una materia.")</span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

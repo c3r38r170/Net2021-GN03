@@ -46,5 +46,17 @@ namespace Business.Logic
             return CursoData.yaEstaInscripto(iD, idPersonaActual);
         }
 
+		public bool isValid(Curso c) {
+			if(CursoData.YaExiste(c.AñoCalendario,c.IDComision,c.IDMateria)) {
+				c.ID = -1;
+				return false;
+			}
+			return !string.IsNullOrWhiteSpace(c.Descripcion)
+				&& c.AñoCalendario >= 1595
+				&& c.Cupo > 0
+				&& c.IDComision > 0
+				&& c.IDMateria > 0;
+		}
+
     }
 }

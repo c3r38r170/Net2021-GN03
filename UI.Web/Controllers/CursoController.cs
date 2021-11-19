@@ -30,9 +30,14 @@ namespace UI.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CursoCreate(Curso cu)
         {
-            CursoLogic cl = new CursoLogic();
-            cl.Save(cu);
-            return RedirectToAction("CursoIndex");
+			var cL = new CursoLogic();
+			if(cL.isValid(cu)) {
+				cL.Save(cu);
+				return RedirectToAction("CursoIndex");
+			} else {
+				cu.State = BusinessEntity.States.Unmodified;
+				return View(cu);
+			}
         }
 
         // GET: CursoController/Edit/5
@@ -45,13 +50,17 @@ namespace UI.Web.Controllers
         // POST: CursoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CursoEdit(Curso cu)
-        {
-            CursoLogic cl = new CursoLogic();
-            cu.State = BusinessEntity.States.Modified;
-            cl.Save(cu);
-            return RedirectToAction("CursoIndex");
-        }
+        public ActionResult CursoEdit(Curso cu) {
+			var cL = new CursoLogic();
+			if(cL.isValid(cu)) {
+				cu.State = BusinessEntity.States.Modified;
+				cL.Save(cu);
+				return RedirectToAction("CursoIndex");
+			} else {
+				cu.State = BusinessEntity.States.Unmodified;
+				return View(cu);
+			}
+		}
 
         // GET: CursoController/Delete/5
         public ActionResult CursoDelete(int id)
