@@ -15,18 +15,19 @@
             @Html.HiddenFor(model => model.ID)
             <div class="form-group">
                 <label asp-for="AñoEspecialidad" class="control-label"></label>
-                <input asp-for="AñoEspecialidad" class="form-control" />
-                <span asp-validation-for="AñoEspecialidad" class="text-danger"></span>
+                <input asp-for="AñoEspecialidad" class="form-control" min="1959" required/>
+                <span asp-validation-for="AñoEspecialidad" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.AñoEspecialidad < 1959)@Html.Raw("El año no puede ser menor a 1959.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                <input asp-for="Descripcion" class="form-control" required/>
+                <span asp-validation-for="Descripcion" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && (Model.Descripcion == null || Model.Descripcion.Trim() == ""))@Html.Raw("La descripción no puede estar vacía.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="IDPlan" class="control-label"></label>
-                <select asp-for="IDPlan" asp-items="(new PlanAdapter()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))">
+                <select asp-for="IDPlan" asp-items="(new PlanAdapter()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))" required>
                 </select>
+                <span asp-validation-for="IDPlan" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.IDPlan < 1)@Html.Raw("Debe elegir un plan.")</span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

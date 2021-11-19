@@ -35,5 +35,10 @@ namespace Business.Logic
         {
             comisionData.Save(c);
         }
+		public bool isValid(Comision c) {
+			return !string.IsNullOrWhiteSpace(c.Descripcion)
+				&& c.AñoEspecialidad >= 1959
+				&& c.IDPlan > 0;
+		}
     }
 }

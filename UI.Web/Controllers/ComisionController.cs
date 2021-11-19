@@ -30,15 +30,11 @@ namespace UI.Web.Controllers
         // POST: ComisionController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ComisionCreate(Comision comi)
-        {
-			if(comi.Descripcion != null
-				&& comi.Descripcion.Trim() != ""
-				&& comi.AñoEspecialidad >= 1959
-				&& comi.IDPlan > 0) {
-
+        public ActionResult ComisionCreate(Comision comi) {
+			ComisionLogic col = new ComisionLogic();
+			if(col.isValid(comi)) {
 				comi.Descripcion = comi.Descripcion.Trim();
-				(new ComisionLogic()).Save(comi);
+				col.Save(comi);
 				return RedirectToAction("ComisionIndex");
 			} else {
 				comi.State = BusinessEntity.States.Unmodified;
@@ -56,12 +52,17 @@ namespace UI.Web.Controllers
         // POST: ComisionController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ComisionEdit(Comision comi)
-        {
-            ComisionLogic col = new ComisionLogic();
-            comi.State = BusinessEntity.States.Modified;
-            col.Save(comi);
-            return RedirectToAction("ComisionIndex");
+        public ActionResult ComisionEdit(Comision comi) {
+			ComisionLogic col = new ComisionLogic();
+			if(col.isValid(comi)) {
+				comi.State = BusinessEntity.States.Modified;
+				comi.Descripcion = comi.Descripcion.Trim();
+				(new ComisionLogic()).Save(comi);
+				return RedirectToAction("ComisionIndex");
+			} else {
+				comi.State = BusinessEntity.States.Unmodified;
+				return View(comi);
+			}
         }
     }
 }
