@@ -1,4 +1,5 @@
 ﻿@model Business.Entities.Usuario
+@using Business.Logic
 
 @{
     ViewData["Title"] = "UsuarioEdit";
@@ -17,28 +18,33 @@
             @Html.HiddenFor(model => model.ID)
             <div class="form-group">
                 <label asp-for="NombreUsuario" class="control-label"></label>
-                <input asp-for="NombreUsuario" class="form-control" />
-                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+                <input asp-for="NombreUsuario" class="form-control" required/>
+                <span asp-validation-for="NombreUsuario" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.NombreUsuario))@Html.Raw("Debe ingresar un nombre de usuario.")</span>
             </div>
-            <div class="form-group">
+            <div class="form-group clave">
                 <label asp-for="Clave" class="control-label"></label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
+                <input asp-for="Clave" class="form-control" required minlength="8"/>
+                <span asp-validation-for="Clave" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && (string.IsNullOrWhiteSpace(Model.Clave) || Model.Clave.Length<8))@Html.Raw("La clave debe tener 8 caracteres como mínimo.")</span>
+            </div>
+            <div class="form-group clave">
+                <label for="clave-confirmacion" class="control-label">Confirme contraseña:</label>
+                <input id="clave-confirmacion" class="form-control" required minlength="8"/>
+                <span id="clave-confirmacion-validacion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <input asp-for="Nombre" class="form-control" required />
+                <span asp-validation-for="Nombre" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Nombre))@Html.Raw("Debe ingresar un nombre.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
+                <input asp-for="Apellido" class="form-control" required />
+                <span asp-validation-for="Apellido" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Apellido))@Html.Raw("Debe ingresar un apellido.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" class="form-control" required />
+                <span asp-validation-for="Email" class="text-danger">@if(Model.State == Business.Entities.BusinessEntity.States.Unmodified && (string.IsNullOrWhiteSpace(Model.Email) || !UsuarioLogic.ComprobarFormatoEmail(Model.Email)))@Html.Raw("Debe ingresar una dirección de correo.")</span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -49,6 +55,16 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <script>
+            var camposClave = document.querySelectorAll('.clave > input');
+            camposClave[1].value = camposClave[0].value;
+            document.querySelector('form').onsubmit = () => {
+                let clavesCoinciden = camposClave[0].value == camposClave[1].value;
+                if(!clavesCoinciden)
+                    document.getElementById('clave-confirmacion-validacion').innerText ='Las claves deben coincidir.';
+                return clavesCoinciden;
+            }
+        </script>
     </div>
 </div>
 
