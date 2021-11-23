@@ -16,10 +16,10 @@
 }
 @if(Model.PersonaAsociada.TipoPersona == Persona.Tipo.Alumno) {
     <div class="form-group">
-        @Html.ActionLink("Inscribirse a un curso", "InscripcionCreate", "AlumnoInscripcion", new { per = Model.PersonaAsociada.ID })
+        @Html.ActionLink("Inscribirse", "InscripcionCreate", "AlumnoInscripcion", new { per = Model.PersonaAsociada.ID })
     </div>
     <div class="form-group">
-        @Html.ActionLink("Cursos en los que está inscripto", "InscripcionListado", "AlumnoInscripcion", new { per = Model.PersonaAsociada.ID })
+        @Html.ActionLink("Estado Académico", "InscripcionListado", "AlumnoInscripcion", new { id = Model.PersonaAsociada.ID })
     </div>
 }
 @if(Model.PersonaAsociada.TipoPersona == Persona.Tipo.Admin) {

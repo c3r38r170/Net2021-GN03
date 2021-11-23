@@ -35,26 +35,28 @@ namespace UI.Web.Controllers
 		}
 
 		[HttpGet]
-		public ActionResult InscripcionListar(int id)
-        {
+		public ActionResult InscripcionListado(int id) {
+			InscripcionLogic il = new InscripcionLogic();
+			return View(il.GetInscripcionesAlumnoActual(id));
+		}
+		[HttpGet]
+		public ActionResult InscripcionListar(int id) {
 			InscripcionLogic il = new InscripcionLogic();
 			return View(il.GetAlumnosPorCurso(id));
-        }
-        public ActionResult InscripcionEdit(int id)
-        {
-            InscripcionLogic il = new InscripcionLogic();
-            return View(il.GetOne(id));
-        }
+		}
+		public ActionResult InscripcionEdit(int id) {
+			InscripcionLogic il = new InscripcionLogic();
+			return View(il.GetOne(id));
+		}
 
-        // POST: PlanController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult InscripcionEdit(AlumnoInscripcion ai)
-        {
-            InscripcionLogic il = new InscripcionLogic();
-            ai.State = BusinessEntity.States.Modified;
-            il.Save(ai);
-            return RedirectToAction("InscripcionListar", new { id = ai.IDCurso});
-        }
-    }
+		// POST: PlanController/Edit/5
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult InscripcionEdit(AlumnoInscripcion ai) {
+			InscripcionLogic il = new InscripcionLogic();
+			ai.State = BusinessEntity.States.Modified;
+			il.Save(ai);
+			return RedirectToAction("InscripcionListar", new { id = ai.IDCurso });
+		}
+	}
 }

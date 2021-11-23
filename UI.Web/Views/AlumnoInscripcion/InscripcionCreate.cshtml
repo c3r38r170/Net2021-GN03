@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="IDAlumno" type="hidden" />
             <div class="form-group">
-                <label asp-for="IDCurso" class="control-label"></label>
+                <label asp-for="IDCurso" class="control-label">Curso</label>
                 <select asp-for="IDCurso" class="form-control" asp-items="(new CursoAdapter()).GetAll().Where(c=>!(new CursoLogic()).yaEstaInscripto(c.ID,Model.IDAlumno)).Select(c => new SelectListItem(c.Descripcion, c.ID.ToString()))" required>
                     <option></option>
                 </select>
