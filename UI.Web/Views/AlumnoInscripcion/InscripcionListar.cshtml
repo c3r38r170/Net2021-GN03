@@ -12,14 +12,11 @@
             <th>
                 Alumno
             </th>
-            <!--<th>
-                @Html.DisplayNameFor(model => model.IDCurso)
-            </th>-->
             <th>
-                @Html.DisplayNameFor(model => model.Condicion)
+                Condicion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nota)
+                Nota
             </th>
 
         </tr>
@@ -29,11 +26,7 @@
             <tr>
                 <td>
                     @Html.Raw((new PersonaLogic()).GetOne(item.IDAlumno).NombreCompleto)
-                    <!--@Html.DisplayFor(modelItem => item.IDAlumno)-->
                 </td>
-                <!--<td>
-                    @Html.DisplayFor(modelItem => item.IDCurso)
-                </td>-->
                 <td>
                     @Html.DisplayFor(modelItem => item.Condicion)
                 </td>

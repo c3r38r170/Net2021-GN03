@@ -40,5 +40,21 @@ namespace UI.Web.Controllers
 			InscripcionLogic il = new InscripcionLogic();
 			return View(il.GetAlumnosPorCurso(id));
         }
-	}
+        public ActionResult InscripcionEdit(int id)
+        {
+            InscripcionLogic il = new InscripcionLogic();
+            return View(il.GetOne(id));
+        }
+
+        // POST: PlanController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult InscripcionEdit(AlumnoInscripcion ai)
+        {
+            InscripcionLogic il = new InscripcionLogic();
+            ai.State = BusinessEntity.States.Modified;
+            il.Save(ai);
+            return RedirectToAction("InscripcionListar", new { id = ai.IDCurso});
+        }
+    }
 }

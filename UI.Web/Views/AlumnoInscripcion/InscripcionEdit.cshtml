@@ -1,0 +1,42 @@
+﻿@model Business.Entities.AlumnoInscripcion
+
+@{
+    ViewData["Title"] = "InscripcionEdit";
+}
+
+<h1>InscripcionEdit</h1>
+
+<h4>AlumnoInscripcion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InscripcionEdit">
+            @Html.HiddenFor(model => model.IDCurso)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">          
+                <select asp-for="Condicion" required>
+                    <option></option>
+                    <option>Libre</option>
+                    <option>Cursando</option>
+                    <option>Regular</option>
+                    <option>Aprobado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Nota" class="control-label"></label>
+                <input asp-for="Nota" class="form-control" />
+                <span asp-validation-for="Nota" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="InscripcionListar">Volver a inscripciones</a>
+</div>
+
