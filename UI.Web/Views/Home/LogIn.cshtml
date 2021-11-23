@@ -1,28 +1,28 @@
 ﻿@using Business.Entities
+@using Business.Logic
 @{
     ViewData["Title"] = "LogIn";
 }
 
+@if(Model.PersonaAsociada == null)
+    Model.PersonaAsociada = (new PersonaLogic()).GetOne(Model.ID_Persona);
+
 <h1>Bienvenido @Model.Nombre</h1>
 
-@if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Docente)
-{
+@if(Model.PersonaAsociada.TipoPersona == Persona.Tipo.Docente) {
     <div class="form-group">
-        @Html.ActionLink("Registrar Nota", "RegistroNotasIndex", "RegistroNotas", new { per = Model.PersonaAsociada.ID },null)
+        @Html.ActionLink("Registrar Nota", "RegistroNotasIndex", "RegistroNotas", new { per = Model.PersonaAsociada.ID }, null)
     </div>
-    <!--, new { per = Model.PersonaAsociada.ID }a asp-action="RegistrarNotasIndex" asp-controller="">Registrar notas</a>-->
 }
-@if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Alumno)
-{
+@if(Model.PersonaAsociada.TipoPersona == Persona.Tipo.Alumno) {
     <div class="form-group">
         @Html.ActionLink("Inscribirse a un curso", "InscripcionCreate", "AlumnoInscripcion", new { per = Model.PersonaAsociada.ID })
     </div>
     <div class="form-group">
-        <a asp-action="" asp-controller="">Cursos en los que está inscripto</a>
+        @Html.ActionLink("Cursos en los que está inscripto", "InscripcionListado", "AlumnoInscripcion", new { per = Model.PersonaAsociada.ID })
     </div>
 }
-@if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Admin)
-{
+@if(Model.PersonaAsociada.TipoPersona == Persona.Tipo.Admin) {
     <div class="form-group">
         <a asp-action="UsuarioIndex" asp-controller="Usuario">Lista de Usuarios</a>
     </div>
