@@ -7,7 +7,10 @@
 
 @if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Docente)
 {
-    <a asp-action="" asp-controller="">Registrar notas</a>
+    <div class="form-group">
+        @Html.ActionLink("Registrar Nota", "RegistroNotasIndex", "RegistroNotas", new { per = Model.PersonaAsociada.ID },null)
+    </div>
+    <!--, new { per = Model.PersonaAsociada.ID }a asp-action="RegistrarNotasIndex" asp-controller="">Registrar notas</a>-->
 }
 @if (Model.PersonaAsociada.TipoPersona == Persona.Tipo.Alumno)
 {
