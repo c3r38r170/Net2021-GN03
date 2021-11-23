@@ -37,5 +37,14 @@ namespace Business.Logic
         {
             MateriaData.Delete(ID);
         }
+
+        public bool isValid(Materia m)
+        {
+            return !string.IsNullOrWhiteSpace(m.Descripcion)
+                && m.HSSemanales > 0
+                && m.HSTotales > 0
+                && m.IDPlan > 0
+                && m.HSTotales > m.HSSemanales;
+        }
      }
 }
