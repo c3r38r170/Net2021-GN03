@@ -29,7 +29,7 @@ namespace Business.Entities {
 		}
 
 		public string Descripcion {
-			get => ComisionAsociada.Descripcion + " " + MateriaAsociada.Descripcion;
+			get => ComisionAsociada.Descripcion + " - " + MateriaAsociada.Descripcion;
 		}
 	}
 }
