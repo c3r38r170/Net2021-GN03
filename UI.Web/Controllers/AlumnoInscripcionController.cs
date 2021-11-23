@@ -31,7 +31,7 @@ namespace UI.Web.Controllers
 			InscripcionLogic il = new InscripcionLogic();
 			ai.Condicion = "Cursando";
 			il.Save(ai);
-			return RedirectToAction("Panel", "Home",(new UsuarioLogic()).GetByPersonaAsociadaId(ai.IDAlumno));
+			return RedirectToAction("LogIn", "Home",(new UsuarioLogic()).GetByPersonaAsociadaId(ai.IDAlumno));
 		}
 
 		[HttpGet]
