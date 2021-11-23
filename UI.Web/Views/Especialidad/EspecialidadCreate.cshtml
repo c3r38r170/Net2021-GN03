@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
                 <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                <span asp-validation-for="Descripcion" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Descripcion))@Html.Raw("La descripción no debe estar vacía.")</span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
