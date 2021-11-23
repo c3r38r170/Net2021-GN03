@@ -15,22 +15,23 @@
             <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
                 <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                <span asp-validation-for="Descripcion" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Descripcion))@Html.Raw("La descripción no debe estar vacía.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="HSSemanales" class="control-label"></label>
                 <input asp-for="HSSemanales" class="form-control" />
-                <span asp-validation-for="HSSemanales" class="text-danger"></span>
+                <span asp-validation-for="HSSemanales" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.HSSemanales < 1)@Html.Raw("Las horas semanales deben estar y deben ser un número entero positivo.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="HSTotales" class="control-label"></label>
                 <input asp-for="HSTotales" class="form-control" />
-                <span asp-validation-for="HSTotales" class="text-danger"></span>
+                <span asp-validation-for="HSTotales" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.HSTotales < 1 && Model.HSTotales > Model.HSSemanales)@Html.Raw("Las horas totales deben estar y deben ser un número entero positivo y mayor a las semanales.")</span>
             </div>
             <div class="form-group">
                 <label asp-for="IDPlan" class="control-label"></label>
                 <select asp-for="IDPlan" asp-items="(new PlanAdapter()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))">
                 </select>
+                <span asp-validation-for="IDPlan" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.IDPlan < 1)@Html.Raw("Debe elegir un plan.")</span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
