@@ -28,19 +28,8 @@ namespace UI.Web.Controllers {
 			}
             else
             {
-				//Session["usuario"] = u; //SetObject("usuario", u);
-				//this.Session;
-				return Panel(u);
+				return View(u);
             }
-		}
-
-		public IActionResult Panel(Usuario u)
-        {
-			return View(u);
-        }
-
-		public IActionResult PanelAlumno() {
-			return View();
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
