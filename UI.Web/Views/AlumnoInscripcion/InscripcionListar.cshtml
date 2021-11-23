@@ -1,0 +1,49 @@
+﻿
+@model IEnumerable<Business.Entities.AlumnoInscripcion>
+@{
+    ViewData["Title"] = "InscripcionListar";
+}
+
+<h1>Alumnos Inscriptos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDAlumno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDCurso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Condicion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nota)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDAlumno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCurso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condicion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "InscripcionEdit", new { id = item.ID }) 
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

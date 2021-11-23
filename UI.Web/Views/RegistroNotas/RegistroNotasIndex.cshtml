@@ -1,5 +1,6 @@
 ﻿
 @model IEnumerable<Business.Entities.DocenteCurso>
+@{
     ViewData["Title"] = "RegistroNotasIndex";
 }
 
@@ -21,22 +22,20 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDCurso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDDocente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cargo)
-                </td>
-       
-                <!-- <td>
-                    Html.ActionLink("Editar", "CursoEdit", new { id = item.ID }) |
-                    Html.ActionLink("Eliminar", "CursoDelete", new { id = item.ID })
-                </td>-->
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCurso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDDocente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cargo)
+            </td>
+            <td>
+                @Html.ActionLink("Seleccionar Curso", "RegistroNotasCarga", new { id = item.IDCurso })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

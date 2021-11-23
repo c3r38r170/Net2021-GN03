@@ -19,17 +19,12 @@ namespace UI.Web.Controllers
         }
 
         // GET: RegistroNotasController/Details/5
-        public ActionResult Details(int id)
-        {
-           return View();
-        }
+
         
         // GET: RegistroNotasController/Create
-        public ActionResult RegistroNotasCreate(int per)
+        public ActionResult RegistroNotasCarga(int id)
         {
-            DocenteCurso dc = new DocenteCurso();
-            dc.IDDocente = per;
-            return View(dc);
+            return RedirectToAction("InscripcionListar", "AlumnoInscripcion", new { id });
         }
 
         // POST: RegistroNotasController/Create
