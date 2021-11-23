@@ -102,7 +102,7 @@ namespace UI.Desktop
             this.cBoxCondicion.Items.Add("Cursando");
             this.cBoxCondicion.Items.Add("Libre");
             this.cBoxCondicion.Items.Add("Regular");
-            this.cBoxCondicion.Items.Add("Promovido");
+            this.cBoxCondicion.Items.Add("Aprobado");
         }
 
         public bool isNumeric(string x)
