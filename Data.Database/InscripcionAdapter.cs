@@ -250,6 +250,22 @@ namespace Data.Database
             return ListaInscripcionesAlumnoActual;
         }
 
+        public List<AlumnoInscripcion> GetAlumnosPorCurso(int idCurso)
+        {
+            List<AlumnoInscripcion> ListaTodasLasInscripciones = this.GetAll();
+            List<AlumnoInscripcion> ListaInscripcionesAlumnoEnCurso = new List<AlumnoInscripcion>();
+
+            foreach (AlumnoInscripcion ai in ListaTodasLasInscripciones)
+            {
+                if (ai.IDCurso == idCurso)
+                {
+                    ListaInscripcionesAlumnoEnCurso.Add(ai);
+                }
+            }
+
+            return ListaInscripcionesAlumnoEnCurso;
+        }
+
         public List<AlumnoInscripcion> GetAll()
         {
             List<AlumnoInscripcion> ListaInscripciones = new List<AlumnoInscripcion>();

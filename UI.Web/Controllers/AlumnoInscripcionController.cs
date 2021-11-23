@@ -34,10 +34,11 @@ namespace UI.Web.Controllers
 			return RedirectToAction("Panel", "Home",(new UsuarioLogic()).GetByPersonaAsociadaId(ai.IDAlumno));
 		}
 
-		public ActionResult InscripcionListar(int IDCurso)
+		[HttpGet]
+		public ActionResult InscripcionListar(int id)
         {
 			InscripcionLogic il = new InscripcionLogic();
-			return View(il.GetAlumnosInscriptosEnCurso(IDCurso));
+			return View(il.GetAlumnosPorCurso(id));
         }
 	}
 }
