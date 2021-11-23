@@ -28,6 +28,7 @@ namespace Business.Entities {
 		public Plan Plan { get => _Plan; set => _Plan = value; }
 		public DateTime FechaNacimiento { get => _FechaNacimiento; set => _FechaNacimiento = value; }
 		//public int TipoPersona { get => _tipoPersona; set => _tipoPersona = value; }
+		public string NombreCompleto { get => Nombre + " " + Apellido; }
 		public Tipo TipoPersona { get => _tipoPersona; set => _tipoPersona = value; }
 		public enum Tipo
 		{

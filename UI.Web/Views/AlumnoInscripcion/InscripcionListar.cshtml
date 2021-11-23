@@ -1,5 +1,5 @@
-﻿
-@model IEnumerable<Business.Entities.AlumnoInscripcion>
+﻿@model IEnumerable<Business.Entities.AlumnoInscripcion>
+@using Business.Logic
 @{
     ViewData["Title"] = "InscripcionListar";
 }
@@ -10,11 +10,11 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IDAlumno)
+                Alumno
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.IDCurso)
-            </th>
+            </th>-->
             <th>
                 @Html.DisplayNameFor(model => model.Condicion)
             </th>
@@ -25,25 +25,25 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDAlumno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDCurso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Condicion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nota)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "InscripcionEdit", new { id = item.ID }) 
-            </td>
-        </tr>
+        @foreach(var item in Model) {
+            <tr>
+                <td>
+                    @Html.Raw((new PersonaLogic()).GetOne(item.IDAlumno).NombreCompleto)
+                    <!--@Html.DisplayFor(modelItem => item.IDAlumno)-->
+                </td>
+                <!--<td>
+                    @Html.DisplayFor(modelItem => item.IDCurso)
+                </td>-->
+                <td>
+                    @Html.DisplayFor(modelItem => item.Condicion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nota)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "InscripcionEdit", new { id = item.ID })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
