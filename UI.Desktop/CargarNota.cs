@@ -26,6 +26,7 @@ namespace UI.Desktop
         {
             try
             {
+                bool correc = true;
                 AlumnoInscripcion ai;
                 int indice = 0;
                 int cantFilasDeDataGrid = this.dgvListaAlumnos.Rows.Count;
@@ -36,18 +37,31 @@ namespace UI.Desktop
                     ai.ID = int.Parse(dr.Cells["IdInscripcion"].Value.ToString());
                     ai.Condicion = dr.Cells["Condicion"].Value.ToString();
                     ai.Nota = int.Parse(dr.Cells["Nota"].Value.ToString());
+                    if (ai.Nota < 0 || ai.Nota > 10)
+                    {
+                        correc = false;
+                    }
                     arregloDeNotasYCondicion[indice] = ai;
                     indice++;
                 }
-                InscripcionLogic il = new InscripcionLogic();
-                il.CargaNotasYCondicion(arregloDeNotasYCondicion);
-                this.Listar();
-                MessageBox.Show("Notas cargadas correctamente");
+                if (correc == true)
+                {
+                    InscripcionLogic il = new InscripcionLogic();
+                    il.CargaNotasYCondicion(arregloDeNotasYCondicion);
+                    this.Listar();
+                    MessageBox.Show("Notas cargadas correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("Nota no permitida");
+                }
+
             }
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
             }
+
         }
 
         public void Listar()
