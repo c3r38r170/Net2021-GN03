@@ -15,48 +15,49 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(model => model.ID)
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <label asp-for="Nombre" class="control-label">Nombre:</label>
+                <input asp-for="Nombre" class="form-control" required/>
+                <span asp-validation-for="Nombre" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Nombre))@Html.Raw("El nombre no debe estar vacío.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
-                <span asp-validation-for="Apellido" class="text-danger"></span>
+                <label asp-for="Apellido" class="control-label">Apellido:</label>
+                <input asp-for="Apellido" class="form-control" required/>
+                <span asp-validation-for="Apellido" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Apellido))@Html.Raw("El apellido no debe estar vacío.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
+                <label asp-for="Direccion" class="control-label">Dirección:</label>
+                <input asp-for="Direccion" class="form-control" required/>
+                <span asp-validation-for="Direccion" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Direccion))@Html.Raw("La dirección no debe estar vacía.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Email" class="control-label">E-mail:</label>
+                <input asp-for="Email" class="form-control" required/>
+                <span asp-validation-for="Email" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Email))@Html.Raw("El mail no debe estar vacío.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
+                <label asp-for="Telefono" class="control-label">Teléfono:</label>
+                <input asp-for="Telefono" class="form-control" required/>
+                <span asp-validation-for="Telefono" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && string.IsNullOrWhiteSpace(Model.Telefono))@Html.Raw("El telefono no debe estar vacío.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="Legajo" class="control-label"></label>
-                <input asp-for="Legajo" class="form-control" />
-                <span asp-validation-for="Legajo" class="text-danger"></span>
+                <label asp-for="Legajo" class="control-label">Legajo:</label>
+                <input asp-for="Legajo" class="form-control" required min="1"/>
+                <span asp-validation-for="Legajo" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.Legajo < 1)@Html.Raw("El legajo es necesario, y debe ser un número entero positivo.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="Plan" class="control-label"></label>
+                <label asp-for="Plan" class="control-label">Plan:</label>
                 <select asp-for="IDPlan" asp-items="(new PlanAdapter()).GetAll().Select(p => new SelectListItem(p.Descripcion.ToString(), p.ID.ToString()))">
                 </select>
+                <span asp-validation-for="IDPlan" class="text-danger">@if (Model.State == Business.Entities.BusinessEntity.States.Unmodified && Model.IDPlan < 1)@Html.Raw("Debe elegir un plan.")</span>
             </div>
             <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label"></label>
-                <input asp-for="FechaNacimiento" class="form-control" id="fecha-cursed"/>
+                <label asp-for="FechaNacimiento" class="control-label">Fecha de nacimiento:</label>
+                <input asp-for="FechaNacimiento" class="form-control" id="fecha-cursed" max="fecha-cursed" required/>
                 <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TipoPersona" class="control-label"></label>
-                <select asp-for="TipoPersona" asp-items="Html.GetEnumSelectList<Persona.Tipo>()">
+                <label asp-for="TipoPersona" class="control-label">Tipo de persona:</label>
+                <select asp-for="TipoPersona" asp-items="Html.GetEnumSelectList<Persona.Tipo>()" required>
                 </select>
             </div>
             <div class="form-group">

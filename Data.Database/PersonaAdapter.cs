@@ -134,5 +134,26 @@ namespace Data.Database {
 			sc.Parameters.Add("@id_plan", SqlDbType.Int).Value = p.IDPlan;
 			return sc;
 		}
+
+		public bool Existe(int leg)
+        {
+			try
+            {
+				this.OpenConnection();
+				SqlCommand cmd = new SqlCommand("SELECT * FROM personas WHERE legajo=@leg", sqlConn);
+				cmd.Parameters.Add("@leg", SqlDbType.Int).Value = leg;
+				SqlDataReader dr = cmd.ExecuteReader();
+				return dr.Read();
+			}
+            catch (Exception Ex)
+            {
+				Exception ExcepcionManejada = new Exception("Error al recuperar lista de Personas.", Ex);
+				throw ExcepcionManejada;
+			}
+            finally
+            {
+				this.CloseConnection();
+            }
+        }
 	}
 }

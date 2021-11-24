@@ -234,7 +234,7 @@ namespace Data.Database
 		public bool YaExiste(int año, int IDComision,int IDMateria) {
 			try {
 				this.OpenConnection();
-				SqlCommand cmd = new SqlCommand("SELECT * FROM id_curso WHERE anio_calendario=@año AND id_comision=@idComision AND id_materia=@idMateria", sqlConn);
+				SqlCommand cmd = new SqlCommand("SELECT * FROM curso WHERE anio_calendario=@año AND id_comision=@idComision AND id_materia=@idMateria", sqlConn);
 				cmd.Parameters.Add("@año", SqlDbType.Int).Value = año;
 				cmd.Parameters.Add("@idComision", SqlDbType.Int).Value = IDComision;
 				cmd.Parameters.Add("@idMateria", SqlDbType.Int).Value = IDMateria;

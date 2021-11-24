@@ -32,8 +32,16 @@ namespace UI.Web.Controllers
         {
             PersonaLogic pl = new PersonaLogic();
             per.Plan = (new PlanLogic()).GetOne(per.IDPlan);
-            pl.Save(per);
-            return RedirectToAction("PersonaIndex");
+            if (pl.isValid(per))
+            {
+                pl.Save(per);
+                return RedirectToAction("PersonaIndex");
+            }
+            else
+            {
+                per.State = BusinessEntity.States.Unmodified;
+                return View(per);
+            }
         }
 
         // GET: PersonaController/Edit/5
@@ -49,10 +57,18 @@ namespace UI.Web.Controllers
         public ActionResult PersonaEdit(Persona per)
         {
             PersonaLogic pl = new PersonaLogic();
-            per.State = BusinessEntity.States.Modified;
             per.Plan = (new PlanLogic()).GetOne(per.IDPlan);
-            pl.Save(per);
-            return RedirectToAction("PersonaIndex");
+            if (pl.isValid(per))
+            {
+                per.State = BusinessEntity.States.Modified;
+                pl.Save(per);
+                return RedirectToAction("PersonaIndex");
+            }
+            else
+            {
+                per.State = BusinessEntity.States.Unmodified;
+                return View(per);
+            }
         }
 
         // GET: PersonaController/Delete/5

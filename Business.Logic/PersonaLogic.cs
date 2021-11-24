@@ -27,5 +27,22 @@ namespace Business.Logic {
 		public Persona GetOne(int ID) {
 			return PersonaData.GetOne(ID);
 		}
+
+		public bool isValid(Persona u)
+        {
+			DateTime comp = new DateTime(1900, 01, 01, 00, 00, 00);
+            if (PersonaData.Existe(u.Legajo))
+            {
+				u.ID = -1;
+				return false;
+            }
+			return !string.IsNullOrWhiteSpace(u.Nombre)
+				&& !string.IsNullOrWhiteSpace(u.Apellido)
+				&& !string.IsNullOrWhiteSpace(u.Direccion)
+				&& !string.IsNullOrWhiteSpace(u.Email)
+				&& !string.IsNullOrWhiteSpace(u.Telefono)
+				&& u.Legajo > 0
+				&& u.Plan != null;
+        }
 	}
 }
