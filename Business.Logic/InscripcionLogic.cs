@@ -48,5 +48,9 @@ namespace Business.Logic
 			return InscripcionData.GetInscripcionesAlumnoActual(id);
 		}
 
-		}
+        public void CargaNotasYCondicion(AlumnoInscripcion[] arregloDeNotasYCondicion)
+        {
+            InscripcionData.CargaNotasYCondicion(arregloDeNotasYCondicion);
+        }
+    }
 }

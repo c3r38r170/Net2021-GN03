@@ -33,6 +33,12 @@ namespace UI.Desktop
             this.dgvListaAlumnos = new System.Windows.Forms.DataGridView();
             this.btnCargarNota = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.IdInscripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Condicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaAlumnos)).BeginInit();
             this.SuspendLayout();
@@ -59,11 +65,17 @@ namespace UI.Desktop
             this.dgvListaAlumnos.AllowUserToAddRows = false;
             this.dgvListaAlumnos.AllowUserToDeleteRows = false;
             this.dgvListaAlumnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaAlumnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdInscripcion,
+            this.Nombre,
+            this.Apellido,
+            this.Legajo,
+            this.Condicion,
+            this.Nota});
             this.tableLayoutPanel1.SetColumnSpan(this.dgvListaAlumnos, 2);
             this.dgvListaAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListaAlumnos.Location = new System.Drawing.Point(3, 3);
             this.dgvListaAlumnos.Name = "dgvListaAlumnos";
-            this.dgvListaAlumnos.ReadOnly = true;
             this.dgvListaAlumnos.RowTemplate.Height = 25;
             this.dgvListaAlumnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListaAlumnos.Size = new System.Drawing.Size(794, 415);
@@ -72,11 +84,11 @@ namespace UI.Desktop
             // btnCargarNota
             // 
             this.btnCargarNota.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCargarNota.Location = new System.Drawing.Point(637, 424);
+            this.btnCargarNota.Location = new System.Drawing.Point(631, 424);
             this.btnCargarNota.Name = "btnCargarNota";
-            this.btnCargarNota.Size = new System.Drawing.Size(79, 23);
+            this.btnCargarNota.Size = new System.Drawing.Size(85, 23);
             this.btnCargarNota.TabIndex = 1;
-            this.btnCargarNota.Text = "Cargar Nota";
+            this.btnCargarNota.Text = "Cargar Notas";
             this.btnCargarNota.UseVisualStyleBackColor = true;
             this.btnCargarNota.Click += new System.EventHandler(this.btnCargarNota_Click);
             // 
@@ -89,6 +101,51 @@ namespace UI.Desktop
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // IdInscripcion
+            // 
+            this.IdInscripcion.DataPropertyName = "ID inscripcion";
+            this.IdInscripcion.HeaderText = "ID inscripcion";
+            this.IdInscripcion.Name = "IdInscripcion";
+            this.IdInscripcion.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Apellido
+            // 
+            this.Apellido.DataPropertyName = "Apellido";
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            // 
+            // Legajo
+            // 
+            this.Legajo.DataPropertyName = "Legajo";
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.ReadOnly = true;
+            // 
+            // Condicion
+            // 
+            this.Condicion.DataPropertyName = "Condicion";
+            this.Condicion.HeaderText = "Condicion";
+            this.Condicion.Items.AddRange(new object[] {
+            "Cursando",
+            "Libre",
+            "Regular",
+            "Promovido"});
+            this.Condicion.Name = "Condicion";
+            // 
+            // Nota
+            // 
+            this.Nota.DataPropertyName = "Nota";
+            this.Nota.HeaderText = "Nota";
+            this.Nota.Name = "Nota";
             // 
             // CargarNota
             // 
@@ -111,5 +168,11 @@ namespace UI.Desktop
         private System.Windows.Forms.DataGridView dgvListaAlumnos;
         private System.Windows.Forms.Button btnCargarNota;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdInscripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Condicion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
     }
 }

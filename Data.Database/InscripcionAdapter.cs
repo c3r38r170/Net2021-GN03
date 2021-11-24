@@ -136,6 +136,14 @@ namespace Data.Database
             return dtADevolver;
         }
 
+        public void CargaNotasYCondicion(AlumnoInscripcion[] arregloDeNotasYCondicion)
+        {
+            for (int x = 0; x < arregloDeNotasYCondicion.Length; x++)
+            {
+                this.Update(arregloDeNotasYCondicion[x]);
+            }
+        }
+
         public object GetAlumnosInscriptosEnCurso(int dcurso)
         {
             List<AlumnoInscripcion> ListaAlumnosInscripciones = this.GetAll();

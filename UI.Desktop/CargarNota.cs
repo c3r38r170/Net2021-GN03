@@ -1,4 +1,6 @@
-﻿using Business.Logic;
+﻿using Business.Entities;
+using Business.Logic;
+using System;
 using System.Windows.Forms;
 
 namespace UI.Desktop
@@ -22,10 +24,30 @@ namespace UI.Desktop
 
         private void btnCargarNota_Click(object sender, System.EventArgs e)
         {
-            int ID = int.Parse(this.dgvListaAlumnos.CurrentRow.Cells[0].Value.ToString());
-            CargarNotaDesktop cnd = new CargarNotaDesktop(ID, ApplicationForm.ModoForm.Consulta);
-            cnd.ShowDialog();
-            this.Listar();
+            try
+            {
+                AlumnoInscripcion ai;
+                int indice = 0;
+                int cantFilasDeDataGrid = this.dgvListaAlumnos.Rows.Count;
+                AlumnoInscripcion[] arregloDeNotasYCondicion = new AlumnoInscripcion[cantFilasDeDataGrid];
+                foreach (DataGridViewRow dr in this.dgvListaAlumnos.Rows)
+                {
+                    ai = new AlumnoInscripcion();
+                    ai.ID = int.Parse(dr.Cells["IdInscripcion"].Value.ToString());
+                    ai.Condicion = dr.Cells["Condicion"].Value.ToString();
+                    ai.Nota = int.Parse(dr.Cells["Nota"].Value.ToString());
+                    arregloDeNotasYCondicion[indice] = ai;
+                    indice++;
+                }
+                InscripcionLogic il = new InscripcionLogic();
+                il.CargaNotasYCondicion(arregloDeNotasYCondicion);
+                this.Listar();
+                MessageBox.Show("Notas cargadas correctamente");
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
         }
 
         public void Listar()
@@ -36,6 +58,7 @@ namespace UI.Desktop
 
         private void CargarNota_Load(object sender, System.EventArgs e)
         {
+            this.dgvListaAlumnos.AutoGenerateColumns = false;
             Listar();
         }
     }
